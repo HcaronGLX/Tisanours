@@ -1,0 +1,132 @@
+{%- liquid
+  assign ss = section.settings
+  assign heading_tag = 'h2'
+  if ss.heading_level == 'h1'
+    assign heading_tag = 'h1'
+  endif
+  assign overlay = ss.overlay_opacity | divided_by: 100.0
+  assign img_alt = ss.image.alt | escape
+  assign img_m_alt = ss.image_mobile.alt | escape
+-%}
+<div
+  class="hero hero--{{ ss.style }}{% if ss.overlap_header %} hero--overlap{% endif %}{% if ss.show_scallop %} has-scallop{% endif %}"
+  style="--hero-width: {{ ss.content_width }}%; --hero-mobile-h: {{ ss.mobile_height }}px;{% if overlay > 0 %} --hero-overlay: rgba(255, 247, 236, {{ overlay }});{% endif %}"
+>
+  {%- if ss.image != blank -%}
+    <div class="hero__bg hero__bg--desktop">
+      {{ ss.image | image_url: width: 2400 | image_tag: widths: '750, 1100, 1500, 1800, 2400', sizes: '100vw', loading: 'eager', fetchpriority: 'high', alt: img_alt }}
+    </div>
+  {%- endif -%}
+  {%- if ss.image_mobile != blank -%}
+    <div class="hero__bg hero__bg--mobile">
+      {{ ss.image_mobile | image_url: width: 1200 | image_tag: widths: '430, 750, 1000, 1200', sizes: '100vw', loading: 'eager', alt: img_m_alt }}
+    </div>
+  {%- endif -%}
+
+  <div class="hero__inner">
+    <div class="hero__content">
+      {%- for block in section.blocks -%}
+        {%- assign bs = block.settings -%}
+        {%- case block.type -%}
+          {%- when 'badge' -%}
+            <span class="hero__badge" {{ block.shopify_attributes }}>{{ bs.text }}</span>
+          {%- when 'rating' -%}
+            <div class="stars-line" {{ block.shopify_attributes }}>
+              <span class="stars" aria-hidden="true">{{ bs.stars }}</span>
+              <span class="stars-line__label">{{ bs.text }}</span>
+            </div>
+          {%- when 'heading' -%}
+            <{{ heading_tag }} class="hero__title" {{ block.shopify_attributes }}>{{ bs.heading }}</{{ heading_tag }}>
+          {%- when 'text' -%}
+            <div class="hero__text" {{ block.shopify_attributes }}>{{ bs.text }}</div>
+          {%- when 'buttons' -%}
+            <div class="btn-row" {{ block.shopify_attributes }}>
+              {%- render 'button', label: bs.label_1, link: bs.link_1, style: bs.style_1, tilt: bs.tilt_1 -%}
+              {%- render 'button', label: bs.label_2, link: bs.link_2, style: bs.style_2 -%}
+            </div>
+          {%- when 'chips' -%}
+            {%- assign chip_lines = bs.items | newline_to_br | split: '<br />' -%}
+            <div class="chips" {{ block.shopify_attributes }}>
+              {%- for line in chip_lines -%}
+                {%- assign chip = line | strip -%}
+                {%- if chip != blank -%}<span class="chip">{{ chip }}</span>{%- endif -%}
+              {%- endfor -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+  {%- if ss.show_scallop -%}
+    <div class="scallop" style="--scallop: {{ ss.scallop_color }};"></div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Hero",
+  "tag": "section",
+  "class": "section-hero",
+  "settings": [
+    { "type": "select", "id": "style", "label": "Style", "options": [
+      { "value": "home", "label": "Accueil" },
+      { "value": "about", "label": "Page (À propos)" }
+    ], "default": "home" },
+    { "type": "select", "id": "heading_level", "label": "Niveau du titre", "options": [
+      { "value": "h1", "label": "H1 (titre principal de la page)" },
+      { "value": "h2", "label": "H2" }
+    ], "default": "h1" },
+    { "type": "image_picker", "id": "image", "label": "Image de fond" },
+    { "type": "image_picker", "id": "image_mobile", "label": "Image de fond mobile" },
+    { "type": "range", "id": "overlay_opacity", "label": "Voile crème sur l'image", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 0 },
+    { "type": "checkbox", "id": "overlap_header", "label": "Passer sous le header (header transparent)", "default": true },
+    { "type": "range", "id": "content_width", "label": "Largeur du contenu (desktop)", "min": 40, "max": 80, "step": 2, "unit": "%", "default": 50 },
+    { "type": "range", "id": "mobile_height", "label": "Hauteur minimale mobile", "min": 400, "max": 800, "step": 20, "unit": "px", "default": 680 },
+    { "type": "checkbox", "id": "show_scallop", "label": "Festons en bas de section", "default": true },
+    { "type": "color", "id": "scallop_color", "label": "Couleur des festons (section suivante)", "default": "#FFF7EC" }
+  ],
+  "blocks": [
+    { "type": "badge", "name": "Badge", "limit": 1, "settings": [
+      { "type": "text", "id": "text", "label": "Texte", "default": "À propos de Tisa’nours" }
+    ] },
+    { "type": "rating", "name": "Note", "limit": 1, "settings": [
+      { "type": "text", "id": "stars", "label": "Étoiles", "default": "★★★★★" },
+      { "type": "text", "id": "text", "label": "Texte", "default": "4,9/5 basé sur 128 avis parents" }
+    ] },
+    { "type": "heading", "name": "Titre", "limit": 1, "settings": [
+      { "type": "inline_richtext", "id": "heading", "label": "Titre", "info": "Mettez en italique la fin du titre pour la surligner.", "default": "L'infusion fruitée bio qui remplace les <em>boissons sucrées</em>" }
+    ] },
+    { "type": "text", "name": "Texte", "limit": 2, "settings": [
+      { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Sans sucre ajouté, sans caféine, à savourer chaude ou glacée. Les enfants choisissent leur saveur, préparent leur bouteille et se créent un vrai rituel. Les parents, eux, arrêtent de négocier.</p>" }
+    ] },
+    { "type": "buttons", "name": "Boutons", "limit": 1, "settings": [
+      { "type": "text", "id": "label_1", "label": "Bouton 1 : texte", "default": "Découvrir le Kit Rituel · 59,90 €" },
+      { "type": "url", "id": "link_1", "label": "Bouton 1 : lien" },
+      { "type": "select", "id": "style_1", "label": "Bouton 1 : style", "options": [
+        { "value": "red", "label": "Rouge" }, { "value": "yellow", "label": "Jaune" }, { "value": "dark", "label": "Vert" }, { "value": "outline", "label": "Contour" }
+      ], "default": "red" },
+      { "type": "checkbox", "id": "tilt_1", "label": "Bouton 1 : légèrement incliné", "default": true },
+      { "type": "text", "id": "label_2", "label": "Bouton 2 : texte", "default": "Voir les 3 saveurs" },
+      { "type": "url", "id": "link_2", "label": "Bouton 2 : lien" },
+      { "type": "select", "id": "style_2", "label": "Bouton 2 : style", "options": [
+        { "value": "red", "label": "Rouge" }, { "value": "yellow", "label": "Jaune" }, { "value": "dark", "label": "Vert" }, { "value": "outline", "label": "Contour" }
+      ], "default": "outline" }
+    ] },
+    { "type": "chips", "name": "Pastilles", "limit": 1, "settings": [
+      { "type": "textarea", "id": "items", "label": "Pastilles (une par ligne)", "default": "0 sucre ajouté*\n0 caféine\nCertifié AB\nChaud ou glacé" }
+    ] }
+  ],
+  "presets": [
+    {
+      "name": "Hero",
+      "blocks": [
+        { "type": "rating" },
+        { "type": "heading" },
+        { "type": "text" },
+        { "type": "buttons" },
+        { "type": "chips" }
+      ]
+    }
+  ]
+}
+{% endschema %}

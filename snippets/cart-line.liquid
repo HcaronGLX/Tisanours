@@ -1,0 +1,54 @@
+{%- comment -%}
+  Ligne de panier (drawer et page panier).
+  - item: line item
+  - index: position (1-based)
+  - once_label: mention pour les produits sans variante
+{%- endcomment -%}
+{%- liquid
+  capture lu
+    render 'univers', setting: 'auto', product: item.product
+  endcapture
+  assign lu = lu | strip
+  assign sub = item.product.metafields.custom.sous_titre.value | default: item.product.metafields.custom.saveur.value
+  if item.product.has_only_default_variant
+    assign plan = once_label
+  else
+    assign plan = item.variant.title
+  endif
+  if item.selling_plan_allocation
+    assign plan = item.selling_plan_allocation.selling_plan.name
+  endif
+  assign minus_qty = item.quantity | minus: 1
+  assign plus_qty = item.quantity | plus: 1
+-%}
+<div class="cart-line u-{{ lu }}">
+  <a class="cart-line__thumb" href="{{ item.url }}" tabindex="-1" aria-hidden="true">
+    {%- if item.image -%}
+      {{ item.image | image_url: width: 160 | image_tag: loading: 'lazy', alt: '' }}
+    {%- else -%}
+      <span class="ph" style="display:block;width:100%;height:100%;"></span>
+    {%- endif -%}
+  </a>
+  <span class="cart-line__info">
+    <a class="cart-line__name" href="{{ item.url }}">{{ item.product.title | escape }}</a>
+    {%- if sub != blank -%}<span class="cart-line__sub">{{ sub }}</span>{%- endif -%}
+    {%- if plan != blank -%}<span class="cart-line__plan">{{ plan }}</span>{%- endif -%}
+    {%- for property in item.properties -%}
+      {%- unless property.first contains '_' or property.last == blank -%}
+        <span class="cart-line__sub">{{ property.first }} : {{ property.last }}</span>
+      {%- endunless -%}
+    {%- endfor -%}
+    <span class="cart-line__row">
+      <span class="qty">
+        <button type="button" class="qty__btn" data-line-change data-line="{{ index }}" data-quantity="{{ minus_qty }}" aria-label="{{ 'cart.decrease' | t }}">–</button>
+        <span class="qty__value">{{ item.quantity }}</span>
+        <button type="button" class="qty__btn" data-line-change data-line="{{ index }}" data-quantity="{{ plus_qty }}" aria-label="{{ 'cart.increase' | t }}">+</button>
+      </span>
+      <span class="cart-line__price">
+        {%- if item.original_line_price > item.final_line_price -%}<s>{{ item.original_line_price | money }}</s>{%- endif -%}
+        {{ item.final_line_price | money }}
+      </span>
+    </span>
+    <button type="button" class="cart-line__remove" data-line-change data-line="{{ index }}" data-quantity="0">{{ 'cart.remove' | t }}</button>
+  </span>
+</div>

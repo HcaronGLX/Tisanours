@@ -1,0 +1,48 @@
+<div class="page-section">
+  <div class="page-section__inner" style="max-width: 1360px;">
+    <h1 class="page-title">{{ section.settings.heading }}</h1>
+    <form class="search-form" action="{{ routes.search_url }}" method="get" role="search">
+      <label class="visually-hidden" for="SearchInput">{{ 'general.search.placeholder' | t }}</label>
+      <input class="field__input" id="SearchInput" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}">
+      <input type="hidden" name="options[prefix]" value="last">
+      <button class="btn btn--red" type="submit">{{ 'general.search.submit' | t }}</button>
+    </form>
+
+    {%- if search.performed -%}
+      {%- paginate search.results by 24 -%}
+        <p class="page-lead">{{ 'general.search.results_count' | t: count: search.results_count, terms: search.terms }}</p>
+        {%- if search.results.size > 0 -%}
+          <div class="collection-grid">
+            {%- for item in search.results -%}
+              {%- case item.object_type -%}
+                {%- when 'product' -%}
+                  {%- capture iu -%}{%- render 'univers', setting: 'auto', product: item -%}{%- endcapture -%}
+                  {%- assign iu = iu | strip -%}
+                  {%- render 'flavor-card', card_product: item, univers: iu, heading_tag: 'h2' -%}
+                {%- else -%}
+                  {%- assign item_text = item.content | strip_html | truncatewords: 22 -%}
+                  {%- render 'flavor-card', univers: 'kit', title: item.title, text: item_text, image: item.image, link: item.url, price_text: ' ', heading_tag: 'h2' -%}
+              {%- endcase -%}
+            {%- endfor -%}
+          </div>
+          {%- render 'pagination', paginate: paginate -%}
+        {%- else -%}
+          <div class="empty-state">
+            <p>{{ 'general.search.no_results' | t }}</p>
+          </div>
+        {%- endif -%}
+      {%- endpaginate -%}
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Résultats de recherche",
+  "tag": "section",
+  "class": "section-main-search",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Rechercher" }
+  ]
+}
+{% endschema %}

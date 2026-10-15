@@ -1,0 +1,81 @@
+{%- liquid
+  assign ss = section.settings
+  capture u
+    render 'univers', setting: ss.univers, product: product
+  endcapture
+  assign u = u | strip
+  assign rows = ss.rows | newline_to_br | split: '<br />'
+  assign compare_image = ss.image | default: product.featured_image
+  assign section_bg = 'var(--c-cream)'
+  if ss.background == 'white'
+    assign section_bg = 'var(--c-white)'
+  endif
+-%}
+<div class="compare u-{{ u }}{% if ss.neutral_lines %} u-line-neutral{% endif %}" style="--section-bg: {{ section_bg }};">
+  <div class="compare__inner">
+    <div class="compare__box">
+      {%- if ss.show_image -%}
+        <div class="compare__media">
+          {%- render 'media', image: compare_image, class: 'compare__image', sizes: '(min-width: 900px) 420px, 100vw' -%}
+        </div>
+      {%- endif -%}
+      <div>
+        <h2 class="compare__title{% if ss.highlight_mobile_only %} hl-mobile-only{% endif %}">{{ ss.heading }}</h2>
+        <div class="compare__table" role="table" aria-label="{{ ss.heading | strip_html | escape }}">
+          <div class="compare__row compare__row--head" role="row">
+            <span class="compare__head-label" role="columnheader">{{ ss.col_label }}</span>
+            <span class="compare__head-brand" role="columnheader">{{ ss.col_brand }}</span>
+            <span class="compare__head-other" role="columnheader">
+              <span class="desktop-only">{{ ss.col_other | newline_to_br }}</span>
+              <span class="mobile-only">{{ ss.col_other_mobile | default: ss.col_other }}</span>
+            </span>
+          </div>
+          {%- for row in rows -%}
+            {%- assign crit = row | strip -%}
+            {%- if crit != blank -%}
+              <div class="compare__row" role="row">
+                <span class="compare__crit" role="cell">{{ crit }}</span>
+                <span class="compare__yes" role="cell" aria-label="{{ 'sections.comparison.yes' | t }}">✓</span>
+                <span class="compare__no" role="cell" aria-label="{{ 'sections.comparison.no' | t }}">✕</span>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        {%- if ss.note != blank -%}<p class="compare__note">{{ ss.note }}</p>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Tableau comparatif",
+  "tag": "section",
+  "class": "section-comparison",
+  "settings": [
+    { "type": "select", "id": "univers", "label": "Univers de couleur", "options": [
+      { "value": "auto", "label": "Automatique (métachamp custom.univers)" },
+      { "value": "kit", "label": "Kit / neutre" },
+      { "value": "sunshine", "label": "Tropical Sunshine (jaune)" },
+      { "value": "adventure", "label": "Happy Adventure (rouge)" },
+      { "value": "forest", "label": "Dream Forest (violet)" },
+      { "value": "bottle", "label": "Gourde (vert)" }
+    ], "default": "auto" },
+    { "type": "checkbox", "id": "neutral_lines", "label": "Séparateurs neutres (gris-vert)", "default": false },
+    { "type": "select", "id": "background", "label": "Fond autour de l'encart (desktop)", "options": [
+      { "value": "cream", "label": "Crème" }, { "value": "white", "label": "Blanc" }
+    ], "default": "cream" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titre", "default": "La différence est dans <em>le détail</em>" },
+    { "type": "checkbox", "id": "highlight_mobile_only", "label": "Surligner le titre uniquement sur mobile", "default": true },
+    { "type": "checkbox", "id": "show_image", "label": "Afficher une image (desktop)", "default": true },
+    { "type": "image_picker", "id": "image", "label": "Image", "info": "Par défaut : image du produit." },
+    { "type": "text", "id": "col_label", "label": "En-tête des critères", "default": "Ce qui fait la différence" },
+    { "type": "text", "id": "col_brand", "label": "Colonne marque", "default": "Tisa’nours" },
+    { "type": "textarea", "id": "col_other", "label": "Colonne comparée (desktop)", "default": "Boisson\nsucrée" },
+    { "type": "text", "id": "col_other_mobile", "label": "Colonne comparée (mobile)", "default": "Soda" },
+    { "type": "textarea", "id": "rows", "label": "Critères (un par ligne)", "default": "Sans sucre ajouté*\nSans caféine ni théine\n100 % ingrédients bio\nSans colorant ni conservateur\nÀ boire chaud ou glacé\nL’enfant choisit sa saveur" },
+    { "type": "textarea", "id": "note", "label": "Mention", "default": "*Contient naturellement des sucres présents dans les fruits. Comparaison avec un soda ou un sirop à l’eau du commerce." }
+  ],
+  "presets": [ { "name": "Tableau comparatif" } ]
+}
+{% endschema %}

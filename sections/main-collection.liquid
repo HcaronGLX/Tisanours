@@ -1,0 +1,57 @@
+{%- assign ss = section.settings -%}
+<div class="page-section">
+  <div class="page-section__inner" style="max-width: 1360px;">
+    <h1 class="page-title">{{ collection.title | escape }}</h1>
+    {%- if collection.description != blank and ss.show_description -%}
+      <div class="page-lead rte">{{ collection.description }}</div>
+    {%- endif -%}
+
+    {%- paginate collection.products by ss.products_per_page -%}
+      {%- if ss.show_sort -%}
+        <form class="collection-toolbar" method="get">
+          <span>{{ 'collections.count' | t: count: collection.products_count }}</span>
+          <label>
+            <span class="visually-hidden">{{ 'collections.sort_by' | t }}</span>
+            <select name="sort_by" onchange="this.form.submit()">
+              {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+              {%- for option in collection.sort_options -%}
+                <option value="{{ option.value | escape }}"{% if option.value == sort_by %} selected{% endif %}>{{ option.name | escape }}</option>
+              {%- endfor -%}
+            </select>
+          </label>
+        </form>
+      {%- endif -%}
+
+      {%- if collection.products.size > 0 -%}
+        <div class="collection-grid">
+          {%- for p in collection.products -%}
+            {%- capture pu -%}{%- render 'univers', setting: 'auto', product: p -%}{%- endcapture -%}
+            {%- assign pu = pu | strip -%}
+            {%- render 'flavor-card', card_product: p, univers: pu, button_label: ss.button_label, heading_tag: 'h2' -%}
+          {%- endfor -%}
+        </div>
+        {%- render 'pagination', paginate: paginate -%}
+      {%- else -%}
+        <div class="empty-state">
+          <p class="page-lead">{{ 'collections.empty' | t }}</p>
+          {%- assign continue_label = 'collections.continue' | t -%}
+          {%- render 'button', label: continue_label, link: routes.root_url, style: 'red' -%}
+        </div>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection",
+  "tag": "section",
+  "class": "section-main-collection",
+  "settings": [
+    { "type": "checkbox", "id": "show_description", "label": "Afficher la description", "default": true },
+    { "type": "checkbox", "id": "show_sort", "label": "Afficher le tri", "default": true },
+    { "type": "range", "id": "products_per_page", "label": "Produits par page", "min": 6, "max": 48, "step": 3, "default": 24 },
+    { "type": "text", "id": "button_label", "label": "Texte du bouton des cartes", "default": "Découvrir" }
+  ]
+}
+{% endschema %}

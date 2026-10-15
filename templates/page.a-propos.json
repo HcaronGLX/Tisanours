@@ -1,0 +1,186 @@
+/*
+ * Modèle Tisa'nours — éditable depuis l'éditeur de thème Shopify.
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "style": "about",
+        "heading_level": "h1",
+        "overlay_opacity": 0,
+        "overlap_header": true,
+        "content_width": 56,
+        "mobile_height": 520,
+        "show_scallop": true,
+        "scallop_color": "#FFF7EC"
+      },
+      "blocks": {
+        "badge_1": {
+          "type": "badge",
+          "settings": {
+            "text": "À propos de Tisa’nours"
+          }
+        },
+        "heading_2": {
+          "type": "heading",
+          "settings": {
+            "heading": "Nous voulions une boisson que les enfants réclament, et que <em>les parents approuvent</em>"
+          }
+        },
+        "text_3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Tisa’nours est une alternative fruitée bio aux boissons sucrées, pensée pour les enfants de 3 à 12 ans : le plaisir les fait adhérer, et le choix, la bouteille et le rituel leur permettent de se l’approprier.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "badge_1",
+        "heading_2",
+        "text_3"
+      ]
+    },
+    "habitude": {
+      "type": "image-with-text",
+      "settings": {
+        "heading": "Le moment devient une habitude. <em>La saveur reste libre.</em>",
+        "text": "<p>Nous ne voulons pas attribuer une saveur à une heure ou à une fonction. Matin, sortie d’école, repas, goûter, soir : le rituel s’installe sur le moment, et l’enfant choisit selon son envie du jour.</p><p>L’autonomie est progressive et adaptée à l’âge. L’idée est la participation et l’appropriation · l’eau chaude reste l’affaire des adultes pour les plus jeunes.</p>",
+        "quote": "« Sa saveur. Sa bouteille. Son rituel. »",
+        "ph": "beige",
+        "media_position": "right",
+        "background": "cream"
+      }
+    },
+    "piliers": {
+      "type": "pillars",
+      "settings": {
+        "eyebrow": "Notre socle",
+        "heading": "Nos quatre <em>piliers</em>",
+        "note": "En soutien : plaisir · gourmandise · famille · partage · découverte · simplicité · liberté de choix."
+      },
+      "blocks": {
+        "pillar_1": {
+          "type": "pillar",
+          "settings": {
+            "icon": "🔁",
+            "title": "Rituel",
+            "text": "Des habitudes simples et agréables, qui reviennent d’elles-mêmes."
+          }
+        },
+        "pillar_2": {
+          "type": "pillar",
+          "settings": {
+            "icon": "🧒",
+            "title": "Autonomie",
+            "text": "L’enfant choisit et participe, à la mesure de son âge."
+          }
+        },
+        "pillar_3": {
+          "type": "pillar",
+          "settings": {
+            "icon": "🏡",
+            "title": "Lifestyle",
+            "text": "Maison, école, sorties, famille : le rituel suit le quotidien."
+          }
+        },
+        "pillar_4": {
+          "type": "pillar",
+          "settings": {
+            "icon": "🧡",
+            "title": "Bien-être",
+            "text": "Plaisir, simplicité et moments agréables, sans discours culpabilisant."
+          }
+        }
+      },
+      "block_order": [
+        "pillar_1",
+        "pillar_2",
+        "pillar_3",
+        "pillar_4"
+      ]
+    },
+    "ingredients": {
+      "type": "benefits",
+      "settings": {
+        "background": "cream",
+        "card_bg": "white",
+        "rating_text": "",
+        "heading": "Ce que nous mettons (et ne mettons pas) <em>dans nos infusions</em>",
+        "compact_heading": true,
+        "button_label": "",
+        "button_style": "yellow",
+        "media_style": "single",
+        "media_position": "left",
+        "ph_1": "sunshine-soft",
+        "ph_2": "beige",
+        "ph_3": "beige",
+        "show_mobile_image": true,
+        "ph_mobile": "beige"
+      },
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "",
+            "title": "100 % bio",
+            "text": "Fruits et plantes issus de l’agriculture biologique, certifiés AB."
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "🧂",
+            "title": "Sans sucre ajouté*",
+            "text": "Le goût vient du fruit. Les sucres présents sont ceux, naturels, des fruits."
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "😴",
+            "title": "Sans caféine ni théine",
+            "text": "Adapté dès 3 ans, y compris le soir."
+          }
+        },
+        "benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "",
+            "title": "Conditionné en France",
+            "text": "Sachets de 80 g conditionnés en France, environ 30 infusions chacun."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4"
+      ]
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "background": "white",
+        "size": "narrow",
+        "heading": "L’infusion est le premier produit, <em>pas la limite de la marque</em>",
+        "text": "Tisa’nours devient progressivement un univers de petits rituels enfant et famille : infusions, bouteilles et gourdes, accessoires, routines, goûter, autonomie, moments partagés. Le fil conducteur reste le quotidien de l’enfant : le choix, le plaisir, l’autonomie et les moments en famille.",
+        "button_1_label": "Commencer par le Kit Rituel",
+        "button_1_link": "shopify://products/kit-demarrage-rituel",
+        "button_1_style": "red",
+        "button_1_tilt": true,
+        "button_2_label": "Poser une question",
+        "button_2_link": "shopify://pages/faq-contact",
+        "button_2_style": "outline"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "habitude",
+    "piliers",
+    "ingredients",
+    "cta"
+  ]
+}

@@ -1,0 +1,40 @@
+<div class="page-section">
+  <div class="page-section__inner">
+    <h1 class="page-title">{{ 'customer.account.title' | t }}</h1>
+    <p class="page-lead">{{ 'customer.account.welcome' | t: name: customer.first_name }} · <a class="link-underline" href="{{ routes.account_logout_url }}">{{ 'customer.account.logout' | t }}</a></p>
+    <div class="account-grid">
+      <div class="card-box">
+        <h2 style="font-size: 24px;">{{ 'customer.account.orders' | t }}</h2>
+        {%- paginate customer.orders by 20 -%}
+          {%- if customer.orders.size > 0 -%}
+            <table class="table" style="margin-top: 14px;">
+              <thead><tr><th>{{ 'customer.order.number' | t }}</th><th>{{ 'customer.order.date' | t }}</th><th>{{ 'customer.order.status' | t }}</th><th>{{ 'customer.order.total' | t }}</th></tr></thead>
+              <tbody>
+                {%- for order in customer.orders -%}
+                  <tr>
+                    <td><a class="link-underline" href="{{ order.customer_url }}">{{ order.name }}</a></td>
+                    <td>{{ order.created_at | time_tag: format: 'date' }}</td>
+                    <td>{{ order.fulfillment_status_label }}</td>
+                    <td>{{ order.total_price | money }}</td>
+                  </tr>
+                {%- endfor -%}
+              </tbody>
+            </table>
+            {%- render 'pagination', paginate: paginate -%}
+          {%- else -%}
+            <p style="margin-top: 12px;">{{ 'customer.account.no_orders' | t }}</p>
+          {%- endif -%}
+        {%- endpaginate -%}
+      </div>
+      <div class="card-box">
+        <h2 style="font-size: 24px;">{{ 'customer.account.details' | t }}</h2>
+        <div style="margin-top: 12px;">{{ customer.default_address | format_address }}</div>
+        <a class="link-underline" style="display: inline-block; margin-top: 12px;" href="{{ routes.account_addresses_url }}">{{ 'customer.account.addresses' | t: count: customer.addresses_count }}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Compte client", "tag": "section", "class": "section-account", "settings": [] }
+{% endschema %}

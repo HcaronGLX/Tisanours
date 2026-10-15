@@ -1,0 +1,42 @@
+<div class="page-section">
+  <div class="page-section__inner">
+    <a class="link-underline" href="{{ routes.account_url }}">← {{ 'customer.account.title' | t }}</a>
+    <h1 class="page-title" style="margin-top: 14px;">{{ 'customer.order.title' | t: name: order.name }}</h1>
+    <p class="page-lead">{{ order.created_at | time_tag: format: 'date_at_time' }}{% if order.cancelled %} · {{ 'customer.order.cancelled' | t }}{% endif %}</p>
+    <div class="card-box" style="margin-top: 24px; overflow-x: auto;">
+      <table class="table">
+        <thead><tr><th>{{ 'customer.order.product' | t }}</th><th>{{ 'customer.order.quantity' | t }}</th><th>{{ 'customer.order.total' | t }}</th></tr></thead>
+        <tbody>
+          {%- for line_item in order.line_items -%}
+            <tr>
+              <td>{{ line_item.title }}</td>
+              <td>{{ line_item.quantity }}</td>
+              <td>{{ line_item.final_line_price | money }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+        <tfoot>
+          <tr><td colspan="2">{{ 'customer.order.subtotal' | t }}</td><td>{{ order.line_items_subtotal_price | money }}</td></tr>
+          {%- for shipping_method in order.shipping_methods -%}
+            <tr><td colspan="2">{{ shipping_method.title }}</td><td>{{ shipping_method.price | money }}</td></tr>
+          {%- endfor -%}
+          <tr><td colspan="2"><strong>{{ 'customer.order.total' | t }}</strong></td><td><strong>{{ order.total_price | money }}</strong></td></tr>
+        </tfoot>
+      </table>
+    </div>
+    <div class="account-grid">
+      <div class="card-box">
+        <h2 style="font-size: 22px;">{{ 'customer.order.billing_address' | t }}</h2>
+        <div style="margin-top: 10px;">{{ order.billing_address | format_address }}</div>
+      </div>
+      <div class="card-box">
+        <h2 style="font-size: 22px;">{{ 'customer.order.shipping_address' | t }}</h2>
+        <div style="margin-top: 10px;">{{ order.shipping_address | format_address }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Commande", "tag": "section", "class": "section-order", "settings": [] }
+{% endschema %}

@@ -1,0 +1,18 @@
+{%- comment -%}
+  Renvoie la clé d'univers couleur (kit, sunshine, adventure, forest, bottle).
+  - setting: valeur choisie dans l'éditeur ('auto' = métachamp produit custom.univers)
+  - product: produit concerné
+  Utilisation : {% capture u %}{% render 'univers', setting: block.settings.univers, product: p %}{% endcapture %}
+{%- endcomment -%}
+{%- liquid
+  assign result = setting | default: 'auto'
+  if result == 'auto'
+    assign result = product.metafields.custom.univers.value | default: 'kit' | downcase | strip
+  endif
+  case result
+    when 'sunshine', 'adventure', 'forest', 'bottle', 'kit'
+      echo result
+    else
+      echo 'kit'
+  endcase
+-%}

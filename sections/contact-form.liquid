@@ -1,0 +1,96 @@
+{%- liquid
+  assign ss = section.settings
+  assign lines = ss.contact_lines | newline_to_br | split: '<br />'
+  assign subjects = ss.subjects | newline_to_br | split: '<br />'
+-%}
+<div class="contact" id="{{ ss.anchor | default: 'contact' | handle }}">
+  <div class="contact__inner">
+    <div class="contact__box">
+      <div class="contact__info">
+        {%- if ss.heading != blank -%}<h2 class="contact__title hl-mobile-only">{{ ss.heading }}</h2>{%- endif -%}
+        {%- if ss.text != blank -%}<p class="contact__text">{{ ss.text }}</p>{%- endif -%}
+        {%- if ss.contact_lines != blank -%}
+          <div class="contact__lines">
+            {%- for line in lines -%}
+              {%- assign l = line | strip -%}
+              {%- if l != blank -%}<span>{{ l }}</span>{%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+        {%- if ss.pro_title != blank -%}
+          <div class="pro-box">
+            <h3 class="pro-box__title">{{ ss.pro_title }}</h3>
+            {%- if ss.pro_text != blank -%}<div class="pro-box__text rte">{{ ss.pro_text }}</div>{%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- form 'contact', id: 'ContactForm', class: 'form' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="form__success" role="status">{{ ss.success_message }}</p>
+        {%- endif -%}
+        {%- if form.errors -%}
+          <div class="form__errors" role="alert">{{ form.errors | default_errors }}</div>
+        {%- endif -%}
+        <label class="field">{{ ss.label_name }}
+          <input class="field__input" type="text" name="contact[name]" placeholder="{{ ss.placeholder_name }}" autocomplete="name" value="{{ form.name }}">
+        </label>
+        <label class="field">{{ ss.label_email }}
+          <input class="field__input" type="email" name="contact[email]" placeholder="{{ ss.placeholder_email }}" autocomplete="email" value="{{ form.email }}" required>
+        </label>
+        {%- if ss.subjects != blank -%}
+          <label class="field">{{ ss.label_subject }}
+            <select class="field__input" name="contact[{{ ss.label_subject | escape }}]">
+              {%- for s in subjects -%}
+                {%- assign opt = s | strip -%}
+                {%- if opt != blank -%}<option value="{{ opt | escape }}">{{ opt }}</option>{%- endif -%}
+              {%- endfor -%}
+            </select>
+          </label>
+        {%- endif -%}
+        <label class="field">{{ ss.label_message }}
+          <textarea class="field__input" rows="5" name="contact[body]" placeholder="{{ ss.placeholder_message }}" required>{{ form.body }}</textarea>
+        </label>
+        <button type="submit" class="btn btn--red">{{ ss.button_label }}</button>
+        {%- if ss.legal != blank -%}<p class="form__legal">{{ ss.legal }}</p>{%- endif -%}
+      {%- endform -%}
+
+      {%- if ss.pro_title != blank -%}
+        <div class="pro-box pro-box--mobile">
+          <h3 class="pro-box__title">{{ ss.pro_title }}</h3>
+          {%- if ss.pro_text != blank -%}<div class="pro-box__text rte">{{ ss.pro_text }}</div>{%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Formulaire de contact",
+  "tag": "section",
+  "class": "section-contact",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancre", "default": "contact" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titre", "info": "La partie en italique est surlignée sur mobile.", "default": "Nous <em>écrire</em>" },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Une question sur la composition, une commande à modifier, une envie de nous faire un retour ? Nous lisons tout et répondons en moins de 24 h ouvrées." },
+    { "type": "textarea", "id": "contact_lines", "label": "Coordonnées (une par ligne)", "default": "✉️ bonjour@tisanours.fr\n💬 Du lundi au vendredi, 9 h – 18 h\n📦 Suivi de commande depuis votre compte client\n📷 @tisanours sur Instagram" },
+    { "type": "header", "content": "Encart professionnels" },
+    { "type": "text", "id": "pro_title", "label": "Titre", "default": "Vous êtes une boutique, une école ou un professionnel ?" },
+    { "type": "richtext", "id": "pro_text", "label": "Texte", "default": "<p>Écrivez-nous à pro@tisanours.fr pour recevoir nos conditions revendeur.</p>" },
+    { "type": "header", "content": "Formulaire" },
+    { "type": "text", "id": "label_name", "label": "Libellé nom", "default": "Prénom et nom" },
+    { "type": "text", "id": "placeholder_name", "label": "Exemple nom", "default": "Camille Durand" },
+    { "type": "text", "id": "label_email", "label": "Libellé email", "default": "Email" },
+    { "type": "text", "id": "placeholder_email", "label": "Exemple email", "default": "camille@email.fr" },
+    { "type": "text", "id": "label_subject", "label": "Libellé sujet", "default": "Sujet" },
+    { "type": "textarea", "id": "subjects", "label": "Sujets (un par ligne)", "default": "Question produit ou composition\nMa commande\nMon abonnement\nRetour ou remboursement\nPartenariat / revendeur\nAutre" },
+    { "type": "text", "id": "label_message", "label": "Libellé message", "default": "Message" },
+    { "type": "text", "id": "placeholder_message", "label": "Exemple message", "default": "Dites-nous tout…" },
+    { "type": "text", "id": "button_label", "label": "Texte du bouton", "default": "Envoyer le message" },
+    { "type": "textarea", "id": "legal", "label": "Mention RGPD", "default": "En envoyant ce formulaire, vous acceptez que nous utilisions vos données uniquement pour vous répondre." },
+    { "type": "text", "id": "success_message", "label": "Message de confirmation", "default": "Merci ! Votre message est bien parti, nous répondons en moins de 24 h ouvrées." }
+  ],
+  "presets": [ { "name": "Formulaire de contact" } ]
+}
+{% endschema %}

@@ -1,0 +1,30 @@
+/*
+ * Modèle Tisa'nours — éditable depuis l'éditeur de thème Shopify.
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-article",
+      "settings": {}
+    },
+    "cta_kit": {
+      "type": "cta-banner",
+      "settings": {
+        "background": "hatched",
+        "size": "compact",
+        "heading": "Goûtez les 3 saveurs avec le <em>Kit Démarrage Rituel</em>",
+        "text": "Les 3 infusions bio, la bouteille infuseur et le Petit Guide du Rituel. Satisfait ou remboursé 30 jours.",
+        "button_1_label": "Découvrir le Kit · 59,90 €",
+        "button_1_link": "shopify://products/kit-demarrage-rituel",
+        "button_1_style": "red",
+        "button_1_tilt": true,
+        "button_2_label": "",
+        "button_2_style": "outline-transparent"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "cta_kit"
+  ]
+}

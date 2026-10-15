@@ -1,0 +1,393 @@
+{%- comment -%}
+  Fiche produit complète (galerie collante + colonne d'informations à blocs).
+  Utilisé par les sections main-product et featured-product.
+  - product: produit
+  - section: section courante
+  - title_tag: h1 | h2
+  - sticky_atc: afficher la barre d'ajout collante en mobile
+{%- endcomment -%}
+{%- liquid
+  assign ss = section.settings
+  capture u
+    render 'univers', setting: ss.univers, product: product
+  endcapture
+  assign u = u | strip
+  assign title_tag = title_tag | default: 'h1'
+  assign form_id = 'ProductForm-' | append: section.id
+  assign current_variant = product.selected_or_first_available_variant
+
+  assign has_offers = false
+  assign offers_block = nil
+  for b in section.blocks
+    if b.type == 'offers' and product.variants.size > 1
+      assign has_offers = true
+      assign offers_block = b
+    endif
+  endfor
+
+  if has_offers and product.selected_variant == nil
+    assign default_index = offers_block.settings.default_offer | minus: 1
+    assign candidate = product.variants[default_index]
+    if candidate != blank
+      assign current_variant = candidate
+    endif
+  endif
+
+  assign button_class = 'btn--red'
+  if ss.button_style == 'univers'
+    assign button_class = 'btn--univers'
+  elsif ss.button_style == 'dark'
+    assign button_class = 'btn--dark'
+  endif
+
+  assign thumbs = ss.gallery_thumbs | default: 4
+  assign media_count = product.media.size
+-%}
+
+<div
+  class="product product--{{ ss.background | default: 'cream' }}{% if ss.bordered %} product--bordered{% endif %}{% if title_tag != 'h1' %} product--home{% endif %} u-{{ u }}"
+  data-product
+  data-money-format="{{ shop.money_format | escape }}"
+  {% if title_tag == 'h1' %}data-update-url{% endif %}
+>
+  <script type="application/json" data-product-variants>{{ product.variants | json }}</script>
+
+  <div class="product__inner">
+    <div class="product__media">
+      <div class="gallery" style="--thumbs: {{ thumbs }};{% if ss.gallery_radius %} --gallery-radius: {{ ss.gallery_radius }}px;{% endif %}">
+        <div class="gallery__main">
+          {%- if media_count > 0 -%}
+            {%- for media in product.media -%}
+              {%- liquid
+                assign is_active = false
+                if current_variant.featured_media and current_variant.featured_media.id == media.id
+                  assign is_active = true
+                elsif current_variant.featured_media == blank and forloop.first
+                  assign is_active = true
+                endif
+                capture media_alt
+                  echo media.alt | default: product.title
+                endcapture
+                assign media_loading = 'lazy'
+                if forloop.first
+                  assign media_loading = 'eager'
+                endif
+              -%}
+              <div class="{% if is_active %}is-active{% endif %}" data-gallery-slide data-media-id="{{ media.id }}">
+                {{- media.preview_image | image_url: width: 1600 | image_tag: widths: '540, 720, 900, 1080, 1296, 1600', sizes: '(min-width: 900px) 50vw, 100vw', loading: media_loading, alt: media_alt -}}
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            <div class="ph is-active" style="width:100%;height:100%;" data-gallery-slide data-media-id="placeholder"></div>
+          {%- endif -%}
+        </div>
+
+        {%- if thumbs > 0 -%}
+          <div class="gallery__thumbs gallery__thumbs--{{ thumbs }}">
+            {%- if media_count > 1 -%}
+              {%- for media in product.media limit: thumbs -%}
+                <button type="button" class="gallery__thumb{% if forloop.first %} is-active{% endif %}" data-gallery-thumb data-media-id="{{ media.id }}" aria-label="{{ 'products.product.media_label' | t: index: forloop.index }}">
+                  {{- media.preview_image | image_url: width: 300 | image_tag: loading: 'lazy', alt: '' -}}
+                </button>
+              {%- endfor -%}
+              {%- assign missing = thumbs | minus: media_count -%}
+            {%- else -%}
+              {%- assign missing = thumbs -%}
+            {%- endif -%}
+            {%- if missing > 0 -%}
+              {%- for i in (1..missing) -%}
+                <span class="gallery__thumb ph ph--sm{% if ss.dashed_placeholders %} ph--dashed{% endif %}" role="presentation"></span>
+              {%- endfor -%}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="product__info">
+      {%- form 'product', product, id: form_id, class: 'pi-form', novalidate: 'novalidate', data-product-form: 'true' -%}
+        {%- unless has_offers -%}
+          <input type="hidden" name="id" value="{{ current_variant.id }}">
+        {%- endunless -%}
+        <input type="hidden" name="quantity" value="1">
+      {%- endform -%}
+
+      {%- assign prev_type = '' -%}
+      {%- for block in section.blocks -%}
+        {%- assign bs = block.settings -%}
+        {%- case block.type -%}
+
+          {%- when 'badge' -%}
+            {%- if bs.text != blank -%}
+              <span class="pi-badge{% if bs.style != 'univers' %} pi-badge--{{ bs.style }}{% endif %}" {{ block.shopify_attributes }}>{{ bs.text }}</span>
+            {%- endif -%}
+
+          {%- when 'title' -%}
+            <{{ title_tag }} class="pi-title" {{ block.shopify_attributes }}>{{ product.title | escape }}</{{ title_tag }}>
+
+          {%- when 'rating' -%}
+            <div class="pi-rating" {{ block.shopify_attributes }}>
+              <span class="stars" aria-hidden="true">{{ bs.stars | default: '★★★★★' }}</span>
+              <span>{{ bs.text }}</span>
+            </div>
+
+          {%- when 'seo' -%}
+            {%- if bs.text != blank -%}
+              <p class="pi-seo" {{ block.shopify_attributes }}>{{ bs.text }}</p>
+            {%- endif -%}
+
+          {%- when 'description' -%}
+            <div class="pi-description{% if bs.size == 'large' %} pi-description--lg{% endif %} rte" {{ block.shopify_attributes }}>
+              {%- if bs.source == 'custom' and bs.text != blank -%}
+                {{ bs.text }}
+              {%- else -%}
+                {{ product.description }}
+              {%- endif -%}
+            </div>
+
+          {%- when 'bullets' -%}
+            {%- assign lines = bs.items | newline_to_br | split: '<br />' -%}
+            <ul class="pi-bullets" {{ block.shopify_attributes }}>
+              {%- for line in lines -%}
+                {%- assign bullet = line | strip -%}
+                {%- if bullet != blank -%}<li>✓ {{ bullet }}</li>{%- endif -%}
+              {%- endfor -%}
+            </ul>
+
+          {%- when 'flavors' -%}
+            {%- if bs.label != blank -%}
+              <span class="pi-label">{{ bs.label }}</span>
+            {%- endif -%}
+            <div class="pi-flavors pi-flavors--{{ bs.mode }}" {{ block.shopify_attributes }}>
+              {%- for i in (1..3) -%}
+                {%- liquid
+                  assign key_p = 'product_' | append: i
+                  assign key_u = 'univers_' | append: i
+                  assign key_t = 'title_' | append: i
+                  assign key_s = 'subtitle_' | append: i
+                  assign fp = bs[key_p]
+                  capture fu
+                    render 'univers', setting: bs[key_u], product: fp
+                  endcapture
+                  assign fu = fu | strip
+                  assign f_title = bs[key_t] | default: fp.title
+                  assign f_sub = bs[key_s] | default: fp.metafields.custom.saveur.value
+                  assign is_current = false
+                  if fp != blank and fp.id == product.id
+                    assign is_current = true
+                  endif
+                  if is_current and bs.mode == 'switcher' and bs.current_label != blank
+                    assign f_sub = bs.current_label
+                  endif
+                -%}
+                {%- if f_title != blank -%}
+                  {%- if fp != blank -%}
+                    <a class="flavor-tile u-{{ fu }}{% if is_current %} is-current{% endif %}" href="{{ fp.url }}"{% if is_current %} aria-current="page"{% endif %}>
+                  {%- else -%}
+                    <div class="flavor-tile u-{{ fu }}">
+                  {%- endif -%}
+                    {%- render 'media', image: fp.featured_image, class: 'flavor-tile__media', tag: 'span', sizes: '160px', widths: '160, 320' -%}
+                    <span class="flavor-tile__body">
+                      <span class="flavor-tile__name">{{ f_title }}</span>
+                      {%- if f_sub != blank -%}<span class="flavor-tile__sub">{{ f_sub }}</span>{%- endif -%}
+                    </span>
+                  {%- if fp != blank -%}</a>{%- else -%}</div>{%- endif -%}
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+
+          {%- when 'offers' -%}
+            {%- if product.variants.size > 1 -%}
+              <fieldset class="offers" {{ block.shopify_attributes }}>
+                <legend class="visually-hidden">{{ product.options.first | default: 'Format' }}</legend>
+                {%- for variant in product.variants limit: 3 -%}
+                  {%- liquid
+                    assign idx = forloop.index
+                    assign k_sub = 'subtitle_' | append: idx
+                    assign k_unit = 'unit_' | append: idx
+                    assign k_badge = 'badge_' | append: idx
+                    assign k_pill = 'pill_' | append: idx
+                    assign pill = bs[k_pill]
+                    if pill == blank and variant.compare_at_price > variant.price
+                      assign pct = variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price
+                      assign pill = '-' | append: pct | append: '%'
+                    endif
+                    assign thumb_count = idx
+                  -%}
+                  <label class="offer{% unless variant.available %} is-unavailable{% endunless %}">
+                    <input
+                      type="radio"
+                      name="id"
+                      value="{{ variant.id }}"
+                      form="{{ form_id }}"
+                      data-offer-input
+                      {% if variant.id == current_variant.id %}checked{% endif %}
+                      {% unless variant.available %}disabled{% endunless %}
+                    >
+                    {%- if bs[k_badge] != blank -%}<span class="offer__badge">{{ bs[k_badge] }}</span>{%- endif -%}
+                    {%- if bs.show_thumbs -%}
+                      <span class="offer__thumbs" aria-hidden="true">
+                        {%- for n in (1..thumb_count) -%}
+                          {%- render 'media', image: product.featured_image, class: 'offer__thumb ph--xs', tag: 'span', sizes: '60px', widths: '60, 120' -%}
+                        {%- endfor -%}
+                      </span>
+                    {%- endif -%}
+                    <span class="offer__body">
+                      <span class="offer__name">{{ variant.title }}</span>
+                      {%- if bs[k_sub] != blank -%}<span class="offer__sub">{{ bs[k_sub] }}</span>{%- endif -%}
+                      {%- if bs[k_unit] != blank -%}<span class="offer__unit">{{ bs[k_unit] }}</span>{%- endif -%}
+                    </span>
+                    {%- if pill != blank -%}<span class="offer__pill">{{ pill }}</span>{%- endif -%}
+                    <span class="offer__prices">
+                      {%- if variant.compare_at_price > variant.price -%}
+                        <span class="offer__compare">{{ variant.compare_at_price | money }}</span>
+                      {%- endif -%}
+                      <span class="offer__price">{{ variant.price | money }}</span>
+                    </span>
+                  </label>
+                {%- endfor -%}
+              </fieldset>
+            {%- endif -%}
+
+          {%- when 'variant_picker' -%}
+            {%- unless product.has_only_default_variant or has_offers -%}
+              <div class="variant-picker" data-variant-picker {{ block.shopify_attributes }}>
+                {%- for option in product.options_with_values -%}
+                  <fieldset class="variant-picker__option" data-option-index="{{ forloop.index0 }}">
+                    <legend class="variant-picker__legend">{{ option.name }}</legend>
+                    <div class="variant-picker__values">
+                      {%- for value in option.values -%}
+                        <label class="variant-pill">
+                          <input type="radio" name="{{ section.id }}-option-{{ option.position }}" value="{{ value | escape }}"{% if option.selected_value == value %} checked{% endif %}>
+                          <span>
+                            {%- if value.swatch.color -%}<i class="variant-pill__swatch" style="background: {{ value.swatch.color }};"></i>{%- endif -%}
+                            {{ value }}
+                          </span>
+                        </label>
+                      {%- endfor -%}
+                    </div>
+                  </fieldset>
+                {%- endfor -%}
+              </div>
+            {%- endunless -%}
+
+          {%- when 'price' -%}
+            <div class="pi-price" {{ block.shopify_attributes }}>
+              <span class="pi-price__value" data-product-price>{{ current_variant.price | money }}</span>
+              <span class="pi-price__compare" data-product-compare{% unless current_variant.compare_at_price > current_variant.price %} hidden{% endunless %}>{{ current_variant.compare_at_price | money }}</span>
+              {%- if bs.note != blank -%}<span class="pi-price__note">{{ bs.note }}</span>{%- endif -%}
+            </div>
+
+          {%- when 'buy_buttons' -%}
+            {%- liquid
+              if bs.label != blank
+                assign btn_label = bs.label
+              else
+                assign btn_label = 'products.product.add_to_cart' | t
+              endif
+              assign block_btn_class = button_class
+              if bs.style != 'section' and bs.style != blank
+                assign block_btn_class = 'btn--' | append: bs.style
+              endif
+            -%}
+            <div class="pi-buy" {{ block.shopify_attributes }}>
+              <button
+                type="submit"
+                form="{{ form_id }}"
+                class="btn btn--lg {{ block_btn_class }}"
+                data-add-button
+                data-label="{{ btn_label | escape }}"
+                {% unless current_variant.available %}disabled data-sold-out{% endunless %}
+              >
+                <span data-add-label>{% if current_variant.available %}{{ btn_label }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span>
+              </button>
+              <p class="pi-error" data-form-error role="alert"></p>
+            </div>
+
+          {%- when 'marquee' -%}
+            <div class="pi-marquee" {{ block.shopify_attributes }}>
+              {%- render 'marquee', items: bs.items, duration: bs.duration -%}
+            </div>
+
+          {%- when 'testimonial' -%}
+            <blockquote class="testimonial{% unless bs.avatar_mobile %} testimonial--no-avatar-mobile{% endunless %}" {{ block.shopify_attributes }}>
+              {%- if bs.show_avatar -%}
+                {%- render 'media', image: bs.avatar, class: 'testimonial__avatar ph--beige', sizes: '56px', widths: '56, 112' -%}
+              {%- endif -%}
+              <div>
+                <div class="testimonial__stars" aria-hidden="true">{{ bs.stars | default: '★★★★★' }}</div>
+                <p class="testimonial__quote">{{ bs.quote }}</p>
+                <footer class="testimonial__author{% if bs.author_color == 'univers' %} testimonial__author--univers{% endif %}">{{ bs.author }}</footer>
+              </div>
+            </blockquote>
+
+          {%- when 'upsell' -%}
+            {%- liquid
+              assign up = bs.product
+              assign up_name = bs.name | default: up.title
+              assign up_variant = up.selected_or_first_available_variant
+              assign up_price = bs.price_text
+              if up_price == blank and up != blank
+                assign up_price = up.price | money
+              endif
+            -%}
+            {%- unless up != blank and up.id == product.id -%}
+              <div class="upsell" {{ block.shopify_attributes }}>
+                {%- render 'media', image: up.featured_image, class: 'upsell__thumb ph--beige', sizes: '88px', widths: '88, 176' -%}
+                <div class="upsell__body">
+                  {%- if bs.label != blank -%}<span class="upsell__label">{{ bs.label }}</span>{%- endif -%}
+                  <span class="upsell__name">{{ up_name }}<span class="upsell__name-price"> · {{ up_price }}</span></span>
+                  {%- if bs.text != blank -%}<span class="upsell__text">{{ bs.text }}</span>{%- endif -%}
+                </div>
+                <div class="upsell__side">
+                  <span class="upsell__price">{{ up_price }}</span>
+                  {%- if up_variant.available -%}
+                    <button type="button" class="btn btn--dark" data-quick-add="{{ up_variant.id }}">{{ bs.button_label | default: 'Ajouter' }}</button>
+                  {%- elsif up != blank -%}
+                    <a class="btn btn--dark" href="{{ up.url }}">{{ bs.button_label | default: 'Ajouter' }}</a>
+                  {%- else -%}
+                    <span class="btn btn--dark is-disabled">{{ bs.button_label | default: 'Ajouter' }}</span>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endunless -%}
+
+          {%- when 'accordion' -%}
+            <details class="accordion accordion--sm pi-accordion{% if prev_type != 'accordion' %} pi-accordion--first{% endif %}" {% if bs.open %}open{% endif %} {{ block.shopify_attributes }}>
+              <summary>{{ bs.question }}</summary>
+              <div class="accordion__content rte">{{ bs.answer }}</div>
+            </details>
+
+          {%- when 'text' -%}
+            <div class="rte text-body" {{ block.shopify_attributes }}>{{ bs.text }}</div>
+
+          {%- when '@app' -%}
+            {% render block %}
+
+          {%- when 'custom_liquid' -%}
+            <div {{ block.shopify_attributes }}>{{ bs.custom_liquid }}</div>
+        {%- endcase -%}
+        {%- assign prev_type = block.type -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+  {%- if sticky_atc -%}
+    <div class="sticky-atc">
+      <span class="sticky-atc__info">
+        <span class="sticky-atc__price" data-sticky-price>{{ current_variant.price | money }}</span>
+        <span class="sticky-atc__name">{{ product.title | escape }}</span>
+      </span>
+      <button
+        type="submit"
+        form="{{ form_id }}"
+        class="btn btn--red"
+        data-add-button
+        data-label="{{ ss.sticky_label | default: 'Ajouter au panier' | escape }}"
+        {% unless current_variant.available %}disabled data-sold-out{% endunless %}
+      >
+        <span data-add-label>{% if current_variant.available %}{{ ss.sticky_label | default: 'Ajouter au panier' }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span>
+      </button>
+    </div>
+  {%- endif -%}
+</div>

@@ -1,0 +1,115 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Tisa'nours",
+    "theme_version": "1.0.0",
+    "theme_author": "Agence GLX",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://help.shopify.com"
+  },
+  {
+    "name": "Couleurs de la marque",
+    "settings": [
+      { "type": "header", "content": "Couleurs principales" },
+      { "type": "color", "id": "color_green", "label": "Vert principal (texte, header, footer)", "default": "#22352A" },
+      { "type": "color", "id": "color_green_2", "label": "Vert secondaire (cartes sur fond vert)", "default": "#2E4638" },
+      { "type": "color", "id": "color_green_shadow", "label": "Ombre des boutons verts", "default": "#101C15" },
+      { "type": "color", "id": "color_cream", "label": "Crème (fond principal)", "default": "#FFF7EC" },
+      { "type": "color", "id": "color_white", "label": "Blanc", "default": "#FFFFFF" },
+      { "type": "color", "id": "color_border", "label": "Bordures beiges", "default": "#EFE2D0" },
+      { "type": "color", "id": "color_border_2", "label": "Bordures beiges (variante)", "default": "#E7DFD4" },
+      { "type": "color", "id": "color_yellow_soft", "label": "Jaune clair (pastilles d'icônes)", "default": "#FFE9C2" },
+      { "type": "header", "content": "Textes" },
+      { "type": "color", "id": "color_text", "label": "Texte courant", "default": "#3E4A40" },
+      { "type": "color", "id": "color_text_2", "label": "Texte secondaire", "default": "#5C6B60" },
+      { "type": "color", "id": "color_text_3", "label": "Texte secondaire chaud", "default": "#6B6152" },
+      { "type": "color", "id": "color_text_on_dark", "label": "Texte clair sur fond vert", "default": "#D8E2DA" },
+      { "type": "color", "id": "color_text_on_dark_2", "label": "Texte clair secondaire sur fond vert", "default": "#A9BDAF" },
+      { "type": "header", "content": "Boutons et accents" },
+      { "type": "color", "id": "color_red", "label": "Rouge marque (CTA principal)", "default": "#E8514A" },
+      { "type": "color", "id": "color_red_dark", "label": "Ombre du rouge", "default": "#B3241F" },
+      { "type": "color", "id": "color_red_hover", "label": "Rouge au survol", "default": "#F0605A" },
+      { "type": "color", "id": "color_yellow", "label": "Jaune", "default": "#F5B01A" },
+      { "type": "color", "id": "color_yellow_dark", "label": "Ombre du jaune", "default": "#C98A08" },
+      { "type": "color", "id": "color_stars", "label": "Étoiles des avis", "default": "#F5B01A" }
+    ]
+  },
+  {
+    "name": "Univers produits",
+    "settings": [
+      { "type": "paragraph", "content": "Chaque produit a son univers de couleur. Les sections et les cartes produit utilisent ces palettes." },
+      { "type": "header", "content": "Kit / neutre" },
+      { "type": "color", "id": "u_kit_main", "label": "Couleur principale", "default": "#F5B01A" },
+      { "type": "color", "id": "u_kit_on", "label": "Texte sur la couleur principale", "default": "#22352A" },
+      { "type": "color", "id": "u_kit_shadow", "label": "Ombre des boutons", "default": "#C98A08" },
+      { "type": "color", "id": "u_kit_soft", "label": "Fond doux", "default": "#FFE9C2" },
+      { "type": "color", "id": "u_kit_ink", "label": "Encre (textes colorés)", "default": "#9A5A05" },
+      { "type": "color", "id": "u_kit_ph1", "label": "Placeholder clair", "default": "#FBE7D2" },
+      { "type": "color", "id": "u_kit_ph2", "label": "Placeholder foncé", "default": "#F5DCC0" },
+      { "type": "header", "content": "Tropical Sunshine (jaune)" },
+      { "type": "color", "id": "u_sunshine_main", "label": "Couleur principale", "default": "#F5B01A" },
+      { "type": "color", "id": "u_sunshine_on", "label": "Texte sur la couleur principale", "default": "#22352A" },
+      { "type": "color", "id": "u_sunshine_shadow", "label": "Ombre des boutons", "default": "#C98A08" },
+      { "type": "color", "id": "u_sunshine_soft", "label": "Fond doux", "default": "#FFF3D6" },
+      { "type": "color", "id": "u_sunshine_ink", "label": "Encre (textes colorés)", "default": "#9A5A05" },
+      { "type": "color", "id": "u_sunshine_ph1", "label": "Placeholder clair", "default": "#FFE9C2" },
+      { "type": "color", "id": "u_sunshine_ph2", "label": "Placeholder foncé", "default": "#FADEAF" },
+      { "type": "header", "content": "Happy Adventure (rouge)" },
+      { "type": "color", "id": "u_adventure_main", "label": "Couleur principale", "default": "#E8514A" },
+      { "type": "color", "id": "u_adventure_on", "label": "Texte sur la couleur principale", "default": "#FFFFFF" },
+      { "type": "color", "id": "u_adventure_shadow", "label": "Ombre des boutons", "default": "#B3241F" },
+      { "type": "color", "id": "u_adventure_soft", "label": "Fond doux", "default": "#FFE8E4" },
+      { "type": "color", "id": "u_adventure_ink", "label": "Encre (textes colorés)", "default": "#B3241F" },
+      { "type": "color", "id": "u_adventure_ph1", "label": "Placeholder clair", "default": "#FFD9D3" },
+      { "type": "color", "id": "u_adventure_ph2", "label": "Placeholder foncé", "default": "#F9C6BF" },
+      { "type": "header", "content": "Dream Forest (violet)" },
+      { "type": "color", "id": "u_forest_main", "label": "Couleur principale", "default": "#7E4FA8" },
+      { "type": "color", "id": "u_forest_on", "label": "Texte sur la couleur principale", "default": "#FFFFFF" },
+      { "type": "color", "id": "u_forest_shadow", "label": "Ombre des boutons", "default": "#5B2E85" },
+      { "type": "color", "id": "u_forest_soft", "label": "Fond doux", "default": "#F2E8FB" },
+      { "type": "color", "id": "u_forest_ink", "label": "Encre (textes colorés)", "default": "#5B2E85" },
+      { "type": "color", "id": "u_forest_ph1", "label": "Placeholder clair", "default": "#E6D6F5" },
+      { "type": "color", "id": "u_forest_ph2", "label": "Placeholder foncé", "default": "#DAC5EF" },
+      { "type": "header", "content": "Gourde (vert)" },
+      { "type": "color", "id": "u_bottle_main", "label": "Couleur principale", "default": "#22352A" },
+      { "type": "color", "id": "u_bottle_on", "label": "Texte sur la couleur principale", "default": "#FFF7EC" },
+      { "type": "color", "id": "u_bottle_shadow", "label": "Ombre des boutons", "default": "#101C15" },
+      { "type": "color", "id": "u_bottle_soft", "label": "Fond doux", "default": "#E9F0EA" },
+      { "type": "color", "id": "u_bottle_ink", "label": "Encre (textes colorés)", "default": "#22352A" },
+      { "type": "color", "id": "u_bottle_ph1", "label": "Placeholder clair", "default": "#E4EAE4" },
+      { "type": "color", "id": "u_bottle_ph2", "label": "Placeholder foncé", "default": "#D6DED7" }
+    ]
+  },
+  {
+    "name": "Typographie",
+    "settings": [
+      { "type": "paragraph", "content": "Les titres utilisent Archie Bold et les textes Archie Regular. Importez les fichiers de police (.woff2) dans Contenu > Fichiers, puis collez leurs URL ci-dessous. En attendant, les polices de repli Baloo 2 et Nunito sont utilisées." },
+      { "type": "text", "id": "font_archie_regular_url", "label": "URL du fichier Archie Regular (.woff2)" },
+      { "type": "text", "id": "font_archie_bold_url", "label": "URL du fichier Archie Bold (.woff2)" },
+      { "type": "checkbox", "id": "load_fallback_fonts", "label": "Charger les polices de repli (Google Fonts)", "default": true },
+      { "type": "range", "id": "body_scale", "label": "Échelle du texte", "min": 90, "max": 110, "step": 1, "unit": "%", "default": 100 }
+    ]
+  },
+  {
+    "name": "Panier",
+    "settings": [
+      { "type": "checkbox", "id": "cart_drawer_enabled", "label": "Ouvrir le panier latéral à l'ajout", "default": true },
+      { "type": "number", "id": "free_shipping_threshold", "label": "Seuil de livraison offerte (€)", "default": 45 },
+      { "type": "text", "id": "cart_icon", "label": "Icône du panier (emoji)", "default": "🧺" }
+    ]
+  },
+  {
+    "name": "Réseaux sociaux",
+    "settings": [
+      { "type": "text", "id": "social_instagram_link", "label": "Instagram", "info": "https://instagram.com/tisanours" },
+      { "type": "text", "id": "social_facebook_link", "label": "Facebook" },
+      { "type": "text", "id": "social_tiktok_link", "label": "TikTok" }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      { "type": "image_picker", "id": "favicon", "label": "Image du favicon", "info": "32 x 32 px recommandé" }
+    ]
+  }
+]

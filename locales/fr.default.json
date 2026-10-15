@@ -1,0 +1,174 @@
+{
+  "accessibility": {
+    "skip_to_content": "Aller au contenu"
+  },
+  "general": {
+    "newsletter": {
+      "email": "Votre adresse email"
+    },
+    "pagination": {
+      "label": "Pagination",
+      "next": "Page suivante",
+      "previous": "Page précédente"
+    },
+    "password_page": {
+      "password": "Mot de passe",
+      "enter": "Entrer",
+      "admin_link_html": "Vous êtes le propriétaire ? <a href=\"/admin\" class=\"link-underline\">Connectez-vous ici</a>"
+    },
+    "search": {
+      "placeholder": "Rechercher une infusion, une question…",
+      "submit": "Rechercher",
+      "results_count": {
+        "one": "{{ count }} résultat pour « {{ terms }} »",
+        "other": "{{ count }} résultats pour « {{ terms }} »"
+      },
+      "no_results": "Aucun résultat. Essayez un autre mot, par exemple « kit » ou « gourde »."
+    }
+  },
+  "sections": {
+    "announcement": {
+      "label": "Annonces"
+    },
+    "header": {
+      "menu": "Menu",
+      "main_navigation": "Navigation principale",
+      "cart": "Ouvrir le panier"
+    },
+    "comparison": {
+      "yes": "Oui",
+      "no": "Non"
+    },
+    "featured_product": {
+      "placeholder_badge": "Produit mis en avant",
+      "placeholder_title": "Choisissez un produit",
+      "placeholder_text": "Sélectionnez le Kit Démarrage Rituel dans les réglages de la section."
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Ajouter au panier",
+      "adding": "Ajout…",
+      "sold_out": "Épuisé",
+      "unavailable": "Indisponible",
+      "media_label": "Afficher l'image {{ index }}",
+      "from_price": "Dès {{ price }}"
+    }
+  },
+  "cart": {
+    "close": "Fermer le panier",
+    "decrease": "Retirer une unité",
+    "increase": "Ajouter une unité",
+    "remove": "Supprimer",
+    "total": "Total",
+    "error": "Une erreur est survenue, merci de réessayer.",
+    "note": "Une précision pour votre commande ?",
+    "quantity": "Quantité",
+    "shipping_remaining": "Plus que {{ amount }} pour la livraison offerte",
+    "shipping_done": "Livraison offerte, c'est acquis !",
+    "taxes": "Taxes incluses. Frais de livraison calculés à l'étape suivante.",
+    "update": "Mettre à jour"
+  },
+  "collections": {
+    "count": {
+      "one": "{{ count }} produit",
+      "other": "{{ count }} produits"
+    },
+    "sort_by": "Trier par",
+    "empty": "Aucun produit dans cette collection pour le moment.",
+    "continue": "Retour à l'accueil"
+  },
+  "blogs": {
+    "comments": {
+      "title": "Commentaires",
+      "name": "Nom",
+      "email": "Email",
+      "message": "Message",
+      "post": "Publier",
+      "success": "Merci ! Votre commentaire sera publié après validation."
+    }
+  },
+  "customer": {
+    "login": {
+      "title": "Connexion",
+      "submit": "Se connecter",
+      "forgot": "Mot de passe oublié ?",
+      "register": "Créer un compte",
+      "guest": "Continuer en tant qu'invité"
+    },
+    "recover": {
+      "title": "Réinitialiser votre mot de passe",
+      "submit": "Envoyer",
+      "cancel": "Annuler",
+      "success": "Un email vous a été envoyé pour réinitialiser votre mot de passe."
+    },
+    "register": {
+      "title": "Créer un compte",
+      "submit": "Créer mon compte"
+    },
+    "account": {
+      "title": "Mon compte",
+      "welcome": "Bonjour {{ name }}",
+      "logout": "Se déconnecter",
+      "orders": "Mes commandes",
+      "no_orders": "Vous n'avez pas encore passé de commande.",
+      "details": "Mes informations",
+      "addresses": "Mes adresses ({{ count }})"
+    },
+    "order": {
+      "title": "Commande {{ name }}",
+      "number": "Commande",
+      "date": "Date",
+      "status": "Statut",
+      "total": "Total",
+      "product": "Produit",
+      "quantity": "Quantité",
+      "subtotal": "Sous-total",
+      "cancelled": "Annulée",
+      "billing_address": "Adresse de facturation",
+      "shipping_address": "Adresse de livraison"
+    },
+    "addresses": {
+      "title": "Mes adresses",
+      "default": "Adresse par défaut",
+      "edit": "Modifier",
+      "update": "Mettre à jour",
+      "delete": "Supprimer",
+      "delete_confirm": "Supprimer cette adresse ?",
+      "add": "Ajouter une adresse",
+      "set_default": "Définir comme adresse par défaut"
+    },
+    "activate": {
+      "title": "Activer votre compte",
+      "submit": "Activer",
+      "decline": "Refuser l'invitation"
+    },
+    "reset": {
+      "title": "Nouveau mot de passe",
+      "submit": "Enregistrer"
+    },
+    "fields": {
+      "email": "Email",
+      "password": "Mot de passe",
+      "password_confirm": "Confirmer le mot de passe",
+      "first_name": "Prénom",
+      "last_name": "Nom",
+      "company": "Société",
+      "address1": "Adresse",
+      "address2": "Complément d'adresse",
+      "zip": "Code postal",
+      "city": "Ville",
+      "country": "Pays",
+      "phone": "Téléphone"
+    }
+  },
+  "gift_card": {
+    "title": "Carte cadeau de {{ value }}",
+    "heading": "Votre carte cadeau",
+    "value": "Solde : {{ value }}",
+    "disabled": "Cette carte cadeau n'est plus valide.",
+    "shop_link": "Aller à la boutique",
+    "print": "Imprimer",
+    "apple_wallet": "Ajouter à Apple Wallet"
+  }
+}

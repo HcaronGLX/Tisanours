@@ -1,0 +1,70 @@
+{%- assign ss = section.settings -%}
+{%- assign mobile_image = ss.image_mobile | default: ss.image -%}
+<div class="why">
+  <div class="why__inner">
+    <div class="why__content">
+      {%- if ss.eyebrow != blank -%}<span class="eyebrow">{{ ss.eyebrow }}</span>{%- endif -%}
+      {%- if ss.heading != blank -%}<h2 class="why__title">{{ ss.heading }}</h2>{%- endif -%}
+      {%- if ss.text != blank -%}<div class="why__text rte">{{ ss.text }}</div>{%- endif -%}
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="why__stats">
+          {%- for block in section.blocks -%}
+            <div class="stat" {{ block.shopify_attributes }}>
+              <div class="stat__value{% if block.settings.accent %} stat__value--accent{% endif %}">
+                {{- block.settings.value -}}
+                {%- if block.settings.unit != blank -%}<span class="stat__unit">{{ block.settings.unit }}</span>{%- endif -%}
+              </div>
+              {%- if block.settings.text != blank -%}<p class="stat__text">{{ block.settings.text }}</p>{%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- render 'media', image: mobile_image, ph: 'beige', class: 'why__media-mobile', sizes: '100vw' -%}
+
+      {%- if ss.tagline_title != blank or ss.tagline_text != blank -%}
+        <div class="why__tagline">
+          {%- if ss.tagline_title != blank -%}<span class="why__tagline-title">{{ ss.tagline_title }}</span>{%- endif -%}
+          {%- if ss.tagline_text != blank -%}<span class="why__tagline-text">{{ ss.tagline_text }}</span>{%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- render 'media', image: ss.image, ph: 'beige', class: 'why__media' -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Texte + chiffres clés",
+  "tag": "section",
+  "class": "section-why",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Le bon geste" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titre", "info": "Mettez en gras la partie à afficher en rouge, en italique celle à surligner.", "default": "Pourquoi remplacer les boissons sucrées par <strong>une infusion fruitée ?</strong>" },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Un enfant de 3 à 12 ans n'a pas besoin de sucre ajouté pour aimer ce qu'il boit. Il a besoin de goût. Tisa'nours garde le plaisir du fruit et enlève le reste : aucun sucre ajouté, aucune caféine, aucun colorant.</p>" },
+    { "type": "text", "id": "tagline_title", "label": "Phrase de conclusion", "default": "Sa saveur. Sa bouteille. Son rituel." },
+    { "type": "textarea", "id": "tagline_text", "label": "Texte de conclusion", "default": "Il choisit, il participe, il s'approprie le moment. C'est là que l'alternative tient dans le temps." },
+    { "type": "image_picker", "id": "image", "label": "Image", "info": "Verre d'infusion glacée et fruits frais, format portrait." },
+    { "type": "image_picker", "id": "image_mobile", "label": "Image mobile" }
+  ],
+  "blocks": [
+    { "type": "stat", "name": "Chiffre clé", "limit": 4, "settings": [
+      { "type": "text", "id": "value", "label": "Valeur", "default": "≈ 7" },
+      { "type": "text", "id": "unit", "label": "Unité", "default": "sucres" },
+      { "type": "checkbox", "id": "accent", "label": "Couleur rouge", "default": false },
+      { "type": "textarea", "id": "text", "label": "Texte", "default": "dans un soda de 33 cl : un goût qui installe l'habitude, et une négociation à chaque goûter." }
+    ] }
+  ],
+  "presets": [
+    {
+      "name": "Texte + chiffres clés",
+      "blocks": [
+        { "type": "stat" },
+        { "type": "stat", "settings": { "value": "0", "unit": "sucre ajouté*", "accent": true, "text": "dans une infusion Tisa'nours : uniquement des fruits et des plantes bio. Le goût vient du fruit, l'envie vient de l'enfant." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,56 @@
+{%- liquid
+  assign ss = section.settings
+  assign mobile_image = ss.image_mobile | default: ss.image
+  assign section_bg = 'var(--c-cream)'
+  if ss.background == 'white'
+    assign section_bg = 'var(--c-white)'
+  endif
+-%}
+<div class="imgtext imgtext--media-{{ ss.media_position }}" style="--section-bg: {{ section_bg }};">
+  <div class="imgtext__inner">
+    <div class="imgtext__content">
+      {%- if ss.heading != blank -%}<h2 class="imgtext__title">{{ ss.heading }}</h2>{%- endif -%}
+      {%- if ss.text != blank -%}<div class="text-body rte">{{ ss.text }}</div>{%- endif -%}
+      {%- render 'media', image: mobile_image, ph: ss.ph, class: 'imgtext__media-mobile', sizes: '100vw' -%}
+      {%- if ss.quote != blank -%}<p class="imgtext__quote">{{ ss.quote }}</p>{%- endif -%}
+      {%- render 'button', label: ss.button_label, link: ss.button_link, style: ss.button_style -%}
+    </div>
+    <div class="imgtext__media">
+      {%- if ss.media_position == 'left' -%}
+        {%- render 'media', image: ss.image, ph: ss.ph, class: 'tilted-media tilted-media--right' -%}
+      {%- else -%}
+        {%- render 'media', image: ss.image, ph: ss.ph, class: 'tilted-media tilted-media--left' -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Image + texte",
+  "tag": "section",
+  "class": "section-image-text",
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Titre", "default": "Le moment devient une habitude. <em>La saveur reste libre.</em>" },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Nous ne voulons pas attribuer une saveur à une heure ou à une fonction. Matin, sortie d’école, repas, goûter, soir : le rituel s’installe sur le moment, et l’enfant choisit selon son envie du jour.</p><p>L’autonomie est progressive et adaptée à l’âge. L’idée est la participation et l’appropriation · l’eau chaude reste l’affaire des adultes pour les plus jeunes.</p>" },
+    { "type": "text", "id": "quote", "label": "Phrase forte", "default": "« Sa saveur. Sa bouteille. Son rituel. »" },
+    { "type": "text", "id": "button_label", "label": "Texte du bouton" },
+    { "type": "url", "id": "button_link", "label": "Lien du bouton" },
+    { "type": "select", "id": "button_style", "label": "Style du bouton", "options": [
+      { "value": "red", "label": "Rouge" }, { "value": "yellow", "label": "Jaune" }, { "value": "dark", "label": "Vert" }, { "value": "outline", "label": "Contour" }
+    ], "default": "red" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "image_picker", "id": "image_mobile", "label": "Image mobile" },
+    { "type": "select", "id": "ph", "label": "Couleur si vide", "options": [
+      { "value": "beige", "label": "Beige" }, { "value": "sunshine-soft", "label": "Jaune doux" }, { "value": "adventure-soft", "label": "Rouge doux" }, { "value": "forest-soft", "label": "Violet doux" }, { "value": "bottle", "label": "Vert" }
+    ], "default": "beige" },
+    { "type": "select", "id": "media_position", "label": "Position de l'image (desktop)", "options": [
+      { "value": "right", "label": "À droite" }, { "value": "left", "label": "À gauche" }
+    ], "default": "right" },
+    { "type": "select", "id": "background", "label": "Fond", "options": [
+      { "value": "cream", "label": "Crème" }, { "value": "white", "label": "Blanc" }
+    ], "default": "cream" }
+  ],
+  "presets": [ { "name": "Image + texte" } ]
+}
+{% endschema %}

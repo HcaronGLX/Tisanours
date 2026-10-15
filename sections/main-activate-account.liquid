@@ -1,0 +1,18 @@
+<div class="page-section">
+  <div class="page-section__inner" style="max-width: 560px;">
+    <h1 class="page-title">{{ 'customer.activate.title' | t }}</h1>
+    <div class="card-box" style="margin-top: 24px;">
+      {%- form 'activate_customer_password', class: 'form' -%}
+        {%- if form.errors -%}<div class="form__errors">{{ form.errors | default_errors }}</div>{%- endif -%}
+        <label class="field">{{ 'customer.fields.password' | t }}<input class="field__input" type="password" name="customer[password]" autocomplete="new-password" required></label>
+        <label class="field">{{ 'customer.fields.password_confirm' | t }}<input class="field__input" type="password" name="customer[password_confirmation]" autocomplete="new-password" required></label>
+        <button class="btn btn--red" type="submit">{{ 'customer.activate.submit' | t }}</button>
+        <button class="btn btn--outline-small" type="submit" name="decline">{{ 'customer.activate.decline' | t }}</button>
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Activation du compte", "tag": "section", "class": "section-activate", "settings": [] }
+{% endschema %}

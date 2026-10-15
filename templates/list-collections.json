@@ -1,0 +1,17 @@
+/*
+ * Modèle Tisa'nours — éditable depuis l'éditeur de thème Shopify.
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "settings": {
+        "heading": "Nos collections",
+        "button_label": "Voir la collection"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

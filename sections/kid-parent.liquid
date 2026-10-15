@@ -1,0 +1,74 @@
+{%- liquid
+  assign ss = section.settings
+  assign mobile_image = ss.image_mobile | default: ss.image_1
+-%}
+<div class="duo">
+  <div class="duo__inner">
+    <div class="duo__media">
+      <div class="stack">
+        {%- render 'media', image: ss.image_1, ph: ss.ph_1, class: 'stack__item stack__item--1', sizes: '(min-width: 900px) 40vw, 100vw' -%}
+        {%- render 'media', image: ss.image_2, ph: ss.ph_2, class: 'stack__item stack__item--2', sizes: '(min-width: 900px) 36vw, 100vw' -%}
+      </div>
+    </div>
+    <div class="duo__content">
+      {%- if ss.heading != blank -%}<h2 class="duo__title">{{ ss.heading }}</h2>{%- endif -%}
+      {%- render 'media', image: mobile_image, ph: 'adventure', class: 'duo__media-mobile', sizes: '100vw' -%}
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign bs = block.settings
+          assign chip_lines = bs.chips | newline_to_br | split: '<br />'
+          assign bg = '--bubble-bg: var(--' | append: bs.color | append: '-soft); --bubble-ink: var(--' | append: bs.color | append: '-ink);'
+        -%}
+        <div class="bubble" style="{{ bg }}" {{ block.shopify_attributes }}>
+          {%- if bs.label != blank -%}<span class="bubble__label">{{ bs.label }}</span>{%- endif -%}
+          {%- if bs.quote != blank -%}<p class="bubble__quote">{{ bs.quote }}</p>{%- endif -%}
+          <div class="bubble__chips">
+            {%- for line in chip_lines -%}
+              {%- assign chip = line | strip -%}
+              {%- if chip != blank -%}<span class="bubble__chip">{{ chip }}</span>{%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Enfant / parent",
+  "tag": "section",
+  "class": "section-duo",
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Titre", "default": "Une boisson que l’enfant réclame, que <em>le parent approuve</em>" },
+    { "type": "image_picker", "id": "image_1", "label": "Image 1" },
+    { "type": "select", "id": "ph_1", "label": "Couleur si vide (image 1)", "options": [
+      { "value": "beige", "label": "Beige" }, { "value": "adventure-soft", "label": "Rouge doux" }, { "value": "forest-soft", "label": "Violet doux" }, { "value": "sunshine-soft", "label": "Jaune doux" }, { "value": "bottle", "label": "Vert" }
+    ], "default": "adventure-soft" },
+    { "type": "image_picker", "id": "image_2", "label": "Image 2" },
+    { "type": "select", "id": "ph_2", "label": "Couleur si vide (image 2)", "options": [
+      { "value": "beige", "label": "Beige" }, { "value": "adventure-soft", "label": "Rouge doux" }, { "value": "forest-soft", "label": "Violet doux" }, { "value": "sunshine-soft", "label": "Jaune doux" }, { "value": "bottle", "label": "Vert" }
+    ], "default": "bottle" },
+    { "type": "image_picker", "id": "image_mobile", "label": "Image mobile", "info": "Par défaut, l'image 1." }
+  ],
+  "blocks": [
+    { "type": "bubble", "name": "Bulle", "limit": 4, "settings": [
+      { "type": "text", "id": "label", "label": "Sur-titre", "default": "Côté enfant" },
+      { "type": "text", "id": "quote", "label": "Citation", "default": "« C’est bon, et c’est le mien. »" },
+      { "type": "textarea", "id": "chips", "label": "Arguments (un par ligne)", "default": "Un goût vraiment gourmand, pas un goût de tisane\nSa saveur, selon son envie du jour\nIl prépare avec un grand, comme un grand\nSa bouteille, à la maison comme à l’école" },
+      { "type": "select", "id": "color", "label": "Couleur", "options": [
+        { "value": "adventure", "label": "Rouge doux" }, { "value": "bottle", "label": "Vert doux" }, { "value": "sunshine", "label": "Jaune doux" }, { "value": "forest", "label": "Violet doux" }
+      ], "default": "adventure" }
+    ] }
+  ],
+  "presets": [
+    {
+      "name": "Enfant / parent",
+      "blocks": [
+        { "type": "bubble" },
+        { "type": "bubble", "settings": { "label": "Côté parent", "quote": "« Enfin une alternative qui tient. »", "chips": "Bio, sans sucre ajouté, sans caféine ni théine\nToujours prêt, à la maison ou en déplacement\nMoins de bataille autour du goût\nUn moment partagé, sans culpabilité", "color": "bottle" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

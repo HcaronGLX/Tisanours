@@ -1,0 +1,30 @@
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "reassurance": {
+      "type": "reassurance",
+      "blocks": {
+        "r1": { "type": "item", "settings": { "icon": "⏱️", "title": "Expédition rapide", "text": "Sous 24 à 48 h ouvrées" } },
+        "r2": { "type": "item", "settings": { "icon": "🚚", "title": "Livraison offerte", "text": "À partir de 45 € d’achat" } },
+        "r3": { "type": "item", "settings": { "icon": "🔒", "title": "Paiement sécurisé", "text": "CB, Apple Pay, PayPal" } },
+        "r4": { "type": "item", "settings": { "icon": "🇫🇷", "title": "Une marque française", "text": "Conditionné en France" } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4"],
+      "settings": {}
+    },
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "logo_text": "Tisa'nours",
+        "tagline": "infuse ton monde",
+        "menu_1": "tisanours-en-savoir-plus",
+        "menu_1_title": "En savoir plus",
+        "menu_2": "tisanours-informations-legales",
+        "menu_2_title": "Informations légales",
+        "copyright": "© 2026 Tisa'nours"
+      }
+    }
+  },
+  "order": ["reassurance", "footer"]
+}

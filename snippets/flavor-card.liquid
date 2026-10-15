@@ -1,0 +1,58 @@
+{%- comment -%}
+  Carte produit « univers » (Nos 3 infusions, collection).
+  - card_product: produit Shopify (optionnel)
+  - univers: clé d'univers
+  - eyebrow, title, text, price_text, button_label, image: surcharges éditables
+  - class: classes supplémentaires
+  - heading_tag: h2 | h3
+{%- endcomment -%}
+{%- liquid
+  assign p = card_product
+  assign card_title = title | default: p.title
+  assign card_eyebrow = eyebrow | default: p.metafields.custom.saveur.value
+  assign card_text = text | default: p.metafields.custom.accroche.value
+  if card_text == blank and p != blank
+    assign card_text = p.description | strip_html | truncatewords: 22
+  endif
+  assign card_image = image | default: p.featured_image
+  assign card_link = p.url | default: link | default: '#'
+  assign heading_tag = heading_tag | default: 'h3'
+  assign label = button_label | default: 'Découvrir'
+  capture alt_text
+    echo card_title
+    if card_eyebrow != blank
+      echo ', infusion bio '
+      echo card_eyebrow | downcase
+    endif
+  endcapture
+-%}
+<article class="flavor-card u-{{ univers | default: 'kit' }} {{ class }}">
+  <a class="flavor-card__media" href="{{ card_link }}" tabindex="-1" aria-hidden="true">
+    {%- if card_image != blank -%}
+      {{- card_image | image_url: width: 900 | image_tag: widths: '320, 480, 640, 900', sizes: '(min-width: 900px) 33vw, 276px', loading: 'lazy', alt: alt_text -}}
+    {%- else -%}
+      <span class="ph" style="display:block;width:100%;height:100%;"></span>
+    {%- endif -%}
+  </a>
+  <div class="flavor-card__body">
+    {%- if card_eyebrow != blank -%}
+      <span class="flavor-card__eyebrow">{{ card_eyebrow }}</span>
+    {%- endif -%}
+    <{{ heading_tag }} class="flavor-card__title"><a href="{{ card_link }}">{{ card_title }}</a></{{ heading_tag }}>
+    {%- if card_text != blank -%}
+      <p class="flavor-card__text">{{ card_text }}</p>
+    {%- endif -%}
+    <div class="flavor-card__foot">
+      <span class="flavor-card__price">
+        {%- if price_text != blank -%}
+          {{ price_text }}
+        {%- elsif p != blank -%}
+          {%- assign first_variant = p.variants | sort: 'price' | first -%}
+          {%- if first_variant.compare_at_price > first_variant.price -%}<s>{{ first_variant.compare_at_price | money }}</s>{%- endif -%}
+          {{ p.price_min | money }}
+        {%- endif -%}
+      </span>
+      <a class="btn btn--univers" href="{{ card_link }}">{{ label }}</a>
+    </div>
+  </div>
+</article>

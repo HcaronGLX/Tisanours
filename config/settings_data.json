@@ -1,0 +1,12 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "load_fallback_fonts": true,
+      "free_shipping_threshold": 45,
+      "cart_icon": "🧺",
+      "cart_drawer_enabled": true,
+      "social_instagram_link": "https://instagram.com/tisanours"
+    }
+  }
+}

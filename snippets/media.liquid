@@ -1,0 +1,29 @@
+{%- comment -%}
+  Image ou zone hachurée de remplacement.
+  - image: objet image (optionnel)
+  - ph: variante de placeholder (beige, sand, sunshine, adventure, forest, bottle, univers…)
+  - class: classes CSS supplémentaires
+  - alt: texte alternatif
+  - sizes: attribut sizes
+  - widths: largeurs du srcset
+  - loading: lazy | eager
+  - tag: balise englobante (div par défaut)
+{%- endcomment -%}
+{%- liquid
+  assign tag = tag | default: 'div'
+  assign widths = widths | default: '360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048'
+  assign sizes = sizes | default: '(min-width: 900px) 50vw, 100vw'
+  assign loading = loading | default: 'lazy'
+  assign alt_text = alt | default: image.alt
+-%}
+{%- if image != blank -%}
+  <{{ tag }} class="{{ class }}">
+    {{- image | image_url: width: 2048 | image_tag: widths: widths, sizes: sizes, loading: loading, alt: alt_text -}}
+  </{{ tag }}>
+{%- else -%}
+  {%- if ph == 'univers' or ph == blank -%}
+    <{{ tag }} class="ph {{ class }}" role="presentation"></{{ tag }}>
+  {%- else -%}
+    <{{ tag }} class="ph ph--{{ ph }} {{ class }}" role="presentation"></{{ tag }}>
+  {%- endif -%}
+{%- endif -%}

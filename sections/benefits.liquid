@@ -1,0 +1,145 @@
+{%- liquid
+  assign ss = section.settings
+  assign card_bg = 'var(--c-white)'
+  if ss.card_bg == 'cream'
+    assign card_bg = 'var(--c-cream)'
+  endif
+  assign section_bg = 'var(--c-cream)'
+  if ss.background == 'white'
+    assign section_bg = 'var(--c-white)'
+  endif
+  assign mobile_image = ss.image_mobile | default: ss.image_1
+-%}
+<div
+  class="benefits{% if ss.background == 'gradient' %} benefits--gradient{% endif %}{% if ss.media_style == 'sticky_gallery' %} benefits--sticky{% endif %}{% if ss.compact_heading %} benefits--compact{% endif %} benefits--media-{{ ss.media_position }}"
+  style="--section-bg: {{ section_bg }}; --card-bg: {{ card_bg }};"
+>
+  <div class="benefits__inner">
+    <div class="benefits__media">
+      {%- case ss.media_style -%}
+        {%- when 'stacked' -%}
+          <div class="stack">
+            {%- render 'media', image: ss.image_1, ph: ss.ph_1, class: 'stack__item stack__item--1', sizes: '(min-width: 900px) 40vw, 100vw' -%}
+            {%- render 'media', image: ss.image_2, ph: ss.ph_2, class: 'stack__item stack__item--2', sizes: '(min-width: 900px) 36vw, 100vw' -%}
+          </div>
+        {%- when 'single' -%}
+          {%- render 'media', image: ss.image_1, ph: ss.ph_1, class: 'tilted-media tilted-media--right' -%}
+        {%- when 'sticky_gallery' -%}
+          <div class="sticky-gallery">
+            {%- render 'media', image: ss.image_1, ph: ss.ph_1, class: 'sticky-gallery__main' -%}
+            <div class="sticky-gallery__row">
+              {%- render 'media', image: ss.image_2, ph: ss.ph_2, class: 'sticky-gallery__small', sizes: '(min-width: 900px) 25vw, 50vw' -%}
+              {%- render 'media', image: ss.image_3, ph: ss.ph_3, class: 'sticky-gallery__small', sizes: '(min-width: 900px) 25vw, 50vw' -%}
+            </div>
+          </div>
+      {%- endcase -%}
+    </div>
+
+    <div class="benefits__content">
+      {%- if ss.rating_text != blank -%}
+        <div class="stars-line">
+          <span class="stars" aria-hidden="true">{{ ss.rating_stars }}</span>
+          <span class="stars-line__label">{{ ss.rating_text }}</span>
+        </div>
+      {%- endif -%}
+      {%- if ss.heading != blank -%}
+        <h2 class="benefits__title">{{ ss.heading }}</h2>
+      {%- endif -%}
+      {%- if ss.show_mobile_image -%}
+        {%- render 'media', image: mobile_image, ph: ss.ph_mobile, class: 'benefits__media-mobile', sizes: '100vw' -%}
+      {%- endif -%}
+      {%- for block in section.blocks -%}
+        <div class="benefit-card" {{ block.shopify_attributes }}>
+          {%- if block.settings.icon_image != blank -%}
+            <span class="emoji-pill" aria-hidden="true">{{ block.settings.icon_image | image_url: width: 120 | image_tag: loading: 'lazy', alt: '' }}</span>
+          {%- elsif block.settings.icon != blank -%}
+            <span class="emoji-pill" aria-hidden="true">{{ block.settings.icon }}</span>
+          {%- else -%}
+            <span class="emoji-pill ph" aria-hidden="true"></span>
+          {%- endif -%}
+          <span class="benefit-card__body">
+            <span class="benefit-card__title">{{ block.settings.title }}</span>
+            {%- if block.settings.text != blank -%}<span class="benefit-card__text">{{ block.settings.text }}</span>{%- endif -%}
+          </span>
+        </div>
+      {%- endfor -%}
+      {%- if ss.note != blank -%}<p class="benefits__note">{{ ss.note }}</p>{%- endif -%}
+      {%- render 'button', label: ss.button_label, link: ss.button_link, style: ss.button_style, tilt: true -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Bénéfices + images",
+  "tag": "section",
+  "class": "section-benefits",
+  "settings": [
+    { "type": "select", "id": "background", "label": "Fond", "options": [
+      { "value": "gradient", "label": "Dégradé crème vers blanc" },
+      { "value": "cream", "label": "Crème" },
+      { "value": "white", "label": "Blanc" }
+    ], "default": "gradient" },
+    { "type": "select", "id": "card_bg", "label": "Fond des cartes", "options": [
+      { "value": "white", "label": "Blanc" },
+      { "value": "cream", "label": "Crème" }
+    ], "default": "white" },
+    { "type": "header", "content": "Contenu" },
+    { "type": "text", "id": "rating_stars", "label": "Étoiles", "default": "★★★★★" },
+    { "type": "text", "id": "rating_text", "label": "Texte de la note", "default": "bio, sans sucre ajouté, dès 3 ans" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titre", "info": "Mettez en italique la partie à surligner.", "default": "Une alternative <em>sans compromis</em>" },
+    { "type": "checkbox", "id": "compact_heading", "label": "Titre plus petit", "default": false },
+    { "type": "text", "id": "note", "label": "Note sous les cartes" },
+    { "type": "text", "id": "button_label", "label": "Texte du bouton", "default": "Je compose mon rituel" },
+    { "type": "url", "id": "button_link", "label": "Lien du bouton" },
+    { "type": "select", "id": "button_style", "label": "Style du bouton", "options": [
+      { "value": "yellow", "label": "Jaune" }, { "value": "red", "label": "Rouge" }, { "value": "dark", "label": "Vert" }, { "value": "outline", "label": "Contour" }
+    ], "default": "yellow" },
+    { "type": "header", "content": "Images" },
+    { "type": "select", "id": "media_style", "label": "Disposition", "options": [
+      { "value": "stacked", "label": "Deux images empilées et inclinées" },
+      { "value": "single", "label": "Une image inclinée" },
+      { "value": "sticky_gallery", "label": "Galerie collante (1 grande + 2 petites)" }
+    ], "default": "stacked" },
+    { "type": "select", "id": "media_position", "label": "Position des images (desktop)", "options": [
+      { "value": "left", "label": "À gauche" }, { "value": "right", "label": "À droite" }
+    ], "default": "left" },
+    { "type": "image_picker", "id": "image_1", "label": "Image 1" },
+    { "type": "select", "id": "ph_1", "label": "Couleur si vide (image 1)", "options": [
+      { "value": "beige", "label": "Beige" }, { "value": "sunshine", "label": "Jaune" }, { "value": "adventure", "label": "Rouge" }, { "value": "forest", "label": "Violet" }, { "value": "bottle", "label": "Vert" }, { "value": "sunshine-soft", "label": "Jaune doux" }, { "value": "adventure-soft", "label": "Rouge doux" }, { "value": "forest-soft", "label": "Violet doux" }
+    ], "default": "forest-soft" },
+    { "type": "image_picker", "id": "image_2", "label": "Image 2" },
+    { "type": "select", "id": "ph_2", "label": "Couleur si vide (image 2)", "options": [
+      { "value": "beige", "label": "Beige" }, { "value": "sunshine", "label": "Jaune" }, { "value": "adventure", "label": "Rouge" }, { "value": "forest", "label": "Violet" }, { "value": "bottle", "label": "Vert" }, { "value": "sunshine-soft", "label": "Jaune doux" }, { "value": "adventure-soft", "label": "Rouge doux" }, { "value": "forest-soft", "label": "Violet doux" }
+    ], "default": "adventure-soft" },
+    { "type": "image_picker", "id": "image_3", "label": "Image 3 (galerie)" },
+    { "type": "select", "id": "ph_3", "label": "Couleur si vide (image 3)", "options": [
+      { "value": "beige", "label": "Beige" }, { "value": "sunshine", "label": "Jaune" }, { "value": "adventure", "label": "Rouge" }, { "value": "forest", "label": "Violet" }, { "value": "bottle", "label": "Vert" }, { "value": "sunshine-soft", "label": "Jaune doux" }, { "value": "adventure-soft", "label": "Rouge doux" }, { "value": "forest-soft", "label": "Violet doux" }
+    ], "default": "adventure" },
+    { "type": "header", "content": "Mobile" },
+    { "type": "checkbox", "id": "show_mobile_image", "label": "Afficher une image sous le titre", "default": true },
+    { "type": "image_picker", "id": "image_mobile", "label": "Image mobile", "info": "Par défaut, l'image 1." },
+    { "type": "select", "id": "ph_mobile", "label": "Couleur si vide (mobile)", "options": [
+      { "value": "beige", "label": "Beige" }, { "value": "sunshine", "label": "Jaune" }, { "value": "adventure", "label": "Rouge" }, { "value": "forest", "label": "Violet" }, { "value": "bottle", "label": "Vert" }
+    ], "default": "beige" }
+  ],
+  "blocks": [
+    { "type": "benefit", "name": "Bénéfice", "settings": [
+      { "type": "text", "id": "icon", "label": "Icône (emoji)", "default": "🌱" },
+      { "type": "image_picker", "id": "icon_image", "label": "Icône (image)" },
+      { "type": "text", "id": "title", "label": "Titre", "default": "100 % fruits bio" },
+      { "type": "textarea", "id": "text", "label": "Texte", "default": "Fruits et plantes issus de l’agriculture biologique, certifiés AB." }
+    ] }
+  ],
+  "presets": [
+    {
+      "name": "Bénéfices + images",
+      "blocks": [
+        { "type": "benefit", "settings": { "icon": "🌱", "title": "100 % fruits bio", "text": "Fruits et plantes issus de l’agriculture biologique, certifiés AB." } },
+        { "type": "benefit", "settings": { "icon": "🧂", "title": "Sans sucre ajouté*", "text": "Le goût vient du fruit : aucun sucre ajouté, aucun édulcorant, aucun colorant." } },
+        { "type": "benefit", "settings": { "icon": "😴", "title": "Sans caféine ni théine", "text": "Une infusion qui peut se boire le soir, sans perturber le sommeil." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,22 @@
+<div class="page-section" style="background: var(--c-{{ section.settings.background }});">
+  <div class="container" style="padding-top: 40px; padding-bottom: 40px;">
+    {%- for block in section.blocks -%}
+      {% render block %}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Applications",
+  "tag": "section",
+  "class": "section-apps",
+  "settings": [
+    { "type": "select", "id": "background", "label": "Fond", "options": [
+      { "value": "cream", "label": "Crème" }, { "value": "white", "label": "Blanc" }
+    ], "default": "white" }
+  ],
+  "blocks": [ { "type": "@app" } ],
+  "presets": [ { "name": "Applications" } ]
+}
+{% endschema %}

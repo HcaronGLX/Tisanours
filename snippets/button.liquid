@@ -1,0 +1,10 @@
+{%- comment -%}
+  Bouton lien.
+  - label, link
+  - style: red | yellow | dark | univers | outline | outline-transparent | outline-small | pill
+  - tilt: true pour une légère rotation
+  - class: classes supplémentaires
+{%- endcomment -%}
+{%- if label != blank -%}
+  <a class="btn btn--{{ style | default: 'red' }}{% if tilt %} btn--tilt{% endif %} {{ class }}" href="{{ link | default: '#' }}">{{ label }}</a>
+{%- endif -%}

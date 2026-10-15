@@ -1,0 +1,54 @@
+<div class="reassurance">
+  <div class="reassurance__inner">
+    <div class="reassurance__grid">
+      {%- for block in section.blocks -%}
+        <div class="reassurance__item" {{ block.shopify_attributes }}>
+          <span class="reassurance__icon" aria-hidden="true">
+            {%- if block.settings.icon_image != blank -%}
+              {{ block.settings.icon_image | image_url: width: 80 | image_tag: loading: 'lazy', alt: '' }}
+            {%- else -%}
+              {{ block.settings.icon }}
+            {%- endif -%}
+          </span>
+          <span class="reassurance__body">
+            <span class="reassurance__title">{{ block.settings.title }}</span>
+            {%- if block.settings.text != blank -%}<span class="reassurance__text">{{ block.settings.text }}</span>{%- endif -%}
+          </span>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Réassurance",
+  "tag": "section",
+  "class": "section-reassurance",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Élément",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icône (emoji)", "default": "🚚" },
+        { "type": "image_picker", "id": "icon_image", "label": "Icône (image)", "info": "Remplace l'emoji." },
+        { "type": "text", "id": "title", "label": "Titre", "default": "Livraison offerte" },
+        { "type": "text", "id": "text", "label": "Texte", "default": "À partir de 45 € d’achat" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Réassurance",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "⏱️", "title": "Expédition rapide", "text": "Sous 24 à 48 h ouvrées" } },
+        { "type": "item", "settings": { "icon": "🚚", "title": "Livraison offerte", "text": "À partir de 45 € d’achat" } },
+        { "type": "item", "settings": { "icon": "🔒", "title": "Paiement sécurisé", "text": "CB, Apple Pay, PayPal" } },
+        { "type": "item", "settings": { "icon": "🇫🇷", "title": "Une marque française", "text": "Conditionné en France" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

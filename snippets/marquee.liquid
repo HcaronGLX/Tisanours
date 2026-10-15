@@ -1,0 +1,22 @@
+{%- comment -%}
+  Bandeau défilant infini.
+  - items: texte multi-lignes (une entrée par ligne)
+  - class: classes supplémentaires
+  - duration: durée d'une boucle en secondes
+{%- endcomment -%}
+{%- assign lines = items | newline_to_br | split: '<br />' -%}
+<div class="marquee {{ class }}" style="--marquee-duration: {{ duration | default: 26 }}s;">
+  <div class="marquee__track">
+    {%- for n in (1..2) -%}
+      <div class="marquee__group"{% if n == 2 %} aria-hidden="true"{% endif %}>
+        {%- for line in lines -%}
+          {%- assign text = line | strip -%}
+          {%- if text != blank -%}
+            <span>{{ text }}</span>
+            <span class="marquee__sep" aria-hidden="true">·</span>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>

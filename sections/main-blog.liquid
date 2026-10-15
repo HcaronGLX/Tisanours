@@ -1,0 +1,29 @@
+<div class="page-section">
+  <div class="page-section__inner" style="max-width: 1360px;">
+    <h1 class="page-title">{{ blog.title | escape }}</h1>
+    {%- paginate blog.articles by 12 -%}
+      <div class="blog-grid">
+        {%- for article in blog.articles -%}
+          <a class="article-card" href="{{ article.url }}">
+            {%- render 'media', image: article.image, ph: 'beige', class: 'article-card__media', sizes: '(min-width: 900px) 33vw, 100vw' -%}
+            <span class="article-card__body">
+              <span class="article-card__date">{{ article.published_at | time_tag: format: 'date' }}</span>
+              <h2 class="article-card__title">{{ article.title | escape }}</h2>
+              <span class="article-card__excerpt">{{ article.excerpt_or_content | strip_html | truncatewords: 26 }}</span>
+            </span>
+          </a>
+        {%- endfor -%}
+      </div>
+      {%- render 'pagination', paginate: paginate -%}
+    {%- endpaginate -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Blog",
+  "tag": "section",
+  "class": "section-main-blog",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,186 @@
+/*
+ * Modèle Tisa'nours — éditable depuis l'éditeur de thème Shopify.
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "badge": "Aide & contact",
+        "heading": "Questions fréquentes sur les <em>infusions bio pour enfants</em>",
+        "text": "<p>Composition, âge, préparation, abonnement, livraison : les réponses aux questions que les parents nous posent le plus souvent. Il en manque une ? Écrivez-nous, nous répondons en moins de 24 h ouvrées.</p>"
+      }
+    },
+    "faq_1": {
+      "type": "faq-group",
+      "settings": {
+        "heading": "Produit & composition",
+        "padding_top": 44,
+        "structured_data": true
+      },
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "Les infusions Tisa'nours contiennent-elles du sucre ?",
+            "answer": "<p>Aucun sucre ajouté. Nos infusions ne contiennent que des fruits et des plantes bio ; elles contiennent naturellement les sucres présents dans ces fruits. Aucun édulcorant, aucun colorant.</p>",
+            "open": false
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "À partir de quel âge peut-on en donner ?",
+            "answer": "<p>Dès 3 ans, et jusqu'à 12 ans et bien au-delà · les parents en boivent aussi. Nos infusions sont sans caféine ni théine, elles peuvent donc être servies le soir.</p>",
+            "open": false
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "Est-ce vraiment bio ?",
+            "answer": "<p>Oui : 100 % des ingrédients sont issus de l'agriculture biologique, certifiés AB. Les sachets sont conditionnés en France.</p>",
+            "open": false
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "Combien d'infusions dans un sachet de 80 g ?",
+            "answer": "<p>Environ 30 infusions par sachet, soit près de 90 avec le Kit Démarrage Rituel.</p>",
+            "open": false
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Y a-t-il des allergènes ?",
+            "answer": "<p>Nos recettes ne contiennent pas d'allergènes à déclaration obligatoire. La liste complète des ingrédients figure sur chaque page produit et sur le sachet ; en cas de doute, demandez l'avis de votre pédiatre.</p>",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5"
+      ]
+    },
+    "faq_2": {
+      "type": "faq-group",
+      "settings": {
+        "heading": "Préparation & rituel",
+        "padding_top": 24,
+        "structured_data": false
+      },
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "Comment préparer une infusion glacée ?",
+            "answer": "<p>Une cuillère à café dans l'infuseur de la bouteille, de l'eau froide, puis 2 h au réfrigérateur. Version express : infusez 5 minutes à l'eau chaude, puis ajoutez des glaçons.</p>",
+            "open": false
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Mon enfant peut-il préparer sa boisson seul ?",
+            "answer": "<p>Il peut choisir sa saveur, doser et remplir sa bouteille en version froide. L'eau chaude doit rester manipulée par un adulte pour les plus jeunes : l'autonomie se construit progressivement.</p>",
+            "open": false
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "Quelle saveur pour quel moment ?",
+            "answer": "<p>Aucune règle : c'est justement le principe. Le moment devient une habitude, la saveur reste libre. Le Petit Guide du Rituel donne des idées de moments sans imposer de programme.</p>",
+            "open": false
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "La bouteille infuseur passe-t-elle au lave-vaisselle ?",
+            "answer": "<p>Oui, panier du haut. Le filtre se retire pour être rincé après chaque utilisation.</p>",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4"
+      ]
+    },
+    "faq_3": {
+      "type": "faq-group",
+      "settings": {
+        "heading": "Commande, abonnement & livraison",
+        "padding_top": 24,
+        "structured_data": false
+      },
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "Comment fonctionne l'abonnement ?",
+            "answer": "<p>Vous choisissez la fréquence (4, 6 ou 8 semaines) et vous économisez sur chaque commande. Vous pouvez changer de saveur, décaler un envoi, mettre en pause ou annuler à tout moment depuis votre compte. Aucun engagement.</p>",
+            "open": false
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Faut-il commencer par le Kit ?",
+            "answer": "<p>C'est le départ le plus simple : les 3 saveurs, la bouteille infuseur et le Petit Guide du Rituel pour 59,90 €. Ensuite, vous réassortissez uniquement les saveurs préférées, à l'unité ou en abonnement.</p>",
+            "open": false
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "Et si mon enfant n'aime pas ?",
+            "answer": "<p>Le premier kit est satisfait ou remboursé pendant 30 jours, même entamé. Écrivez-nous, nous nous occupons du reste.</p>",
+            "open": false
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "Délais et frais de livraison ?",
+            "answer": "<p>Expédition sous 24 h ouvrées depuis la France, livraison en 2 à 4 jours. Frais offerts dès 45 € d'achat, 4,90 € en dessous. Livraison France, Belgique, Luxembourg et Suisse.</p>",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4"
+      ]
+    },
+    "contact": {
+      "type": "contact-form",
+      "settings": {
+        "anchor": "contact",
+        "heading": "Nous <em>écrire</em>",
+        "text": "Une question sur la composition, une commande à modifier, une envie de nous faire un retour ? Nous lisons tout et répondons en moins de 24 h ouvrées.",
+        "contact_lines": "✉️ bonjour@tisanours.fr\n💬 Du lundi au vendredi, 9 h – 18 h\n📦 Suivi de commande depuis votre compte client\n📷 @tisanours sur Instagram",
+        "pro_title": "Vous êtes une boutique, une école ou un professionnel ?",
+        "pro_text": "<p>Écrivez-nous à pro@tisanours.fr pour recevoir nos conditions revendeur.</p>"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "faq_1",
+    "faq_2",
+    "faq_3",
+    "contact"
+  ]
+}

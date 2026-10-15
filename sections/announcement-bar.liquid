@@ -1,0 +1,55 @@
+{%- if section.blocks.size > 0 -%}
+  <div class="announcement" role="region" aria-label="{{ 'sections.announcement.label' | t }}">
+    <div class="marquee" style="--marquee-duration: {{ section.settings.duration }}s;">
+      <div class="marquee__track">
+        {%- for n in (1..2) -%}
+          <div class="marquee__group"{% if n == 2 %} aria-hidden="true"{% endif %}>
+            {%- for block in section.blocks -%}
+              <span {% if n == 1 %}{{ block.shopify_attributes }}{% endif %}>
+                {%- if block.settings.link != blank -%}
+                  <a href="{{ block.settings.link }}">{{ block.settings.text }}</a>
+                {%- else -%}
+                  {{ block.settings.text }}
+                {%- endif -%}
+              </span>
+              <span class="marquee__sep" aria-hidden="true">·</span>
+            {%- endfor -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Bandeau annonce",
+  "tag": "div",
+  "class": "section-announcement",
+  "settings": [
+    { "type": "range", "id": "duration", "label": "Durée d'une boucle", "min": 10, "max": 60, "step": 2, "unit": "s", "default": 32 }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Texte (emoji compris)", "default": "🌿 100 % fruits bio" },
+        { "type": "url", "id": "link", "label": "Lien" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bandeau annonce",
+      "blocks": [
+        { "type": "message", "settings": { "text": "🌿 100 % fruits bio" } },
+        { "type": "message", "settings": { "text": "🍯 Sans sucre ajouté*" } },
+        { "type": "message", "settings": { "text": "🚚 Livraison offerte dès 45 €" } },
+        { "type": "message", "settings": { "text": "🧒 Dès 3 ans" } }
+      ]
+    }
+  ],
+  "enabled_on": { "groups": ["header"] }
+}
+{% endschema %}

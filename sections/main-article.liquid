@@ -1,0 +1,39 @@
+<article class="page-section">
+  <div class="page-section__inner page-section__inner--narrow">
+    <span class="eyebrow">{{ article.published_at | time_tag: format: 'date' }}</span>
+    <h1 class="page-title" style="margin-top: 12px;">{{ article.title | escape }}</h1>
+    {%- if article.image -%}
+      {%- render 'media', image: article.image, class: 'article__image', sizes: '(min-width: 900px) 820px, 100vw', loading: 'eager' -%}
+    {%- endif -%}
+    <div class="page-body rte">{{ article.content }}</div>
+
+    {%- if blog.comments_enabled? -%}
+      <div class="comments">
+        <h2 class="page-title" style="font-size: 26px;">{{ 'blogs.comments.title' | t }}</h2>
+        {%- for comment in article.comments -%}
+          <div class="card-box">
+            <div class="rte">{{ comment.content }}</div>
+            <p class="testimonial__author">{{ comment.author }} · {{ comment.created_at | time_tag: format: 'date' }}</p>
+          </div>
+        {%- endfor -%}
+        {%- form 'new_comment', article, class: 'form card-box' -%}
+          {%- if form.posted_successfully? -%}<p class="form__success">{{ 'blogs.comments.success' | t }}</p>{%- endif -%}
+          {%- if form.errors -%}<div class="form__errors">{{ form.errors | default_errors }}</div>{%- endif -%}
+          <label class="field">{{ 'blogs.comments.name' | t }}<input class="field__input" type="text" name="comment[author]" value="{{ form.author }}" required></label>
+          <label class="field">{{ 'blogs.comments.email' | t }}<input class="field__input" type="email" name="comment[email]" value="{{ form.email }}" required></label>
+          <label class="field">{{ 'blogs.comments.message' | t }}<textarea class="field__input" name="comment[body]" rows="4" required>{{ form.body }}</textarea></label>
+          <button class="btn btn--red" type="submit">{{ 'blogs.comments.post' | t }}</button>
+        {%- endform -%}
+      </div>
+    {%- endif -%}
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Article",
+  "tag": "section",
+  "class": "section-main-article",
+  "settings": []
+}
+{% endschema %}

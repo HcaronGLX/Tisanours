@@ -1,0 +1,66 @@
+{%- liquid
+  assign menu = section.settings.menu
+  assign highlight = section.settings.highlight_title | downcase | strip
+-%}
+<header class="site-header" data-header>
+  <div class="site-header__inner">
+    <button class="burger" type="button" data-menu-toggle aria-expanded="false" aria-controls="MobileMenu" aria-label="{{ 'sections.header.menu' | t }}">
+      <span></span><span></span><span></span>
+    </button>
+
+    <a class="site-logo" href="{{ routes.root_url }}" {% if section.settings.logo != blank %}style="--logo-width: {{ section.settings.logo_width }}px;"{% endif %}>
+      {%- if section.settings.logo != blank -%}
+        {{ section.settings.logo | image_url: width: 400 | image_tag: alt: shop.name, loading: 'eager' }}
+      {%- else -%}
+        <span class="site-logo__name">{{ section.settings.logo_text | default: shop.name }}</span>
+        {%- if section.settings.tagline != blank -%}
+          <span class="site-logo__tagline">{{ section.settings.tagline }}</span>
+        {%- endif -%}
+      {%- endif -%}
+      {%- if request.page_type == 'index' -%}<span class="visually-hidden">{{ shop.name }}</span>{%- endif -%}
+    </a>
+
+    <nav class="site-nav" aria-label="{{ 'sections.header.main_navigation' | t }}">
+      {%- for link in menu.links -%}
+        {%- assign link_title = link.title | downcase | strip -%}
+        <a
+          class="site-nav__link{% if highlight != blank and link_title == highlight %} site-nav__link--highlight{% endif %}"
+          href="{{ link.url }}"
+          {% if link.current %}aria-current="page"{% endif %}
+        >{{ link.title | escape }}</a>
+      {%- endfor -%}
+    </nav>
+
+    <div class="header-actions">
+      <a class="header-cart" href="{{ routes.cart_url }}" data-cart-open aria-label="{{ 'sections.header.cart' | t }}">
+        <span aria-hidden="true">{{ settings.cart_icon | default: '🧺' }}</span>
+        <span class="cart-bubble" data-cart-bubble>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+
+  <nav class="mobile-menu" id="MobileMenu" aria-label="{{ 'sections.header.main_navigation' | t }}">
+    {%- for link in menu.links -%}
+      {%- assign link_title = link.title | downcase | strip -%}
+      <a class="mobile-menu__link{% if highlight != blank and link_title == highlight %} mobile-menu__link--highlight{% endif %}" href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+    {%- endfor -%}
+  </nav>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "tag": "div",
+  "class": "section-header",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo (image)", "info": "Laisser vide pour afficher le logo texte." },
+    { "type": "range", "id": "logo_width", "label": "Largeur du logo", "min": 80, "max": 260, "step": 5, "unit": "px", "default": 140 },
+    { "type": "text", "id": "logo_text", "label": "Logo texte", "default": "Tisa'nours" },
+    { "type": "text", "id": "tagline", "label": "Baseline", "default": "infuse ton monde" },
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "text", "id": "highlight_title", "label": "Lien mis en avant", "info": "Titre exact du lien à afficher en pastille jaune.", "default": "Le Kit Rituel" },
+    { "type": "paragraph", "content": "Le header devient transparent en haut de page lorsque la première section est un Hero avec l'option « Passer sous le header »." }
+  ],
+  "enabled_on": { "groups": ["header"] }
+}
+{% endschema %}

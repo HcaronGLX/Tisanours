@@ -1,0 +1,28 @@
+{%- assign ss = section.settings -%}
+<div class="page-hero">
+  <div class="page-hero__inner">
+    {%- if ss.badge != blank -%}<span class="page-hero__badge">{{ ss.badge }}</span>{%- endif -%}
+    {%- liquid
+      assign heading = ss.heading
+      if heading == blank
+        assign heading = page.title | default: page_title
+      endif
+    -%}
+    <h1 class="page-hero__title">{{ heading }}</h1>
+    {%- if ss.text != blank -%}<div class="page-hero__text rte">{{ ss.text }}</div>{%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "En-tête de page",
+  "tag": "section",
+  "class": "section-page-hero",
+  "settings": [
+    { "type": "text", "id": "badge", "label": "Badge", "default": "Aide & contact" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titre (H1)", "info": "Laisser vide pour utiliser le titre de la page.", "default": "Questions fréquentes sur les <em>infusions bio pour enfants</em>" },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Composition, âge, préparation, abonnement, livraison : les réponses aux questions que les parents nous posent le plus souvent. Il en manque une ? Écrivez-nous, nous répondons en moins de 24 h ouvrées.</p>" }
+  ],
+  "presets": [ { "name": "En-tête de page" } ]
+}
+{% endschema %}

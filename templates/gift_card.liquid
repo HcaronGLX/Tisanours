@@ -1,0 +1,46 @@
+{% layout none %}
+{%- assign initial_value = gift_card.initial_value | money -%}
+{%- assign balance = gift_card.balance | money -%}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ 'gift_card.title' | t: value: initial_value }} · {{ shop.name }}</title>
+    {%- if settings.load_fallback_fonts -%}
+      <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    {%- endif -%}
+    {% render 'css-variables' %}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'vendor/qrcode.js' | shopify_asset_url }}" defer></script>
+    {{ content_for_header }}
+  </head>
+  <body>
+    <main class="page-section" style="min-height: 100vh;">
+      <div class="page-section__inner page-section__inner--narrow gift-card">
+        <span class="eyebrow">{{ shop.name }}</span>
+        <h1 class="page-title">{{ 'gift_card.heading' | t }}</h1>
+        <p class="page-lead">{{ 'gift_card.value' | t: value: balance }}</p>
+        {%- if gift_card.enabled and gift_card.expired == false -%}
+          <div class="gift-card__code">{{ gift_card.code | format_code }}</div>
+          <div id="QrCode" data-identifier="{{ gift_card.qr_identifier }}"></div>
+        {%- else -%}
+          <p class="form__errors">{{ 'gift_card.disabled' | t }}</p>
+        {%- endif -%}
+        <div class="btn-row" style="justify-content: center;">
+          <a class="btn btn--red" href="{{ shop.url }}">{{ 'gift_card.shop_link' | t }}</a>
+          <button class="btn btn--outline" type="button" onclick="window.print();">{{ 'gift_card.print' | t }}</button>
+        </div>
+        {%- if gift_card.pass_url -%}
+          <a href="{{ gift_card.pass_url }}"><img src="{{ 'gift-card/add-to-apple-wallet.svg' | shopify_asset_url }}" width="120" height="40" alt="{{ 'gift_card.apple_wallet' | t }}" loading="lazy"></a>
+        {%- endif -%}
+      </div>
+    </main>
+    <script>
+      window.addEventListener('load', function () {
+        var el = document.getElementById('QrCode');
+        if (el && window.QRCode) new QRCode(el, { text: el.dataset.identifier, width: 120, height: 120 });
+      });
+    </script>
+  </body>
+</html>

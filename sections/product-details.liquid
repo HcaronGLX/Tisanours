@@ -1,0 +1,210 @@
+{%- liquid
+  assign ss = section.settings
+  capture u
+    render 'univers', setting: ss.univers, product: product
+  endcapture
+  assign u = u | strip
+  assign section_bg = 'var(--c-cream)'
+  if ss.background == 'white'
+    assign section_bg = 'var(--c-white)'
+  endif
+  assign aside_image = ss.image | default: product.featured_image
+-%}
+<div class="pdetails u-{{ u }}{% if ss.aside == 'gallery' %} pdetails--stretch{% endif %}" style="--section-bg: {{ section_bg }};">
+  <div class="pdetails__inner">
+    {%- if ss.heading != blank -%}<h2 class="pdetails__title">{{ ss.heading }}</h2>{%- endif -%}
+    <div class="pdetails__card">
+      {%- for block in section.blocks -%}
+        {%- assign bs = block.settings -%}
+        <details class="panel" {% if bs.open %}open{% endif %} {{ block.shopify_attributes }}>
+          <summary>{{ bs.title }}</summary>
+          <div class="panel__body">
+            {%- case block.type -%}
+              {%- when 'text' -%}
+                {%- if bs.text != blank -%}<div class="panel__text rte">{{ bs.text }}</div>{%- endif -%}
+                {%- if bs.small != blank -%}<div class="panel__small rte">{{ bs.small }}</div>{%- endif -%}
+                {%- if bs.small_2 != blank -%}<div class="panel__small rte desktop-only">{{ bs.small_2 }}</div>{%- endif -%}
+
+              {%- when 'list' -%}
+                {%- assign lines = bs.items | newline_to_br | split: '<br />' -%}
+                <ul class="panel__list">
+                  {%- for line in lines -%}
+                    {%- assign item = line | strip -%}
+                    {%- if item != blank -%}<li>✓ {{ item }}</li>{%- endif -%}
+                  {%- endfor -%}
+                </ul>
+
+              {%- when 'flavors' -%}
+                <div class="flavor-ingredients">
+                  {%- for i in (1..3) -%}
+                    {%- liquid
+                      assign k_name = 'name_' | append: i
+                      assign k_sub = 'sub_' | append: i
+                      assign k_text = 'text_' | append: i
+                      assign k_u = 'univers_' | append: i
+                    -%}
+                    {%- if bs[k_name] != blank -%}
+                      <div class="flavor-ingredients__card u-{{ bs[k_u] }}">
+                        <span class="flavor-ingredients__name">{{ bs[k_name] }}</span>
+                        {%- if bs[k_sub] != blank -%}<span class="flavor-ingredients__sub">{{ bs[k_sub] }}</span>{%- endif -%}
+                        <p class="flavor-ingredients__text">{{ bs[k_text] }}</p>
+                      </div>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+                {%- if bs.note != blank -%}<p class="panel__small">{{ bs.note }}</p>{%- endif -%}
+
+              {%- when 'nutrition' -%}
+                {%- assign rows = bs.rows | newline_to_br | split: '<br />' -%}
+                <div class="nutrition" role="table" aria-label="{{ bs.title | escape }}">
+                  <div class="nutrition__row nutrition__row--head" role="row">
+                    <span role="columnheader">{{ bs.col_0 }}</span>
+                    <span role="columnheader">{{ bs.col_1 }}</span>
+                    <span role="columnheader">{{ bs.col_2 }}</span>
+                  </div>
+                  {%- comment -%} Desktop : les lignes « dont … » sont regroupées sous la ligne précédente {%- endcomment -%}
+                  {%- assign skip_next = false -%}
+                  {%- for row in rows -%}
+                    {%- if skip_next -%}
+                      {%- assign skip_next = false -%}
+                      {%- continue -%}
+                    {%- endif -%}
+                    {%- assign cells = row | strip | split: '|' -%}
+                    {%- assign label = cells[0] | strip -%}
+                    {%- if label == blank -%}{%- continue -%}{%- endif -%}
+                    {%- assign next_row = rows[forloop.index] | strip -%}
+                    {%- assign next_cells = next_row | split: '|' -%}
+                    {%- assign next_label = next_cells[0] | strip -%}
+                    {%- assign next_first = next_label | split: ' ' | first | downcase -%}
+                    <div class="nutrition__row desktop-only" role="row">
+                      <span class="nutrition__label" role="cell">
+                        {{- label -}}
+                        {%- if next_first == 'dont' -%}<small>{{ next_label }}</small>{%- assign skip_next = true -%}{%- endif -%}
+                      </span>
+                      <span class="nutrition__v1" role="cell">{{ cells[1] | strip }}{% if skip_next %}<br>{{ next_cells[1] | strip }}{% endif %}</span>
+                      <span class="nutrition__v2" role="cell">{{ cells[2] | strip }}{% if skip_next %}<br>{{ next_cells[2] | strip }}{% endif %}</span>
+                    </div>
+                  {%- endfor -%}
+                  {%- for row in rows -%}
+                    {%- assign cells = row | strip | split: '|' -%}
+                    {%- assign label = cells[0] | strip -%}
+                    {%- if label == blank -%}{%- continue -%}{%- endif -%}
+                    <div class="nutrition__row mobile-only" role="row">
+                      <span class="nutrition__label" role="cell">{{ label }}</span>
+                      <span class="nutrition__v1" role="cell">{{ cells[1] | strip }}</span>
+                      <span class="nutrition__v2" role="cell">{{ cells[2] | strip }}</span>
+                    </div>
+                  {%- endfor -%}
+                </div>
+                {%- if bs.note != blank -%}<p class="panel__note">{{ bs.note }}</p>{%- endif -%}
+            {%- endcase -%}
+          </div>
+        </details>
+      {%- endfor -%}
+    </div>
+
+    {%- case ss.aside -%}
+      {%- when 'product_image' -%}
+        <div class="pdetails__aside">
+          {%- render 'media', image: aside_image, class: 'pdetails__image', sizes: '(min-width: 900px) 460px, 100vw' -%}
+        </div>
+      {%- when 'gallery' -%}
+        <div class="pdetails__aside" style="align-self: stretch;">
+          <div class="sticky-gallery" style="--cols: 3;">
+            {%- render 'media', image: ss.image, ph: 'beige', class: 'sticky-gallery__main' -%}
+            <div class="sticky-gallery__row">
+              {%- for i in (1..3) -%}
+                {%- assign k_p = 'gallery_product_' | append: i -%}
+                {%- assign gp = ss[k_p] -%}
+                {%- capture gp_u -%}{%- render 'univers', setting: 'auto', product: gp -%}{%- endcapture -%}
+                {%- assign gp_u = gp_u | strip -%}
+                <div class="u-{{ gp_u }}" style="display: contents;">
+                  {%- render 'media', image: gp.featured_image, class: 'sticky-gallery__small sticky-gallery__small--portrait', sizes: '(min-width: 900px) 15vw, 33vw', alt: gp.title -%}
+                </div>
+              {%- endfor -%}
+            </div>
+          </div>
+        </div>
+    {%- endcase -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Ingrédients & nutrition",
+  "tag": "section",
+  "class": "section-product-details",
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Titre (affiché sur mobile)", "default": "Ingrédients &amp; <em>nutrition</em>" },
+    { "type": "select", "id": "univers", "label": "Univers de couleur", "options": [
+      { "value": "auto", "label": "Automatique (métachamp custom.univers)" },
+      { "value": "kit", "label": "Kit / neutre" },
+      { "value": "sunshine", "label": "Tropical Sunshine (jaune)" },
+      { "value": "adventure", "label": "Happy Adventure (rouge)" },
+      { "value": "forest", "label": "Dream Forest (violet)" },
+      { "value": "bottle", "label": "Gourde (vert)" }
+    ], "default": "auto" },
+    { "type": "select", "id": "background", "label": "Fond (desktop)", "options": [
+      { "value": "cream", "label": "Crème" }, { "value": "white", "label": "Blanc" }
+    ], "default": "cream" },
+    { "type": "select", "id": "aside", "label": "Visuel à côté (desktop)", "options": [
+      { "value": "product_image", "label": "Image du produit inclinée" },
+      { "value": "gallery", "label": "Galerie collante (1 image + 3 produits)" },
+      { "value": "none", "label": "Aucun" }
+    ], "default": "product_image" },
+    { "type": "image_picker", "id": "image", "label": "Image", "info": "Par défaut : image du produit." },
+    { "type": "product", "id": "gallery_product_1", "label": "Galerie : produit 1" },
+    { "type": "product", "id": "gallery_product_2", "label": "Galerie : produit 2" },
+    { "type": "product", "id": "gallery_product_3", "label": "Galerie : produit 3" }
+  ],
+  "blocks": [
+    { "type": "text", "name": "Panneau texte", "settings": [
+      { "type": "text", "id": "title", "label": "Titre", "default": "Ingrédients" },
+      { "type": "checkbox", "id": "open", "label": "Ouvert par défaut", "default": true },
+      { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Pomme*, citronnelle*, écorces d’orange*, cynorrhodon*, hibiscus*, mangue*, fruit de la passion*, arômes naturels.</p>" },
+      { "type": "richtext", "id": "small", "label": "Mentions", "default": "<p>*Ingrédients issus de l’agriculture biologique. Sachet de 80 g, soit environ 30 infusions.</p>" },
+      { "type": "richtext", "id": "small_2", "label": "Mentions complémentaires (desktop)", "default": "<p>Conservation : à conserver dans un endroit frais et sec, à l’abri de la lumière.</p>" }
+    ] },
+    { "type": "list", "name": "Panneau liste", "settings": [
+      { "type": "text", "id": "title", "label": "Titre", "default": "Ce que contient le coffret" },
+      { "type": "checkbox", "id": "open", "label": "Ouvert par défaut", "default": true },
+      { "type": "textarea", "id": "items", "label": "Éléments (un par ligne)", "default": "3 sachets de 80 g, une saveur de chaque univers, soit environ 90 infusions\n1 bouteille infuseur enfant, compatible chaud et glacé, filtre amovible\n1 Petit Guide du Rituel illustré" }
+    ] },
+    { "type": "flavors", "name": "Ingrédients par saveur", "settings": [
+      { "type": "text", "id": "title", "label": "Titre", "default": "Ingrédients par infusion" },
+      { "type": "checkbox", "id": "open", "label": "Ouvert par défaut", "default": true },
+      { "type": "header", "content": "Saveur 1" },
+      { "type": "text", "id": "name_1", "label": "Nom", "default": "Tropical Sunshine" },
+      { "type": "text", "id": "sub_1", "label": "Sous-titre", "default": "Passion Mangue · 80 g" },
+      { "type": "textarea", "id": "text_1", "label": "Ingrédients", "default": "Pomme*, citronnelle*, écorces d’orange*, cynorrhodon*, hibiscus*, mangue*, fruit de la passion*, arômes naturels." },
+      { "type": "select", "id": "univers_1", "label": "Couleur", "options": [ { "value": "sunshine", "label": "Jaune" }, { "value": "adventure", "label": "Rouge" }, { "value": "forest", "label": "Violet" }, { "value": "bottle", "label": "Vert" }, { "value": "kit", "label": "Neutre" } ], "default": "sunshine" },
+      { "type": "header", "content": "Saveur 2" },
+      { "type": "text", "id": "name_2", "label": "Nom", "default": "Happy Adventure" },
+      { "type": "text", "id": "sub_2", "label": "Sous-titre", "default": "Pomme Fraise · 80 g" },
+      { "type": "textarea", "id": "text_2", "label": "Ingrédients", "default": "Pomme*, hibiscus*, cynorrhodon*, fraise*, pétales de rose*, vanille*, extrait de vanille*, arôme naturel de fraise." },
+      { "type": "select", "id": "univers_2", "label": "Couleur", "options": [ { "value": "sunshine", "label": "Jaune" }, { "value": "adventure", "label": "Rouge" }, { "value": "forest", "label": "Violet" }, { "value": "bottle", "label": "Vert" }, { "value": "kit", "label": "Neutre" } ], "default": "adventure" },
+      { "type": "header", "content": "Saveur 3" },
+      { "type": "text", "id": "name_3", "label": "Nom", "default": "Dream Forest" },
+      { "type": "text", "id": "sub_3", "label": "Sous-titre", "default": "Fruits des Bois · 80 g" },
+      { "type": "textarea", "id": "text_3", "label": "Ingrédients", "default": "Pomme*, hibiscus*, raisin*, cynorrhodon*, framboise*, fraise*, ananas*, fleurs de bleuet*, arômes naturels de fruits rouges." },
+      { "type": "select", "id": "univers_3", "label": "Couleur", "options": [ { "value": "sunshine", "label": "Jaune" }, { "value": "adventure", "label": "Rouge" }, { "value": "forest", "label": "Violet" }, { "value": "bottle", "label": "Vert" }, { "value": "kit", "label": "Neutre" } ], "default": "forest" },
+      { "type": "textarea", "id": "note", "label": "Mention", "default": "*Ingrédients issus de l’agriculture biologique. Conservation : à conserver dans un endroit frais et sec, à l’abri de la lumière." }
+    ] },
+    { "type": "nutrition", "name": "Panneau nutrition", "settings": [
+      { "type": "text", "id": "title", "label": "Titre", "default": "Apports nutritionnels" },
+      { "type": "checkbox", "id": "open", "label": "Ouvert par défaut", "default": true },
+      { "type": "text", "id": "col_0", "label": "En-tête colonne 1", "default": "Pour" },
+      { "type": "text", "id": "col_1", "label": "En-tête colonne 2", "default": "1 tasse (200 ml)" },
+      { "type": "text", "id": "col_2", "label": "En-tête colonne 3", "default": "100 ml" },
+      { "type": "textarea", "id": "rows", "label": "Lignes", "info": "Une ligne par valeur : Libellé | valeur tasse | valeur 100 ml. Les lignes commençant par « dont » sont regroupées sous la précédente en desktop.", "default": "Énergie (kJ) | | \nÉnergie (kcal) | | \nMatières grasses | | \ndont acides gras saturés | | \nGlucides | | \ndont sucres | | \nProtéines | | \nSel | | " },
+      { "type": "textarea", "id": "note", "label": "Mention", "default": "Valeurs nutritionnelles à compléter après analyse. Infusion sans sucre ajouté : les sucres présents sont ceux, naturels, des fruits." }
+    ] }
+  ],
+  "presets": [
+    {
+      "name": "Ingrédients & nutrition",
+      "blocks": [ { "type": "text" }, { "type": "nutrition" } ]
+    }
+  ]
+}
+{% endschema %}

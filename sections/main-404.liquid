@@ -1,0 +1,26 @@
+<div class="page-section">
+  <div class="page-section__inner page-section__inner--narrow" style="text-align: center;">
+    <span class="eyebrow">404</span>
+    <h1 class="page-title" style="margin-top: 14px;">{{ section.settings.heading }}</h1>
+    <p class="page-lead" style="margin-left: auto; margin-right: auto;">{{ section.settings.text }}</p>
+    <div class="btn-row" style="justify-content: center; margin-top: 26px;">
+      {%- render 'button', label: section.settings.button_label, link: section.settings.button_link, style: 'red' -%}
+      {%- render 'button', label: section.settings.button_2_label, link: routes.root_url, style: 'outline' -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Page introuvable",
+  "tag": "section",
+  "class": "section-404",
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Titre", "default": "Oups, cette page s'est <em>évaporée</em>" },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "La page que vous cherchez n'existe pas ou a été déplacée. Revenez à l'accueil ou découvrez le Kit Démarrage Rituel." },
+    { "type": "text", "id": "button_label", "label": "Bouton principal", "default": "Découvrir le Kit Rituel" },
+    { "type": "url", "id": "button_link", "label": "Lien du bouton principal" },
+    { "type": "text", "id": "button_2_label", "label": "Bouton secondaire", "default": "Retour à l'accueil" }
+  ]
+}
+{% endschema %}

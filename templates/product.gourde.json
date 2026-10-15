@@ -1,0 +1,420 @@
+/*
+ * Modèle Tisa'nours — éditable depuis l'éditeur de thème Shopify.
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "univers": "bottle",
+        "background": "cream",
+        "bordered": false,
+        "button_style": "red",
+        "gallery_thumbs": 4,
+        "gallery_radius": 36,
+        "dashed_placeholders": false,
+        "show_sticky_atc": true,
+        "sticky_label": "Ajouter au panier"
+      },
+      "blocks": {
+        "badge_1": {
+          "type": "badge",
+          "settings": {
+            "text": "L’objet du rituel",
+            "style": "yellow"
+          }
+        },
+        "title_2": {
+          "type": "title",
+          "settings": {}
+        },
+        "rating_3": {
+          "type": "rating",
+          "settings": {
+            "stars": "★★★★★",
+            "text": "4,8/5 · 74 avis parents"
+          }
+        },
+        "description_4": {
+          "type": "description",
+          "settings": {
+            "source": "custom",
+            "text": "<p>La gourde que l’enfant remplit lui-même : filtre infuseur intégré, étanche, pensée pour l’infusion chaude comme glacée. C’est elle qui transforme la boisson en rituel, à la maison, à l’école ou en sortie.</p>",
+            "size": "normal"
+          }
+        },
+        "bullets_5": {
+          "type": "bullets",
+          "settings": {
+            "items": "400 ml, format cartable\nFiltre infuseur amovible\nChaud et glacé\nSans BPA, lave-vaisselle"
+          }
+        },
+        "variant_picker_6": {
+          "type": "variant_picker",
+          "settings": {}
+        },
+        "price_7": {
+          "type": "price",
+          "settings": {
+            "note": "livraison offerte dès 45 €"
+          }
+        },
+        "buy_buttons_8": {
+          "type": "buy_buttons",
+          "settings": {
+            "label": "Ajouter au panier",
+            "style": "section"
+          }
+        },
+        "marquee_9": {
+          "type": "marquee",
+          "settings": {
+            "items": "🚚 Livraison offerte dès 45 €\n🧡 Remboursé 30 jours\n🧊 Chaud et glacé\n🔒 Paiement sécurisé",
+            "duration": 26
+          }
+        },
+        "testimonial_10": {
+          "type": "testimonial",
+          "settings": {
+            "stars": "★★★★★",
+            "quote": "« La gourde part tous les matins dans le cartable. Il la prépare seul la veille, c’est devenu son truc. »",
+            "author": "Sofiane, papa de jumeaux · Achat vérifié",
+            "author_color": "grey",
+            "show_avatar": true,
+            "avatar_mobile": false
+          }
+        },
+        "accordion_11": {
+          "type": "accordion",
+          "settings": {
+            "question": "Peut-on y mettre une infusion chaude ?",
+            "answer": "<p>Oui. L’infusion se prépare à l’eau chaude puis se laisse tiédir avant d’être servie ou refermée. L’eau chaude reste manipulée par un adulte pour les plus jeunes.</p>",
+            "open": false
+          }
+        },
+        "accordion_12": {
+          "type": "accordion",
+          "settings": {
+            "question": "Comment se nettoie la gourde ?",
+            "answer": "<p>La gourde se rince à l’eau claire après chaque utilisation, filtre dévissé. Gourde et bouchon passent au lave-vaisselle, dans le panier du haut.</p>",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "badge_1",
+        "title_2",
+        "rating_3",
+        "description_4",
+        "bullets_5",
+        "variant_picker_6",
+        "price_7",
+        "buy_buttons_8",
+        "marquee_9",
+        "testimonial_10",
+        "accordion_11",
+        "accordion_12"
+      ]
+    },
+    "pensee": {
+      "type": "benefits",
+      "settings": {
+        "background": "white",
+        "card_bg": "cream",
+        "rating_text": "",
+        "heading": "Une gourde pensée pour <em>les enfants</em>",
+        "compact_heading": true,
+        "note": "Matériaux et contenance définitifs à confirmer avec le fournisseur retenu.",
+        "button_label": "",
+        "button_style": "yellow",
+        "media_style": "sticky_gallery",
+        "media_position": "right",
+        "ph_1": "bottle",
+        "ph_2": "sunshine",
+        "ph_3": "adventure",
+        "show_mobile_image": false,
+        "ph_mobile": "bottle"
+      },
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "🎒",
+            "title": "400 ml, format cartable",
+            "text": "Assez pour l’école, assez léger pour un sac d’enfant. Bouchon à vis étanche."
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "🫗",
+            "title": "Filtre infuseur amovible",
+            "text": "Il dose ses fruits, visse le filtre et referme. Le filtre se retire pour le rinçage."
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "🧊",
+            "title": "Chaud et glacé",
+            "text": "Infusion tiède l’hiver, infusion froide et glaçons l’été. Un seul objet pour toute l’année."
+          }
+        },
+        "benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "✨",
+            "title": "Sans BPA, lave-vaisselle",
+            "text": "Matériaux sans BPA, passage au lave-vaisselle dans le panier du haut."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4"
+      ]
+    },
+    "cta_kit": {
+      "type": "cta-banner",
+      "settings": {
+        "background": "hatched",
+        "size": "compact",
+        "heading": "Goûtez les 3 saveurs avec le <em>Kit Démarrage Rituel</em>",
+        "text": "Les 3 infusions bio, la bouteille infuseur et le Petit Guide du Rituel. Satisfait ou remboursé 30 jours.",
+        "button_1_label": "Découvrir le Kit · 59,90 €",
+        "button_1_link": "shopify://products/kit-demarrage-rituel",
+        "button_1_style": "red",
+        "button_1_tilt": true,
+        "button_2_label": "",
+        "button_2_style": "outline-transparent"
+      }
+    },
+    "avis": {
+      "type": "reviews",
+      "settings": {
+        "eyebrow": "Avis vérifiés",
+        "heading": "Ce qu'en disent <em>les familles</em>",
+        "text": "Des parents qui cherchaient une alternative aux boissons sucrées, et des enfants qui redemandent leur infusion.",
+        "summary_stars": "★★★★★",
+        "summary_rating": "4,9/5 sur 128 avis",
+        "summary_stat": "93 % des enfants réclament leur saveur",
+        "duration": 60,
+        "background": "white",
+        "show_scallop": false,
+        "scallop_color": "#FFF7EC"
+      },
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "stars": "★★★★★",
+            "text": "« Ma fille de 5 ans réclame sa \"boisson de fruits\" au goûter. Le sirop est resté au placard depuis. »",
+            "author": "Camille, maman de 2 enfants",
+            "verified": "✓ Achat vérifié",
+            "univers": "sunshine"
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "stars": "★★★★★",
+            "text": "« Le kit était le bon départ : ils ont goûté les trois, chacun a élu sa saveur. La bouteille part tous les jours à l'école. »",
+            "author": "Sofiane, papa de jumeaux",
+            "verified": "✓ Achat vérifié",
+            "univers": "forest"
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "stars": "★★★★★",
+            "text": "« Glacée en été, chaude en hiver : c'est devenu notre moment de fin de journée, sans discussion sur le sucre. »",
+            "author": "Élodie, maman d'un garçon de 8 ans",
+            "verified": "✓ Achat vérifié",
+            "univers": "sunshine"
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "stars": "★★★★★",
+            "text": "« Je cherchais une alternative au jus de fruits du matin. Il choisit son sachet lui-même, c'est devenu un jeu. »",
+            "author": "Marion, maman de 3 enfants",
+            "verified": "✓ Achat vérifié",
+            "univers": "adventure"
+          }
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {
+            "stars": "★★★★★",
+            "text": "« Aucun goût de tisane, c'est ce qui a tout changé chez nous. Mon fils de 6 ans en boit tous les jours. »",
+            "author": "Thomas, papa d'un garçon de 6 ans",
+            "verified": "✓ Achat vérifié",
+            "univers": "forest"
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5"
+      ]
+    },
+    "saveurs": {
+      "type": "featured-flavors",
+      "settings": {
+        "anchor": "",
+        "heading": "Nos 3 <em>infusions fruitées bio</em>",
+        "text": "Trois univers, trois goûts francs. Sachets de 80 g, soit environ 30 infusions · 14,90 € l'unité.",
+        "button_label": "",
+        "button_link": "shopify://products/kit-demarrage-rituel",
+        "background": "white",
+        "mobile_gradient": false,
+        "compact_mobile": true,
+        "hide_current": "mobile",
+        "show_scallop": true,
+        "scallop_color": "#FFF7EC"
+      },
+      "blocks": {
+        "product_1": {
+          "type": "product",
+          "settings": {
+            "product": "tropical-sunshine",
+            "univers": "sunshine",
+            "eyebrow": "Passion Mangue",
+            "title": "Tropical Sunshine",
+            "text": "Soleil, mangue juteuse et fruit de la passion. La saveur des grandes envies de vacances.",
+            "button_label": "Découvrir"
+          }
+        },
+        "product_2": {
+          "type": "product",
+          "settings": {
+            "product": "happy-adventure",
+            "univers": "adventure",
+            "eyebrow": "Pomme Fraise",
+            "title": "Happy Adventure",
+            "text": "Pomme croquante, fraise et une pointe de vanille. Le goût que tout le monde accepte du premier coup.",
+            "button_label": "Découvrir"
+          }
+        },
+        "product_3": {
+          "type": "product",
+          "settings": {
+            "product": "dream-forest",
+            "univers": "forest",
+            "eyebrow": "Fruits des Bois",
+            "title": "Dream Forest",
+            "text": "Framboise, fraise et bleuet. Une forêt douce, parfaite pour le moment calme du soir.",
+            "button_label": "Découvrir"
+          }
+        }
+      },
+      "block_order": [
+        "product_1",
+        "product_2",
+        "product_3"
+      ]
+    },
+    "faq": {
+      "type": "faq-split",
+      "settings": {
+        "heading": "Les questions que se posent <em>les parents</em>",
+        "text": "Tout ce qu'il faut savoir avant de remplacer un jus ou un sirop par une infusion fruitée bio.",
+        "button_label": "Voir toute la FAQ",
+        "button_link": "shopify://pages/faq-contact",
+        "background": "cream",
+        "structured_data": false
+      },
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "À partir de quel âge ?",
+            "answer": "<p>Dès 3 ans. Les infusions sont sans caféine ni théine : elles peuvent se boire le soir sans perturber le sommeil.</p>",
+            "open": false
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Vraiment sans sucre ajouté ?",
+            "answer": "<p>Aucun sucre ajouté. Les infusions contiennent naturellement les sucres présents dans les fruits bio utilisés, sans édulcorant ni colorant.</p>",
+            "open": false
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "Et s'il n'aime pas ?",
+            "answer": "<p>Le Kit permet de tester les 3 saveurs. Et si ça ne prend pas, nous remboursons le premier kit pendant 30 jours, même entamé.</p>",
+            "open": false
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "Chaude ou glacée, comment on prépare ?",
+            "answer": "<p>Chaud : une cuillère à café dans l'infuseur, eau à 90 °C, 5 minutes, puis laisser tiédir. Glacé : même dose, eau froide, 2 h au réfrigérateur.</p>",
+            "open": false
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Mon enfant peut-il la préparer seul ?",
+            "answer": "<p>Il choisit sa saveur, dose et remplit sa bouteille en version froide. L'eau chaude reste manipulée par un adulte pour les plus jeunes.</p>",
+            "open": false
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "Combien d'infusions dans un sachet ?",
+            "answer": "<p>Environ 30 infusions par sachet de 80 g, soit près de 90 avec le Kit Démarrage Rituel.</p>",
+            "open": false
+          }
+        },
+        "question_7": {
+          "type": "question",
+          "settings": {
+            "question": "Comment fonctionne l'abonnement ?",
+            "answer": "<p>Vous choisissez la fréquence (4, 6 ou 8 semaines) et vous économisez sur chaque commande. Modifiable, décalable ou annulable à tout moment, sans engagement.</p>",
+            "open": false
+          }
+        },
+        "question_8": {
+          "type": "question",
+          "settings": {
+            "question": "Quels délais de livraison ?",
+            "answer": "<p>Expédition sous 24 h ouvrées depuis la France, livraison en 2 à 4 jours. Frais offerts dès 45 € d'achat.</p>",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "question_6",
+        "question_7",
+        "question_8"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "pensee",
+    "cta_kit",
+    "avis",
+    "saveurs",
+    "faq"
+  ]
+}

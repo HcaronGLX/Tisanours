@@ -1,0 +1,56 @@
+{%- liquid
+  assign ss = section.settings
+  assign section_bg = 'var(--c-white)'
+  if ss.background == 'cream'
+    assign section_bg = 'var(--c-cream)'
+  endif
+  assign img_alt = ss.image.alt | escape
+-%}
+<div class="cta-banner cta-banner--{{ ss.size }}{% if ss.background == 'hatched' %} cta-banner--hatched{% endif %}" style="--section-bg: {{ section_bg }};">
+  {%- if ss.image != blank -%}
+    <div class="cta-banner__bg">
+      {{ ss.image | image_url: width: 2400 | image_tag: widths: '750, 1100, 1500, 1800, 2400', sizes: '100vw', loading: 'lazy', alt: img_alt }}
+    </div>
+  {%- endif -%}
+  <div class="cta-banner__inner">
+    {%- if ss.heading != blank -%}<h2 class="cta-banner__title{% if ss.size == 'compact' %} hl-sm{% endif %}">{{ ss.heading }}</h2>{%- endif -%}
+    {%- if ss.text != blank -%}<p class="cta-banner__text">{{ ss.text }}</p>{%- endif -%}
+    {%- if ss.button_1_label != blank or ss.button_2_label != blank -%}
+      <div class="btn-row">
+        {%- render 'button', label: ss.button_1_label, link: ss.button_1_link, style: ss.button_1_style, tilt: ss.button_1_tilt -%}
+        {%- render 'button', label: ss.button_2_label, link: ss.button_2_link, style: ss.button_2_style -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Bandeau CTA",
+  "tag": "section",
+  "class": "section-cta",
+  "settings": [
+    { "type": "select", "id": "background", "label": "Fond", "options": [
+      { "value": "white", "label": "Blanc" }, { "value": "cream", "label": "Crème" }, { "value": "hatched", "label": "Beige hachuré (en attendant une image)" }
+    ], "default": "white" },
+    { "type": "image_picker", "id": "image", "label": "Image de fond" },
+    { "type": "select", "id": "size", "label": "Format", "options": [
+      { "value": "default", "label": "Standard" }, { "value": "compact", "label": "Compact (titre plus petit)" }, { "value": "narrow", "label": "Texte long, centré" }, { "value": "tall", "label": "Haut" }
+    ], "default": "default" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titre", "default": "Prêt à <em>infuser son monde ?</em>" },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Commencez par le Kit Démarrage Rituel, puis réassortissez seulement les saveurs préférées, à l'unité." },
+    { "type": "text", "id": "button_1_label", "label": "Bouton 1 : texte", "default": "Composer mon rituel" },
+    { "type": "url", "id": "button_1_link", "label": "Bouton 1 : lien" },
+    { "type": "select", "id": "button_1_style", "label": "Bouton 1 : style", "options": [
+      { "value": "red", "label": "Rouge" }, { "value": "yellow", "label": "Jaune" }, { "value": "dark", "label": "Vert" }, { "value": "outline", "label": "Contour blanc" }, { "value": "outline-transparent", "label": "Contour transparent" }
+    ], "default": "red" },
+    { "type": "checkbox", "id": "button_1_tilt", "label": "Bouton 1 : légèrement incliné", "default": false },
+    { "type": "text", "id": "button_2_label", "label": "Bouton 2 : texte", "default": "En savoir plus" },
+    { "type": "url", "id": "button_2_link", "label": "Bouton 2 : lien" },
+    { "type": "select", "id": "button_2_style", "label": "Bouton 2 : style", "options": [
+      { "value": "red", "label": "Rouge" }, { "value": "yellow", "label": "Jaune" }, { "value": "dark", "label": "Vert" }, { "value": "outline", "label": "Contour blanc" }, { "value": "outline-transparent", "label": "Contour transparent" }
+    ], "default": "outline-transparent" }
+  ],
+  "presets": [ { "name": "Bandeau CTA" } ]
+}
+{% endschema %}

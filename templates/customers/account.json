@@ -1,0 +1,14 @@
+/*
+ * Modèle Tisa'nours — éditable depuis l'éditeur de thème Shopify.
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-account",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

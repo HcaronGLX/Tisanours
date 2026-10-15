@@ -1,0 +1,36 @@
+<div class="page-section">
+  <div class="page-section__inner" style="max-width: 560px;">
+    <h1 class="page-title">{{ 'customer.login.title' | t }}</h1>
+    <div class="card-box" style="margin-top: 24px;">
+      <div id="recover" hidden>
+        <h2 style="font-size: 24px;">{{ 'customer.recover.title' | t }}</h2>
+        {%- form 'recover_customer_password', class: 'form' -%}
+          {%- if form.posted_successfully? -%}<p class="form__success">{{ 'customer.recover.success' | t }}</p>{%- endif -%}
+          {{ form.errors | default_errors }}
+          <label class="field">{{ 'customer.fields.email' | t }}<input class="field__input" type="email" name="email" autocomplete="email" required></label>
+          <button class="btn btn--red" type="submit">{{ 'customer.recover.submit' | t }}</button>
+          <a class="link-underline" href="#login" onclick="document.getElementById('recover').hidden=true;document.getElementById('login').hidden=false;return false;">{{ 'customer.recover.cancel' | t }}</a>
+        {%- endform -%}
+      </div>
+      <div id="login">
+        {%- form 'customer_login', class: 'form' -%}
+          {%- if form.errors -%}<div class="form__errors">{{ form.errors | default_errors }}</div>{%- endif -%}
+          <label class="field">{{ 'customer.fields.email' | t }}<input class="field__input" type="email" name="customer[email]" autocomplete="email" required></label>
+          <label class="field">{{ 'customer.fields.password' | t }}<input class="field__input" type="password" name="customer[password]" autocomplete="current-password" required></label>
+          <a class="link-underline" href="#recover" onclick="document.getElementById('recover').hidden=false;document.getElementById('login').hidden=true;return false;">{{ 'customer.login.forgot' | t }}</a>
+          <button class="btn btn--red" type="submit">{{ 'customer.login.submit' | t }}</button>
+          <a class="link-underline" href="{{ routes.account_register_url }}">{{ 'customer.login.register' | t }}</a>
+        {%- endform -%}
+      </div>
+      {%- if shop.checkout.guest_login -%}
+        {%- form 'guest_login', class: 'form', style: 'margin-top: 20px;' -%}
+          <button class="btn btn--outline-small" type="submit">{{ 'customer.login.guest' | t }}</button>
+        {%- endform -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Connexion", "tag": "section", "class": "section-login", "settings": [] }
+{% endschema %}

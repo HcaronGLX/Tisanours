@@ -1,0 +1,31 @@
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "blocks": {
+        "m1": { "type": "message", "settings": { "text": "🌿 100 % fruits bio" } },
+        "m2": { "type": "message", "settings": { "text": "🍯 Sans sucre ajouté*" } },
+        "m3": { "type": "message", "settings": { "text": "🚚 Livraison offerte dès 45 €" } },
+        "m4": { "type": "message", "settings": { "text": "🇫🇷 Conditionné en France" } },
+        "m5": { "type": "message", "settings": { "text": "😴 Sans caféine ni théine" } },
+        "m6": { "type": "message", "settings": { "text": "🧒 Dès 3 ans" } },
+        "m7": { "type": "message", "settings": { "text": "🧊 Chaud ou glacé" } },
+        "m8": { "type": "message", "settings": { "text": "🧡 Satisfait ou remboursé 30 jours" } }
+      },
+      "block_order": ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8"],
+      "settings": { "duration": 32 }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo_text": "Tisa'nours",
+        "tagline": "infuse ton monde",
+        "menu": "tisanours-menu-principal",
+        "highlight_title": "Le Kit Rituel"
+      }
+    }
+  },
+  "order": ["announcement", "header"]
+}

@@ -1,0 +1,60 @@
+{%- assign ss = section.settings -%}
+<div class="ritual">
+  <div class="ritual__inner">
+    <div class="ritual__card scheme-dark">
+      <div class="ritual__head">
+        {%- if ss.eyebrow != blank -%}<span class="eyebrow">{{ ss.eyebrow }}</span>{%- endif -%}
+        {%- if ss.heading != blank -%}<h2 class="ritual__title">{{ ss.heading }}</h2>{%- endif -%}
+        {%- if ss.text != blank -%}<p class="ritual__text">{{ ss.text }}</p>{%- endif -%}
+      </div>
+      <div class="ritual__grid">
+        {%- for block in section.blocks -%}
+          <div class="ritual-step" {{ block.shopify_attributes }}>
+            <span class="emoji-pill" aria-hidden="true">
+              {%- if block.settings.icon_image != blank -%}
+                {{ block.settings.icon_image | image_url: width: 120 | image_tag: loading: 'lazy', alt: '' }}
+              {%- else -%}
+                {{ block.settings.icon }}
+              {%- endif -%}
+            </span>
+            <span class="ritual-step__title">{{ block.settings.title }}</span>
+            {%- if block.settings.subtitle != blank -%}<span class="ritual-step__sub">{{ block.settings.subtitle }}</span>{%- endif -%}
+            {%- if block.settings.text != blank -%}<span class="ritual-step__text">{{ block.settings.text }}</span>{%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Rituel en étapes",
+  "tag": "section",
+  "class": "section-ritual",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Le rituel" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titre", "info": "La partie en italique est surlignée en jaune.", "default": "Le rituel Tisa’nours, <em>en 3 temps</em>" },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Le moment devient une habitude, la saveur reste libre. Matin, sortie d’école, goûter ou soir : c’est l’enfant qui choisit." }
+  ],
+  "blocks": [
+    { "type": "step", "name": "Étape", "limit": 6, "settings": [
+      { "type": "text", "id": "icon", "label": "Icône (emoji)", "default": "🍓" },
+      { "type": "image_picker", "id": "icon_image", "label": "Icône (image)" },
+      { "type": "text", "id": "title", "label": "Titre", "default": "Alternative" },
+      { "type": "text", "id": "subtitle", "label": "Sous-titre", "default": "sans sucre ajouté*" },
+      { "type": "text", "id": "text", "label": "Texte", "default": "le goût du fruit, pas celui du soda" }
+    ] }
+  ],
+  "presets": [
+    {
+      "name": "Rituel en étapes",
+      "blocks": [
+        { "type": "step" },
+        { "type": "step", "settings": { "icon": "🎨", "title": "Plaisir", "subtitle": "3 saveurs gourmandes", "text": "chaudes ou glacées, au choix" } },
+        { "type": "step", "settings": { "icon": "🎒", "title": "Rituel", "subtitle": "sa bouteille, son moment", "text": "à la maison comme à l’école" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

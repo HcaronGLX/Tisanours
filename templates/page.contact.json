@@ -1,0 +1,30 @@
+/*
+ * Modèle Tisa'nours — éditable depuis l'éditeur de thème Shopify.
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "badge": "Contact",
+        "heading": "Une question ? <em>Écrivez-nous</em>",
+        "text": "<p>Nous lisons tout et répondons en moins de 24 h ouvrées, du lundi au vendredi.</p>"
+      }
+    },
+    "contact": {
+      "type": "contact-form",
+      "settings": {
+        "anchor": "contact",
+        "heading": "Nous <em>écrire</em>",
+        "text": "Une question sur la composition, une commande à modifier, une envie de nous faire un retour ? Nous lisons tout et répondons en moins de 24 h ouvrées.",
+        "contact_lines": "✉️ bonjour@tisanours.fr\n💬 Du lundi au vendredi, 9 h – 18 h\n📦 Suivi de commande depuis votre compte client\n📷 @tisanours sur Instagram",
+        "pro_title": "Vous êtes une boutique, une école ou un professionnel ?",
+        "pro_text": "<p>Écrivez-nous à pro@tisanours.fr pour recevoir nos conditions revendeur.</p>"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "contact"
+  ]
+}

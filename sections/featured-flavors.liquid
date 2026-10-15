@@ -1,0 +1,119 @@
+{%- liquid
+  assign ss = section.settings
+  assign section_bg = 'var(--c-white)'
+  if ss.background == 'cream'
+    assign section_bg = 'var(--c-cream)'
+  endif
+-%}
+<div
+  class="flavors{% if ss.mobile_gradient %} flavors--mobile-gradient{% endif %}{% if ss.compact_mobile %} flavors--compact{% endif %}{% if ss.show_scallop %} has-scallop{% endif %}"
+  {% if ss.anchor != blank %}id="{{ ss.anchor | handle }}"{% endif %}
+  style="--section-bg: {{ section_bg }};"
+>
+  <div class="flavors__inner">
+    <div class="flavors__head">
+      <div class="flavors__head-text">
+        {%- if ss.heading != blank -%}<h2 class="flavors__title">{{ ss.heading }}</h2>{%- endif -%}
+        {%- if ss.text != blank -%}<p class="flavors__text">{{ ss.text }}</p>{%- endif -%}
+      </div>
+      {%- render 'button', label: ss.button_label, link: ss.button_link, style: 'pill' -%}
+    </div>
+
+    <div class="flavors__grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign bs = block.settings
+          assign p = bs.product
+          capture bu
+            render 'univers', setting: bs.univers, product: p
+          endcapture
+          assign bu = bu | strip
+          assign hidden_class = ''
+          if p != blank and product != blank and p.id == product.id
+            if ss.hide_current == 'always'
+              assign hidden_class = 'is-current-hidden'
+            elsif ss.hide_current == 'mobile'
+              assign hidden_class = 'is-current-mobile-hidden'
+            endif
+          endif
+        -%}
+        <div style="display: contents;" {{ block.shopify_attributes }}>
+          {%- render 'flavor-card',
+            card_product: p,
+            univers: bu,
+            eyebrow: bs.eyebrow,
+            title: bs.title,
+            text: bs.text,
+            price_text: bs.price_text,
+            image: bs.image,
+            link: bs.link,
+            button_label: bs.button_label,
+            class: hidden_class
+          -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+  {%- if ss.show_scallop -%}
+    <div class="scallop" style="--scallop: {{ ss.scallop_color }};"></div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Nos infusions (cartes)",
+  "tag": "section",
+  "class": "section-flavors",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancre (lien #)", "info": "Ex. « saveurs » pour un lien /#saveurs.", "default": "saveurs" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titre", "default": "Nos 3 <em>infusions fruitées bio</em>" },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Trois univers, trois goûts francs. Sachets de 80 g, soit environ 30 infusions · 14,90 € l'unité." },
+    { "type": "text", "id": "button_label", "label": "Texte du bouton", "default": "Prendre les 3 dans le Kit →" },
+    { "type": "url", "id": "button_link", "label": "Lien du bouton" },
+    { "type": "select", "id": "background", "label": "Fond", "options": [
+      { "value": "white", "label": "Blanc" }, { "value": "cream", "label": "Crème" }
+    ], "default": "white" },
+    { "type": "checkbox", "id": "mobile_gradient", "label": "Dégradé blanc vers crème sur mobile", "default": true },
+    { "type": "checkbox", "id": "compact_mobile", "label": "Espacements réduits sur mobile", "default": false },
+    { "type": "select", "id": "hide_current", "label": "Sur une fiche produit, masquer le produit affiché", "options": [
+      { "value": "never", "label": "Jamais" }, { "value": "mobile", "label": "Sur mobile" }, { "value": "always", "label": "Toujours" }
+    ], "default": "mobile" },
+    { "type": "checkbox", "id": "show_scallop", "label": "Festons en bas de section", "default": false },
+    { "type": "color", "id": "scallop_color", "label": "Couleur des festons (section suivante)", "default": "#FFF7EC" }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Produit",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Produit" },
+        { "type": "select", "id": "univers", "label": "Univers", "options": [
+          { "value": "auto", "label": "Automatique (métachamp custom.univers)" },
+          { "value": "kit", "label": "Kit / neutre" },
+          { "value": "sunshine", "label": "Tropical Sunshine (jaune)" },
+          { "value": "adventure", "label": "Happy Adventure (rouge)" },
+          { "value": "forest", "label": "Dream Forest (violet)" },
+          { "value": "bottle", "label": "Gourde (vert)" }
+        ], "default": "auto" },
+        { "type": "text", "id": "eyebrow", "label": "Sur-titre", "info": "Par défaut : métachamp custom.saveur." },
+        { "type": "text", "id": "title", "label": "Titre", "info": "Par défaut : titre du produit." },
+        { "type": "textarea", "id": "text", "label": "Description", "info": "Par défaut : métachamp custom.accroche." },
+        { "type": "text", "id": "price_text", "label": "Prix (texte)", "info": "Par défaut : prix du produit." },
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "Par défaut : image du produit." },
+        { "type": "url", "id": "link", "label": "Lien (si aucun produit)" },
+        { "type": "text", "id": "button_label", "label": "Texte du bouton", "default": "Découvrir" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Nos infusions (cartes)",
+      "blocks": [
+        { "type": "product", "settings": { "univers": "sunshine", "eyebrow": "Passion Mangue", "title": "Tropical Sunshine", "text": "Soleil, mangue juteuse et fruit de la passion. La saveur des grandes envies de vacances.", "price_text": "14,90 €" } },
+        { "type": "product", "settings": { "univers": "adventure", "eyebrow": "Pomme Fraise", "title": "Happy Adventure", "text": "Pomme croquante, fraise et une pointe de vanille. Le goût que tout le monde accepte du premier coup.", "price_text": "14,90 €" } },
+        { "type": "product", "settings": { "univers": "forest", "eyebrow": "Fruits des Bois", "title": "Dream Forest", "text": "Framboise, fraise et bleuet. Une forêt douce, parfaite pour le moment calme du soir.", "price_text": "14,90 €" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

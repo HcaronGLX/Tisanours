@@ -1,0 +1,42 @@
+{%- liquid
+  assign ss = section.settings
+  assign section_bg = 'var(--c-cream)'
+  if ss.background == 'white'
+    assign section_bg = 'var(--c-white)'
+  endif
+-%}
+<div class="page-section" style="background: {{ section_bg }}; text-align: {{ ss.alignment }};">
+  <div class="page-section__inner page-section__inner--narrow">
+    {%- if ss.heading != blank -%}<h2 class="page-title">{{ ss.heading }}</h2>{%- endif -%}
+    {%- if ss.text != blank -%}<div class="page-body rte">{{ ss.text }}</div>{%- endif -%}
+    {%- if ss.button_label != blank -%}
+      <div class="btn-row" style="margin-top: 24px;{% if ss.alignment == 'center' %} justify-content: center;{% endif %}">
+        {%- render 'button', label: ss.button_label, link: ss.button_link, style: ss.button_style -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Texte enrichi",
+  "tag": "section",
+  "class": "section-rich-text",
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Titre", "default": "Un titre <em>surligné</em>" },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Racontez votre histoire ici.</p>" },
+    { "type": "text", "id": "button_label", "label": "Texte du bouton" },
+    { "type": "url", "id": "button_link", "label": "Lien du bouton" },
+    { "type": "select", "id": "button_style", "label": "Style du bouton", "options": [
+      { "value": "red", "label": "Rouge" }, { "value": "yellow", "label": "Jaune" }, { "value": "dark", "label": "Vert" }, { "value": "outline", "label": "Contour" }
+    ], "default": "red" },
+    { "type": "select", "id": "alignment", "label": "Alignement", "options": [
+      { "value": "left", "label": "Gauche" }, { "value": "center", "label": "Centré" }
+    ], "default": "center" },
+    { "type": "select", "id": "background", "label": "Fond", "options": [
+      { "value": "cream", "label": "Crème" }, { "value": "white", "label": "Blanc" }
+    ], "default": "cream" }
+  ],
+  "presets": [ { "name": "Texte enrichi" } ]
+}
+{% endschema %}

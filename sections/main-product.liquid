@@ -1,0 +1,804 @@
+{%- render 'product-info', product: product, section: section, title_tag: 'h1', sticky_atc: section.settings.show_sticky_atc -%}
+
+<script type="application/ld+json">
+  {{ product | structured_data }}
+</script>
+
+{% schema %}
+{
+  "name": "Fiche produit",
+  "tag": "section",
+  "class": "section-main-product",
+  "settings": [
+    {
+      "type": "select",
+      "id": "univers",
+      "label": "Univers de couleur",
+      "options": [
+        {
+          "value": "auto",
+          "label": "Automatique (métachamp custom.univers)"
+        },
+        {
+          "value": "kit",
+          "label": "Kit / neutre"
+        },
+        {
+          "value": "sunshine",
+          "label": "Tropical Sunshine (jaune)"
+        },
+        {
+          "value": "adventure",
+          "label": "Happy Adventure (rouge)"
+        },
+        {
+          "value": "forest",
+          "label": "Dream Forest (violet)"
+        },
+        {
+          "value": "bottle",
+          "label": "Gourde (vert)"
+        }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Fond",
+      "options": [
+        {
+          "value": "cream",
+          "label": "Crème"
+        },
+        {
+          "value": "white",
+          "label": "Blanc"
+        },
+        {
+          "value": "gradient",
+          "label": "Dégradé de l'univers"
+        }
+      ],
+      "default": "cream"
+    },
+    {
+      "type": "checkbox",
+      "id": "bordered",
+      "label": "Bordure basse",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Couleur du bouton d'ajout",
+      "options": [
+        {
+          "value": "red",
+          "label": "Rouge marque"
+        },
+        {
+          "value": "univers",
+          "label": "Couleur de l'univers"
+        },
+        {
+          "value": "dark",
+          "label": "Vert"
+        }
+      ],
+      "default": "red"
+    },
+    {
+      "type": "header",
+      "content": "Galerie"
+    },
+    {
+      "type": "range",
+      "id": "gallery_thumbs",
+      "label": "Nombre de vignettes",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "gallery_radius",
+      "label": "Arrondi de l'image principale",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "checkbox",
+      "id": "dashed_placeholders",
+      "label": "Vignettes vides en pointillés",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Barre d'ajout collante (mobile)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sticky_atc",
+      "label": "Afficher",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "sticky_label",
+      "label": "Texte du bouton",
+      "default": "Ajouter au panier"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "badge",
+      "name": "Badge",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texte",
+          "default": "Le plus choisi pour démarrer"
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Couleur",
+          "options": [
+            {
+              "value": "univers",
+              "label": "Couleur de l'univers"
+            },
+            {
+              "value": "yellow",
+              "label": "Jaune"
+            },
+            {
+              "value": "green",
+              "label": "Vert"
+            }
+          ],
+          "default": "univers"
+        }
+      ]
+    },
+    {
+      "type": "title",
+      "name": "Titre",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "rating",
+      "name": "Note",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "stars",
+          "label": "Étoiles",
+          "default": "★★★★★"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texte",
+          "default": "4,9/5 · 128 avis parents"
+        }
+      ]
+    },
+    {
+      "type": "seo",
+      "name": "Ligne SEO",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texte",
+          "default": "Infusion fruitée bio · sans sucre ajouté · dès 3 ans"
+        }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "source",
+          "label": "Source",
+          "options": [
+            {
+              "value": "product",
+              "label": "Description du produit"
+            },
+            {
+              "value": "custom",
+              "label": "Texte personnalisé"
+            }
+          ],
+          "default": "product"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texte personnalisé"
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Taille",
+          "options": [
+            {
+              "value": "normal",
+              "label": "Normale"
+            },
+            {
+              "value": "large",
+              "label": "Grande"
+            }
+          ],
+          "default": "normal"
+        }
+      ]
+    },
+    {
+      "type": "bullets",
+      "name": "Liste à puces",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "items",
+          "label": "Éléments (un par ligne)",
+          "default": "3 infusions bio de 80 g\n1 bouteille infuseur\n1 Petit Guide du Rituel\nSans sucre ajouté*, dès 3 ans"
+        }
+      ]
+    },
+    {
+      "type": "flavors",
+      "name": "Saveurs",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Libellé (mobile)",
+          "default": "Choisissez la saveur"
+        },
+        {
+          "type": "select",
+          "id": "mode",
+          "label": "Comportement",
+          "options": [
+            {
+              "value": "switcher",
+              "label": "Sélecteur de saveur (met en avant la saveur affichée)"
+            },
+            {
+              "value": "display",
+              "label": "Présentation (toutes bordées, ex. contenu du Kit)"
+            }
+          ],
+          "default": "switcher"
+        },
+        {
+          "type": "text",
+          "id": "current_label",
+          "label": "Mention de la saveur affichée",
+          "default": "Cette saveur"
+        },
+        {
+          "type": "header",
+          "content": "Saveur 1"
+        },
+        {
+          "type": "product",
+          "id": "product_1",
+          "label": "Produit"
+        },
+        {
+          "type": "select",
+          "id": "univers_1",
+          "label": "Univers",
+          "options": [
+            {
+              "value": "auto",
+              "label": "Automatique (métachamp custom.univers)"
+            },
+            {
+              "value": "kit",
+              "label": "Kit / neutre"
+            },
+            {
+              "value": "sunshine",
+              "label": "Tropical Sunshine (jaune)"
+            },
+            {
+              "value": "adventure",
+              "label": "Happy Adventure (rouge)"
+            },
+            {
+              "value": "forest",
+              "label": "Dream Forest (violet)"
+            },
+            {
+              "value": "bottle",
+              "label": "Gourde (vert)"
+            }
+          ],
+          "default": "sunshine"
+        },
+        {
+          "type": "text",
+          "id": "title_1",
+          "label": "Nom (si aucun produit)",
+          "default": "Tropical Sunshine"
+        },
+        {
+          "type": "text",
+          "id": "subtitle_1",
+          "label": "Sous-titre",
+          "default": "Passion Mangue"
+        },
+        {
+          "type": "header",
+          "content": "Saveur 2"
+        },
+        {
+          "type": "product",
+          "id": "product_2",
+          "label": "Produit"
+        },
+        {
+          "type": "select",
+          "id": "univers_2",
+          "label": "Univers",
+          "options": [
+            {
+              "value": "auto",
+              "label": "Automatique (métachamp custom.univers)"
+            },
+            {
+              "value": "kit",
+              "label": "Kit / neutre"
+            },
+            {
+              "value": "sunshine",
+              "label": "Tropical Sunshine (jaune)"
+            },
+            {
+              "value": "adventure",
+              "label": "Happy Adventure (rouge)"
+            },
+            {
+              "value": "forest",
+              "label": "Dream Forest (violet)"
+            },
+            {
+              "value": "bottle",
+              "label": "Gourde (vert)"
+            }
+          ],
+          "default": "adventure"
+        },
+        {
+          "type": "text",
+          "id": "title_2",
+          "label": "Nom (si aucun produit)",
+          "default": "Happy Adventure"
+        },
+        {
+          "type": "text",
+          "id": "subtitle_2",
+          "label": "Sous-titre",
+          "default": "Pomme Fraise"
+        },
+        {
+          "type": "header",
+          "content": "Saveur 3"
+        },
+        {
+          "type": "product",
+          "id": "product_3",
+          "label": "Produit"
+        },
+        {
+          "type": "select",
+          "id": "univers_3",
+          "label": "Univers",
+          "options": [
+            {
+              "value": "auto",
+              "label": "Automatique (métachamp custom.univers)"
+            },
+            {
+              "value": "kit",
+              "label": "Kit / neutre"
+            },
+            {
+              "value": "sunshine",
+              "label": "Tropical Sunshine (jaune)"
+            },
+            {
+              "value": "adventure",
+              "label": "Happy Adventure (rouge)"
+            },
+            {
+              "value": "forest",
+              "label": "Dream Forest (violet)"
+            },
+            {
+              "value": "bottle",
+              "label": "Gourde (vert)"
+            }
+          ],
+          "default": "forest"
+        },
+        {
+          "type": "text",
+          "id": "title_3",
+          "label": "Nom (si aucun produit)",
+          "default": "Dream Forest"
+        },
+        {
+          "type": "text",
+          "id": "subtitle_3",
+          "label": "Sous-titre",
+          "default": "Fruits des Bois"
+        }
+      ]
+    },
+    {
+      "type": "offers",
+      "name": "Offres en sachets",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Chaque offre correspond à une variante du produit (variante 1 = 1 sachet, etc.). Le prix et le prix barré viennent des variantes."
+        },
+        {
+          "type": "range",
+          "id": "default_offer",
+          "label": "Offre présélectionnée",
+          "min": 1,
+          "max": 3,
+          "step": 1,
+          "default": 2
+        },
+        {
+          "type": "checkbox",
+          "id": "show_thumbs",
+          "label": "Afficher les vignettes de sachets",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Offre 1"
+        },
+        {
+          "type": "text",
+          "id": "subtitle_1",
+          "label": "Sous-titre",
+          "default": "Cure 1 mois"
+        },
+        {
+          "type": "text",
+          "id": "unit_1",
+          "label": "Prix unitaire (texte)",
+          "default": "0,49€ / sachet"
+        },
+        {
+          "type": "text",
+          "id": "badge_1",
+          "label": "Badge"
+        },
+        {
+          "type": "text",
+          "id": "pill_1",
+          "label": "Pastille de remise",
+          "info": "Laisser vide pour calculer automatiquement depuis le prix barré."
+        },
+        {
+          "type": "header",
+          "content": "Offre 2"
+        },
+        {
+          "type": "text",
+          "id": "subtitle_2",
+          "label": "Sous-titre",
+          "default": "Cure 2 mois"
+        },
+        {
+          "type": "text",
+          "id": "unit_2",
+          "label": "Prix unitaire (texte)",
+          "default": "0,45€ / sachet"
+        },
+        {
+          "type": "text",
+          "id": "badge_2",
+          "label": "Badge",
+          "default": "Le plus populaire"
+        },
+        {
+          "type": "text",
+          "id": "pill_2",
+          "label": "Pastille de remise",
+          "info": "Laisser vide pour calculer automatiquement depuis le prix barré.",
+          "default": "-5%"
+        },
+        {
+          "type": "header",
+          "content": "Offre 3"
+        },
+        {
+          "type": "text",
+          "id": "subtitle_3",
+          "label": "Sous-titre",
+          "default": "Cure 3 mois"
+        },
+        {
+          "type": "text",
+          "id": "unit_3",
+          "label": "Prix unitaire (texte)",
+          "default": "0,42€ / sachet"
+        },
+        {
+          "type": "text",
+          "id": "badge_3",
+          "label": "Badge",
+          "default": "La meilleure offre"
+        },
+        {
+          "type": "text",
+          "id": "pill_3",
+          "label": "Pastille de remise",
+          "info": "Laisser vide pour calculer automatiquement depuis le prix barré.",
+          "default": "-15%"
+        }
+      ]
+    },
+    {
+      "type": "variant_picker",
+      "name": "Sélecteur de variantes",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Affiche les options du produit (ex. coloris). Masqué si le bloc Offres est utilisé."
+        }
+      ]
+    },
+    {
+      "type": "price",
+      "name": "Prix",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Mention à côté du prix",
+          "default": "Livraison offerte · satisfait ou remboursé 30 jours"
+        }
+      ]
+    },
+    {
+      "type": "buy_buttons",
+      "name": "Bouton d'ajout au panier",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Texte du bouton",
+          "default": "Ajouter au panier"
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Couleur",
+          "options": [
+            {
+              "value": "section",
+              "label": "Réglage de la section"
+            },
+            {
+              "value": "red",
+              "label": "Rouge"
+            },
+            {
+              "value": "univers",
+              "label": "Couleur de l'univers"
+            },
+            {
+              "value": "dark",
+              "label": "Vert"
+            }
+          ],
+          "default": "section"
+        }
+      ]
+    },
+    {
+      "type": "marquee",
+      "name": "Bandeau défilant",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "items",
+          "label": "Messages (un par ligne)",
+          "default": "🚚 Livraison offerte dès 45 €\n🧡 Remboursé 30 jours\n🌿 Certifié AB\n🔒 Paiement sécurisé"
+        },
+        {
+          "type": "range",
+          "id": "duration",
+          "label": "Durée d'une boucle",
+          "min": 10,
+          "max": 60,
+          "step": 2,
+          "unit": "s",
+          "default": 26
+        }
+      ]
+    },
+    {
+      "type": "testimonial",
+      "name": "Avis parent",
+      "settings": [
+        {
+          "type": "text",
+          "id": "stars",
+          "label": "Étoiles",
+          "default": "★★★★★"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Citation",
+          "default": "« Le kit était le bon départ : ils ont goûté les trois, chacun a élu sa saveur. La bouteille part tous les jours à l'école. »"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Auteur",
+          "default": "Sofiane, papa de jumeaux · Achat vérifié"
+        },
+        {
+          "type": "select",
+          "id": "author_color",
+          "label": "Couleur de l'auteur",
+          "options": [
+            {
+              "value": "grey",
+              "label": "Gris"
+            },
+            {
+              "value": "univers",
+              "label": "Couleur de l'univers"
+            }
+          ],
+          "default": "grey"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_avatar",
+          "label": "Afficher l'avatar",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "avatar_mobile",
+          "label": "Afficher l'avatar sur mobile",
+          "default": true
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Avatar"
+        }
+      ]
+    },
+    {
+      "type": "upsell",
+      "name": "Produit complémentaire",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Produit"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Sur-titre",
+          "default": "Complétez le rituel"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Nom (remplace le titre du produit)",
+          "default": "Gourde infuseur Tisa’nours"
+        },
+        {
+          "type": "text",
+          "id": "price_text",
+          "label": "Prix (si aucun produit)",
+          "default": "24,90 €"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Texte",
+          "default": "Chaud et glacé, filtre amovible, 400 ml. C’est elle qui rend le rituel possible partout."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Texte du bouton",
+          "default": "Ajouter"
+        }
+      ]
+    },
+    {
+      "type": "accordion",
+      "name": "Question / accordéon",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Que contient exactement le kit ?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Réponse",
+          "default": "<p>Les 3 sachets de 80 g (Tropical Sunshine, Happy Adventure, Dream Forest), soit environ 90 infusions, une bouteille infuseur enfant compatible chaud et glacé, et le Petit Guide du Rituel illustré.</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "open",
+          "label": "Ouvert par défaut",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Texte",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texte",
+          "default": "<p>Texte libre</p>"
+        }
+      ]
+    },
+    {
+      "type": "custom_liquid",
+      "name": "Liquid personnalisé",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "custom_liquid",
+          "label": "Code Liquid"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

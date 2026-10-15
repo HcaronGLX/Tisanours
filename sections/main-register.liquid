@@ -1,0 +1,19 @@
+<div class="page-section">
+  <div class="page-section__inner" style="max-width: 560px;">
+    <h1 class="page-title">{{ 'customer.register.title' | t }}</h1>
+    <div class="card-box" style="margin-top: 24px;">
+      {%- form 'create_customer', class: 'form' -%}
+        {%- if form.errors -%}<div class="form__errors">{{ form.errors | default_errors }}</div>{%- endif -%}
+        <label class="field">{{ 'customer.fields.first_name' | t }}<input class="field__input" type="text" name="customer[first_name]" autocomplete="given-name"></label>
+        <label class="field">{{ 'customer.fields.last_name' | t }}<input class="field__input" type="text" name="customer[last_name]" autocomplete="family-name"></label>
+        <label class="field">{{ 'customer.fields.email' | t }}<input class="field__input" type="email" name="customer[email]" autocomplete="email" required></label>
+        <label class="field">{{ 'customer.fields.password' | t }}<input class="field__input" type="password" name="customer[password]" autocomplete="new-password" required></label>
+        <button class="btn btn--red" type="submit">{{ 'customer.register.submit' | t }}</button>
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Création de compte", "tag": "section", "class": "section-register", "settings": [] }
+{% endschema %}

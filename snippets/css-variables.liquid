@@ -1,0 +1,72 @@
+{%- comment -%}
+  Design tokens Tisa'nours, éditables depuis les réglages du thème.
+{%- endcomment -%}
+<style>
+  @font-face {
+    font-family: 'Archie';
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    src: local('Archie Regular'), local('Archie'){% if settings.font_archie_regular_url != blank %}, url('{{ settings.font_archie_regular_url }}'){% endif %};
+  }
+  @font-face {
+    font-family: 'Archie';
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+    src: local('Archie Bold'), local('Archie-Bold'){% if settings.font_archie_bold_url != blank %}, url('{{ settings.font_archie_bold_url }}'){% endif %};
+  }
+
+  :root {
+    --font-heading: 'Archie', 'Baloo 2', 'Nunito', sans-serif;
+    --font-body: 'Archie', 'Nunito', system-ui, sans-serif;
+    --font-scale: {{ settings.body_scale | default: 100 | divided_by: 100.0 }};
+
+    --c-green: {{ settings.color_green }};
+    --c-green-2: {{ settings.color_green_2 }};
+    --c-green-shadow: {{ settings.color_green_shadow }};
+    --c-cream: {{ settings.color_cream }};
+    --c-white: {{ settings.color_white }};
+    --c-border: {{ settings.color_border }};
+    --c-border-2: {{ settings.color_border_2 }};
+    --c-yellow-soft: {{ settings.color_yellow_soft }};
+    --c-text: {{ settings.color_text }};
+    --c-text-2: {{ settings.color_text_2 }};
+    --c-text-3: {{ settings.color_text_3 }};
+    --c-on-dark: {{ settings.color_text_on_dark }};
+    --c-on-dark-2: {{ settings.color_text_on_dark_2 }};
+    --c-red: {{ settings.color_red }};
+    --c-red-dark: {{ settings.color_red_dark }};
+    --c-red-hover: {{ settings.color_red_hover }};
+    --c-yellow: {{ settings.color_yellow }};
+    --c-yellow-dark: {{ settings.color_yellow_dark }};
+    --c-stars: {{ settings.color_stars }};
+    --c-muted: #8A7F6B;
+    --c-sep: #C9BFA9;
+    --c-sand-1: #F3E3CB;
+    --c-sand-2: #EDDBC0;
+
+    {%- liquid
+      assign univers_list = 'kit,sunshine,adventure,forest,bottle' | split: ','
+    -%}
+    {%- for u in univers_list -%}
+      {%- assign k_main = 'u_' | append: u | append: '_main' -%}
+      {%- assign k_on = 'u_' | append: u | append: '_on' -%}
+      {%- assign k_shadow = 'u_' | append: u | append: '_shadow' -%}
+      {%- assign k_soft = 'u_' | append: u | append: '_soft' -%}
+      {%- assign k_ink = 'u_' | append: u | append: '_ink' -%}
+      {%- assign k_ph1 = 'u_' | append: u | append: '_ph1' -%}
+      {%- assign k_ph2 = 'u_' | append: u | append: '_ph2' -%}
+      --{{ u }}-main: {{ settings[k_main] }};
+      --{{ u }}-on: {{ settings[k_on] }};
+      --{{ u }}-shadow: {{ settings[k_shadow] }};
+      --{{ u }}-soft: {{ settings[k_soft] }};
+      --{{ u }}-ink: {{ settings[k_ink] }};
+      --{{ u }}-ph1: {{ settings[k_ph1] }};
+      --{{ u }}-ph2: {{ settings[k_ph2] }};
+    {%- endfor -%}
+
+    --header-h: 76px;
+    --announcement-h: 37px;
+  }
+</style>

@@ -1,0 +1,25 @@
+<div class="page-section">
+  <div class="page-section__inner" style="max-width: 1360px;">
+    <h1 class="page-title">{{ section.settings.heading }}</h1>
+    <div class="collection-grid">
+      {%- for c in collections -%}
+        {%- unless c.handle == 'frontpage' -%}
+          {%- assign c_text = c.description | strip_html | truncatewords: 22 -%}
+          {%- render 'flavor-card', univers: 'kit', title: c.title, text: c_text, image: c.featured_image, link: c.url, price_text: ' ', button_label: section.settings.button_label, heading_tag: 'h2' -%}
+        {%- endunless -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Liste des collections",
+  "tag": "section",
+  "class": "section-list-collections",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Nos collections" },
+    { "type": "text", "id": "button_label", "label": "Texte du bouton", "default": "Voir la collection" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,60 @@
+{%- assign ss = section.settings -%}
+<div class="pillars scheme-dark">
+  <div class="pillars__inner">
+    <div class="pillars__head">
+      {%- if ss.eyebrow != blank -%}<span class="eyebrow">{{ ss.eyebrow }}</span>{%- endif -%}
+      {%- if ss.heading != blank -%}<h2 class="pillars__title">{{ ss.heading }}</h2>{%- endif -%}
+    </div>
+    <div class="pillars__grid">
+      {%- for block in section.blocks -%}
+        <div class="pillar" {{ block.shopify_attributes }}>
+          <span class="emoji-pill" aria-hidden="true">
+            {%- if block.settings.icon_image != blank -%}
+              {{ block.settings.icon_image | image_url: width: 120 | image_tag: loading: 'lazy', alt: '' }}
+            {%- else -%}
+              {{ block.settings.icon }}
+            {%- endif -%}
+          </span>
+          <span class="pillar__body">
+            <span class="pillar__title">{{ block.settings.title }}</span>
+            <span class="pillar__line" aria-hidden="true"><span class="pillar__dot"></span></span>
+            <span class="pillar__text">{{ block.settings.text }}</span>
+          </span>
+        </div>
+      {%- endfor -%}
+    </div>
+    {%- if ss.note != blank -%}<p class="pillars__note">{{ ss.note }}</p>{%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Piliers (frise)",
+  "tag": "section",
+  "class": "section-pillars",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Notre socle" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titre", "default": "Nos quatre <em>piliers</em>" },
+    { "type": "textarea", "id": "note", "label": "Note de bas de section", "default": "En soutien : plaisir · gourmandise · famille · partage · découverte · simplicité · liberté de choix." }
+  ],
+  "blocks": [
+    { "type": "pillar", "name": "Pilier", "limit": 6, "settings": [
+      { "type": "text", "id": "icon", "label": "Icône (emoji)", "default": "🔁" },
+      { "type": "image_picker", "id": "icon_image", "label": "Icône (image)" },
+      { "type": "text", "id": "title", "label": "Titre", "default": "Rituel" },
+      { "type": "textarea", "id": "text", "label": "Texte", "default": "Des habitudes simples et agréables, qui reviennent d’elles-mêmes." }
+    ] }
+  ],
+  "presets": [
+    {
+      "name": "Piliers (frise)",
+      "blocks": [
+        { "type": "pillar" },
+        { "type": "pillar", "settings": { "icon": "🧒", "title": "Autonomie", "text": "L’enfant choisit et participe, à la mesure de son âge." } },
+        { "type": "pillar", "settings": { "icon": "🏡", "title": "Lifestyle", "text": "Maison, école, sorties, famille : le rituel suit le quotidien." } },
+        { "type": "pillar", "settings": { "icon": "🧡", "title": "Bien-être", "text": "Plaisir, simplicité et moments agréables, sans discours culpabilisant." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,76 @@
+/*
+ * Modèle Tisa'nours — éditable depuis l'éditeur de thème Shopify.
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "settings": {
+        "heading": "Oups, cette page s'est <em>évaporée</em>",
+        "button_label": "Découvrir le Kit Rituel",
+        "button_link": "shopify://products/kit-demarrage-rituel",
+        "button_2_label": "Retour à l'accueil"
+      }
+    },
+    "saveurs": {
+      "type": "featured-flavors",
+      "settings": {
+        "anchor": "",
+        "heading": "Nos 3 <em>infusions fruitées bio</em>",
+        "text": "Trois univers, trois goûts francs. Sachets de 80 g, soit environ 30 infusions · 14,90 € l'unité.",
+        "button_label": "",
+        "button_link": "shopify://products/kit-demarrage-rituel",
+        "background": "white",
+        "mobile_gradient": false,
+        "compact_mobile": true,
+        "hide_current": "mobile",
+        "show_scallop": false,
+        "scallop_color": "#FFF7EC"
+      },
+      "blocks": {
+        "product_1": {
+          "type": "product",
+          "settings": {
+            "product": "tropical-sunshine",
+            "univers": "sunshine",
+            "eyebrow": "Passion Mangue",
+            "title": "Tropical Sunshine",
+            "text": "Soleil, mangue juteuse et fruit de la passion. La saveur des grandes envies de vacances.",
+            "button_label": "Découvrir"
+          }
+        },
+        "product_2": {
+          "type": "product",
+          "settings": {
+            "product": "happy-adventure",
+            "univers": "adventure",
+            "eyebrow": "Pomme Fraise",
+            "title": "Happy Adventure",
+            "text": "Pomme croquante, fraise et une pointe de vanille. Le goût que tout le monde accepte du premier coup.",
+            "button_label": "Découvrir"
+          }
+        },
+        "product_3": {
+          "type": "product",
+          "settings": {
+            "product": "dream-forest",
+            "univers": "forest",
+            "eyebrow": "Fruits des Bois",
+            "title": "Dream Forest",
+            "text": "Framboise, fraise et bleuet. Une forêt douce, parfaite pour le moment calme du soir.",
+            "button_label": "Découvrir"
+          }
+        }
+      },
+      "block_order": [
+        "product_1",
+        "product_2",
+        "product_3"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "saveurs"
+  ]
+}

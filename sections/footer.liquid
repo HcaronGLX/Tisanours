@@ -1,0 +1,97 @@
+{%- assign ss = section.settings -%}
+<footer class="site-footer">
+  <div class="site-footer__grid">
+    <div class="site-footer__col site-footer__col--brand">
+      {%- if ss.logo != blank -%}
+        {{ ss.logo | image_url: width: 400 | image_tag: alt: shop.name, loading: 'lazy', style: 'width: 160px; height: auto;' }}
+      {%- else -%}
+        <div class="site-footer__brand-name">{{ ss.logo_text | default: shop.name }}</div>
+        {%- if ss.tagline != blank -%}<div class="site-footer__brand-tagline">{{ ss.tagline }}</div>{%- endif -%}
+      {%- endif -%}
+      {%- if ss.brand_text != blank -%}<p class="site-footer__brand-text">{{ ss.brand_text }}</p>{%- endif -%}
+    </div>
+
+    {%- if ss.menu_1 != blank -%}
+      <div class="site-footer__col site-footer__col--menu-1">
+        <h2 class="site-footer__title">{{ ss.menu_1_title | default: ss.menu_1.title }}</h2>
+        <ul class="site-footer__links">
+          {%- for link in ss.menu_1.links -%}
+            <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+
+    {%- if ss.menu_2 != blank -%}
+      <div class="site-footer__col site-footer__col--menu-2">
+        <h2 class="site-footer__title">{{ ss.menu_2_title | default: ss.menu_2.title }}</h2>
+        <ul class="site-footer__links">
+          {%- for link in ss.menu_2.links -%}
+            <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+
+    {%- if ss.show_newsletter -%}
+      <div class="site-footer__col site-footer__col--newsletter">
+        <h2 class="site-footer__title">{{ ss.newsletter_title }}</h2>
+        {%- if ss.newsletter_text != blank -%}<p class="site-footer__text">{{ ss.newsletter_text }}</p>{%- endif -%}
+        {%- form 'customer', id: 'FooterNewsletter', class: 'newsletter-form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          {%- if form.posted_successfully? -%}
+            <p class="newsletter__msg" role="status">{{ ss.newsletter_success }}</p>
+          {%- else -%}
+            <div class="newsletter">
+              <label class="visually-hidden" for="FooterNewsletter-email">{{ 'general.newsletter.email' | t }}</label>
+              <input class="newsletter__input" id="FooterNewsletter-email" type="email" name="contact[email]" placeholder="{{ ss.newsletter_placeholder }}" autocomplete="email" required>
+              <button class="newsletter__btn" type="submit">{{ ss.newsletter_button }}</button>
+            </div>
+            {%- if form.errors -%}<p class="newsletter__msg" role="alert">{{ form.errors | default_errors }}</p>{%- endif -%}
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="site-footer__bottom">
+    <span>{{ ss.copyright | default: shop.name }}</span>
+    {%- if settings.social_instagram_link != blank or settings.social_facebook_link != blank or settings.social_tiktok_link != blank -%}
+      <span class="site-footer__social">
+        {%- if settings.social_instagram_link != blank -%}<a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener">Instagram</a>{%- endif -%}
+        {%- if settings.social_facebook_link != blank -%}<a href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener">Facebook</a>{%- endif -%}
+        {%- if settings.social_tiktok_link != blank -%}<a href="{{ settings.social_tiktok_link }}" target="_blank" rel="noopener">TikTok</a>{%- endif -%}
+      </span>
+    {%- endif -%}
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "tag": "div",
+  "class": "section-footer",
+  "settings": [
+    { "type": "header", "content": "Marque" },
+    { "type": "image_picker", "id": "logo", "label": "Logo (image)" },
+    { "type": "text", "id": "logo_text", "label": "Logo texte", "default": "Tisa'nours" },
+    { "type": "text", "id": "tagline", "label": "Baseline", "default": "infuse ton monde" },
+    { "type": "textarea", "id": "brand_text", "label": "Phrase de marque", "default": "Infusions fruitées bio pour les enfants de 3 à 12 ans. L'alternative gourmande aux boissons sucrées, à savourer chaude ou glacée." },
+    { "type": "header", "content": "Menus" },
+    { "type": "link_list", "id": "menu_1", "label": "Menu 1" },
+    { "type": "text", "id": "menu_1_title", "label": "Titre du menu 1", "default": "En savoir plus" },
+    { "type": "link_list", "id": "menu_2", "label": "Menu 2" },
+    { "type": "text", "id": "menu_2_title", "label": "Titre du menu 2", "default": "Informations légales" },
+    { "type": "header", "content": "Newsletter" },
+    { "type": "checkbox", "id": "show_newsletter", "label": "Afficher la newsletter", "default": true },
+    { "type": "text", "id": "newsletter_title", "label": "Titre", "default": "Rejoignez le rituel" },
+    { "type": "textarea", "id": "newsletter_text", "label": "Texte", "default": "Des idées de rituels et de goûters, une fois par mois. Rien d'autre." },
+    { "type": "text", "id": "newsletter_placeholder", "label": "Placeholder", "default": "votre@email.fr" },
+    { "type": "text", "id": "newsletter_button", "label": "Texte du bouton", "default": "Envoyer" },
+    { "type": "text", "id": "newsletter_success", "label": "Message de confirmation", "default": "Merci, bienvenue dans le rituel !" },
+    { "type": "header", "content": "Bas de page" },
+    { "type": "text", "id": "copyright", "label": "Copyright", "default": "© 2026 Tisa'nours" }
+  ],
+  "enabled_on": { "groups": ["footer"] }
+}
+{% endschema %}
