@@ -189,7 +189,7 @@
       ]
     },
     "kit": {
-      "type": "featured-product",
+      "type": "product-highlight",
       "settings": {
         "product": "kit-demarrage-rituel",
         "univers": "kit",

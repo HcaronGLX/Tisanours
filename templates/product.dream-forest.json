@@ -72,7 +72,7 @@
         "offers_7": {
           "type": "offers",
           "settings": {
-            "default_offer": 2,
+            "default_offer": "2",
             "show_thumbs": true,
             "subtitle_1": "Cure 1 mois",
             "unit_1": "0,49€ / sachet",

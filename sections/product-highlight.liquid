@@ -283,11 +283,11 @@
           "options": [
             {
               "value": "switcher",
-              "label": "Sélecteur de saveur (met en avant la saveur affichée)"
+              "label": "Sélecteur (saveur affichée mise en avant)"
             },
             {
               "value": "display",
-              "label": "Présentation (toutes bordées, ex. contenu du Kit)"
+              "label": "Présentation (toutes bordées, ex. Kit)"
             }
           ],
           "default": "switcher"
@@ -469,13 +469,24 @@
           "content": "Chaque offre correspond à une variante du produit (variante 1 = 1 sachet, etc.). Le prix et le prix barré viennent des variantes."
         },
         {
-          "type": "range",
+          "type": "select",
           "id": "default_offer",
           "label": "Offre présélectionnée",
-          "min": 1,
-          "max": 3,
-          "step": 1,
-          "default": 2
+          "options": [
+            {
+              "value": "1",
+              "label": "Offre 1"
+            },
+            {
+              "value": "2",
+              "label": "Offre 2"
+            },
+            {
+              "value": "3",
+              "label": "Offre 3"
+            }
+          ],
+          "default": "2"
         },
         {
           "type": "checkbox",
