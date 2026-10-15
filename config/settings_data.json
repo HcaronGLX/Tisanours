@@ -1,12 +1,40 @@
 {
-  "current": "Default",
+  "current": {
+    "load_fallback_fonts": true,
+    "body_scale": 100,
+    "free_shipping_threshold": 45,
+    "cart_icon": "🧺",
+    "cart_drawer_enabled": true,
+    "social_instagram_link": "https://instagram.com/tisanours",
+    "sections": {
+      "cart-drawer": {
+        "type": "cart-drawer",
+        "settings": {
+          "title": "Mon panier",
+          "once_label": "Achat unique",
+          "empty_title": "Votre panier est vide",
+          "empty_text": "Commencez par le Kit Démarrage Rituel : les 3 saveurs, la gourde infuseur et le Petit Guide du Rituel.",
+          "empty_button_label": "Découvrir le Kit Rituel",
+          "empty_button_link": "shopify://products/kit-demarrage-rituel",
+          "upsell_product": "gourde-infuseur",
+          "upsell_exclude": ["kit-demarrage-rituel"],
+          "upsell_label": "Complétez le rituel",
+          "upsell_name": "Gourde infuseur",
+          "upsell_button": "Ajouter",
+          "shipping_remaining": "Plus que [montant] pour la livraison offerte",
+          "shipping_done": "Livraison offerte, c'est acquis !",
+          "checkout_label": "Passer commande",
+          "note": "Paiement sécurisé · Satisfait ou remboursé 30 jours"
+        }
+      }
+    }
+  },
   "presets": {
     "Default": {
       "load_fallback_fonts": true,
       "free_shipping_threshold": 45,
       "cart_icon": "🧺",
-      "cart_drawer_enabled": true,
-      "social_instagram_link": "https://instagram.com/tisanours"
+      "cart_drawer_enabled": true
     }
   }
 }
