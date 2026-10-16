@@ -1,7 +1,5 @@
 {
   "current": {
-    "load_fallback_fonts": true,
-    "body_scale": 100,
     "free_shipping_threshold": 45,
     "cart_drawer_enabled": true,
     "sections": {
@@ -15,7 +13,9 @@
           "empty_button_label": "Découvrir le Kit Rituel",
           "empty_button_link": "shopify://products/kit-demarrage-rituel",
           "upsell_product": "gourde-infuseur",
-          "upsell_exclude": ["kit-demarrage-rituel"],
+          "upsell_exclude": [
+            "kit-demarrage-rituel"
+          ],
           "upsell_label": "Complétez le rituel",
           "upsell_name": "Gourde infuseur",
           "upsell_button": "Ajouter",
@@ -25,13 +25,16 @@
           "note": "Paiement sécurisé · Satisfait ou remboursé 30 jours"
         }
       }
-    }
+    },
+    "type_heading_font": "fredoka_n6",
+    "type_body_font": "nunito_n4",
+    "body_font_size": 14,
+    "heading_scale": 100
   },
   "presets": {
     "Default": {
-      "load_fallback_fonts": true,
       "free_shipping_threshold": 45,
-        "cart_drawer_enabled": true
+      "cart_drawer_enabled": true
     }
   }
 }

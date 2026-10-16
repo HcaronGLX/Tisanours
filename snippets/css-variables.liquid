@@ -1,26 +1,50 @@
 {%- comment -%}
   Design tokens Tisa'nours, éditables depuis les réglages du thème.
 {%- endcomment -%}
+{%- liquid
+  assign heading_font = settings.type_heading_font
+  assign body_font = settings.type_body_font
+  assign body_bold = body_font | font_modify: 'weight', 'bold'
+  assign body_heavy = body_font | font_modify: 'weight', '800'
+  assign body_italic = body_font | font_modify: 'style', 'italic'
+  assign heading_weight = heading_font.weight | default: 700
+  if settings.font_archie_bold_url != blank
+    assign heading_weight = 700
+  endif
+-%}
 <style>
+  {{ heading_font | font_face: font_display: 'swap' }}
+  {{ body_font | font_face: font_display: 'swap' }}
+  {%- if body_bold %}{{ body_bold | font_face: font_display: 'swap' }}{% endif %}
+  {%- if body_heavy %}{{ body_heavy | font_face: font_display: 'swap' }}{% endif %}
+  {%- if body_italic %}{{ body_italic | font_face: font_display: 'swap' }}{% endif %}
+
+  {%- if settings.font_archie_regular_url != blank %}
   @font-face {
     font-family: 'Archie';
     font-weight: 400;
     font-style: normal;
     font-display: swap;
-    src: local('Archie Regular'), local('Archie'){% if settings.font_archie_regular_url != blank %}, url('{{ settings.font_archie_regular_url }}'){% endif %};
+    src: url('{{ settings.font_archie_regular_url }}') format('woff2');
   }
+  {%- endif %}
+  {%- if settings.font_archie_bold_url != blank %}
   @font-face {
     font-family: 'Archie';
     font-weight: 700;
     font-style: normal;
     font-display: swap;
-    src: local('Archie Bold'), local('Archie-Bold'){% if settings.font_archie_bold_url != blank %}, url('{{ settings.font_archie_bold_url }}'){% endif %};
+    src: url('{{ settings.font_archie_bold_url }}') format('woff2');
   }
+  {%- endif %}
 
   :root {
-    --font-heading: 'Archie', 'Baloo 2', 'Nunito', sans-serif;
-    --font-body: 'Archie', 'Nunito', system-ui, sans-serif;
-    --font-scale: {{ settings.body_scale | default: 100 | divided_by: 100.0 }};
+    --font-heading: {% if settings.font_archie_bold_url != blank %}'Archie', {% endif %}{{ heading_font.family }}, {{ heading_font.fallback_families }};
+    --font-heading-weight: {{ heading_weight }};
+    --font-body: {% if settings.font_archie_regular_url != blank %}'Archie', {% endif %}{{ body_font.family }}, {{ body_font.fallback_families }};
+    --font-body-weight: {{ body_font.weight | default: 400 }};
+    --fs-body: {{ settings.body_font_size | default: 14 }}px;
+    --heading-scale: {{ settings.heading_scale | default: 100 | divided_by: 100.0 }};
 
     --c-green: {{ settings.color_green }};
     --c-green-2: {{ settings.color_green_2 }};
