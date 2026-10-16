@@ -55,11 +55,17 @@
                 {%- if bs.note != blank -%}<p class="panel__small">{{ bs.note }}</p>{%- endif -%}
 
               {%- when 'nutrition' -%}
-                {%- assign rows = bs.rows | newline_to_br | split: '<br />' -%}
-                <div class="nutrition" role="table" aria-label="{{ bs.title | escape }}">
+                {%- liquid
+                  assign rows = bs.rows | newline_to_br | split: '<br />'
+                  assign two_cols = false
+                  if bs.col_1 == blank
+                    assign two_cols = true
+                  endif
+                -%}
+                <div class="nutrition{% if two_cols %} nutrition--2col{% endif %}" role="table" aria-label="{{ bs.title | escape }}">
                   <div class="nutrition__row nutrition__row--head" role="row">
                     <span role="columnheader">{{ bs.col_0 }}</span>
-                    <span role="columnheader">{{ bs.col_1 }}</span>
+                    {%- unless two_cols -%}<span role="columnheader">{{ bs.col_1 }}</span>{%- endunless -%}
                     <span role="columnheader">{{ bs.col_2 }}</span>
                   </div>
                   {%- comment -%} Desktop : les lignes « dont … » sont regroupées sous la ligne précédente {%- endcomment -%}
@@ -75,24 +81,43 @@
                     {%- assign next_row = rows[forloop.index] | strip -%}
                     {%- assign next_cells = next_row | split: '|' -%}
                     {%- assign next_label = next_cells[0] | strip -%}
-                    {%- assign next_first = next_label | split: ' ' | first | downcase -%}
+                    {%- liquid
+                      assign next_first = next_label | split: ' ' | first | downcase
+                      assign v1 = cells[1] | strip
+                      assign v2 = cells[2] | strip
+                      assign nv1 = next_cells[1] | strip
+                      assign nv2 = next_cells[2] | strip
+                      if two_cols and v2 == blank
+                        assign v2 = v1
+                      endif
+                      if two_cols and nv2 == blank
+                        assign nv2 = nv1
+                      endif
+                    -%}
                     <div class="nutrition__row desktop-only" role="row">
                       <span class="nutrition__label" role="cell">
                         {{- label -}}
                         {%- if next_first == 'dont' -%}<small>{{ next_label }}</small>{%- assign skip_next = true -%}{%- endif -%}
                       </span>
-                      <span class="nutrition__v1" role="cell">{{ cells[1] | strip }}{% if skip_next %}<br>{{ next_cells[1] | strip }}{% endif %}</span>
-                      <span class="nutrition__v2" role="cell">{{ cells[2] | strip }}{% if skip_next %}<br>{{ next_cells[2] | strip }}{% endif %}</span>
+                      {%- unless two_cols -%}<span class="nutrition__v1" role="cell">{{ v1 }}{% if skip_next and nv1 != blank %}<br>{{ nv1 }}{% endif %}</span>{%- endunless -%}
+                      <span class="nutrition__v2" role="cell">{{ v2 }}{% if skip_next and nv2 != blank %}<br>{{ nv2 }}{% endif %}</span>
                     </div>
                   {%- endfor -%}
                   {%- for row in rows -%}
                     {%- assign cells = row | strip | split: '|' -%}
                     {%- assign label = cells[0] | strip -%}
                     {%- if label == blank -%}{%- continue -%}{%- endif -%}
+                    {%- liquid
+                      assign v1 = cells[1] | strip
+                      assign v2 = cells[2] | strip
+                      if two_cols and v2 == blank
+                        assign v2 = v1
+                      endif
+                    -%}
                     <div class="nutrition__row mobile-only" role="row">
                       <span class="nutrition__label" role="cell">{{ label }}</span>
-                      <span class="nutrition__v1" role="cell">{{ cells[1] | strip }}</span>
-                      <span class="nutrition__v2" role="cell">{{ cells[2] | strip }}</span>
+                      {%- unless two_cols -%}<span class="nutrition__v1" role="cell">{{ v1 }}</span>{%- endunless -%}
+                      <span class="nutrition__v2" role="cell">{{ v2 }}</span>
                     </div>
                   {%- endfor -%}
                 </div>
@@ -107,6 +132,10 @@
       {%- when 'product_image' -%}
         <div class="pdetails__aside">
           {%- render 'media', image: aside_image, class: 'pdetails__image', sizes: '(min-width: 900px) 460px, 100vw' -%}
+        </div>
+      {%- when 'image' -%}
+        <div class="pdetails__aside pdetails__aside--plain">
+          {%- render 'media', image: aside_image, ph: 'beige', class: 'pdetails__image pdetails__image--plain', sizes: '(min-width: 900px) 50vw, 100vw' -%}
         </div>
       {%- when 'gallery' -%}
         <div class="pdetails__aside" style="align-self: stretch;">
@@ -148,11 +177,12 @@
       { "value": "cream", "label": "Crème" }, { "value": "white", "label": "Blanc" }
     ], "default": "cream" },
     { "type": "select", "id": "aside", "label": "Visuel à côté (desktop)", "options": [
+      { "value": "image", "label": "Image seule, sans cadre" },
       { "value": "product_image", "label": "Image du produit inclinée" },
       { "value": "gallery", "label": "Galerie collante (1 image + 3 produits)" },
       { "value": "none", "label": "Aucun" }
     ], "default": "product_image" },
-    { "type": "image_picker", "id": "image", "label": "Image", "info": "Par défaut : image du produit." },
+    { "type": "image_picker", "id": "image", "label": "Image", "info": "Par défaut : image du produit. Pour « Image seule, sans cadre », privilégiez un visuel détouré (PNG transparent)." },
     { "type": "product", "id": "gallery_product_1", "label": "Galerie : produit 1" },
     { "type": "product", "id": "gallery_product_2", "label": "Galerie : produit 2" },
     { "type": "product", "id": "gallery_product_3", "label": "Galerie : produit 3" }
@@ -194,9 +224,9 @@
       { "type": "text", "id": "title", "label": "Titre", "default": "Apports nutritionnels" },
       { "type": "checkbox", "id": "open", "label": "Ouvert par défaut", "default": true },
       { "type": "text", "id": "col_0", "label": "En-tête colonne 1", "default": "Pour" },
-      { "type": "text", "id": "col_1", "label": "En-tête colonne 2", "default": "1 tasse (200 ml)" },
+      { "type": "text", "id": "col_1", "label": "En-tête colonne 2", "info": "Laisser vide pour un tableau à 2 colonnes (libellé + valeur).", "default": "1 tasse (200 ml)" },
       { "type": "text", "id": "col_2", "label": "En-tête colonne 3", "default": "100 ml" },
-      { "type": "textarea", "id": "rows", "label": "Lignes", "info": "Une ligne par valeur : Libellé | valeur tasse | valeur 100 ml. Les lignes commençant par « dont » sont regroupées sous la précédente en desktop.", "default": "Énergie (kJ) | | \nÉnergie (kcal) | | \nMatières grasses | | \ndont acides gras saturés | | \nGlucides | | \ndont sucres | | \nProtéines | | \nSel | | " },
+      { "type": "textarea", "id": "rows", "label": "Lignes", "info": "Une ligne par valeur : Libellé | valeur colonne 2 | valeur colonne 3 (ou Libellé | valeur en mode 2 colonnes). Les lignes commençant par « dont » sont regroupées sous la précédente en desktop.", "default": "Énergie (kJ) | | \nÉnergie (kcal) | | \nMatières grasses | | \ndont acides gras saturés | | \nGlucides | | \ndont sucres | | \nProtéines | | \nSel | | " },
       { "type": "textarea", "id": "note", "label": "Mention", "default": "Valeurs nutritionnelles à compléter après analyse. Infusion sans sucre ajouté : les sucres présents sont ceux, naturels, des fruits." }
     ] }
   ],

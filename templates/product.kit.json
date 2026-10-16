@@ -1,21 +1,16 @@
 /*
- * Modèle Tisa'nours — éditable depuis l'éditeur de thème Shopify.
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
  */
 {
   "sections": {
     "main": {
       "type": "main-product",
-      "settings": {
-        "univers": "kit",
-        "background": "cream",
-        "bordered": false,
-        "button_style": "red",
-        "gallery_thumbs": 4,
-        "gallery_radius": 36,
-        "dashed_placeholders": false,
-        "show_sticky_atc": true,
-        "sticky_label": "Ajouter au panier"
-      },
       "blocks": {
         "badge_1": {
           "type": "badge",
@@ -139,19 +134,22 @@
         "accordion_11",
         "accordion_12",
         "accordion_13"
-      ]
+      ],
+      "settings": {
+        "univers": "kit",
+        "background": "cream",
+        "bordered": false,
+        "button_style": "red",
+        "gallery_thumbs": 4,
+        "show_empty_thumbs": false,
+        "gallery_radius": 36,
+        "dashed_placeholders": false,
+        "show_sticky_atc": true,
+        "sticky_label": "Ajouter au panier"
+      }
     },
     "details": {
       "type": "product-details",
-      "settings": {
-        "heading": "Ce que contient <em>le coffret</em>",
-        "univers": "kit",
-        "background": "cream",
-        "aside": "none",
-        "gallery_product_1": "tropical-sunshine",
-        "gallery_product_2": "happy-adventure",
-        "gallery_product_3": "dream-forest"
-      },
       "blocks": {
         "list_1": {
           "type": "list",
@@ -187,9 +185,9 @@
             "title": "Apports nutritionnels",
             "open": true,
             "col_0": "Pour",
-            "col_1": "1 tasse (200 ml)",
+            "col_1": "",
             "col_2": "100 ml",
-            "rows": "Énergie (kJ) | | \nÉnergie (kcal) | | \nMatières grasses | | \ndont acides gras saturés | | \nGlucides | | \ndont sucres | | \nProtéines | | \nSel | | ",
+            "rows": "Énergie (kJ) | 9 kJ\nÉnergie (kcal) | 2 kcal\nMatières grasses | < 0,1 g\ndont acides gras saturés |\nGlucides | < 0,1 g\ndont sucres |\nProtéines | < 0,1 g\nSel | < 0,1 g",
             "note": "Valeurs identiques pour les 3 infusions, à compléter après analyse. Sans sucre ajouté : les sucres présents sont ceux, naturels, des fruits."
           }
         }
@@ -198,7 +196,17 @@
         "list_1",
         "flavors_2",
         "nutrition_3"
-      ]
+      ],
+      "settings": {
+        "heading": "Ce que contient <em>le coffret</em>",
+        "univers": "kit",
+        "background": "cream",
+        "aside": "image",
+        "image": "shopify://shop_images/KitDemarrageRituel-2.png",
+        "gallery_product_1": "tropical-sunshine",
+        "gallery_product_2": "happy-adventure",
+        "gallery_product_3": "dream-forest"
+      }
     },
     "comparatif": {
       "type": "comparison",
@@ -219,18 +227,6 @@
     },
     "avis": {
       "type": "reviews",
-      "settings": {
-        "eyebrow": "Avis vérifiés",
-        "heading": "Ce qu'en disent <em>les familles</em>",
-        "text": "Des parents qui cherchaient une alternative aux boissons sucrées, et des enfants qui redemandent leur infusion.",
-        "summary_stars": "★★★★★",
-        "summary_rating": "4,9/5 sur 128 avis",
-        "summary_stat": "93 % des enfants réclament leur saveur",
-        "duration": 60,
-        "background": "white",
-        "show_scallop": false,
-        "scallop_color": "#FFF7EC"
-      },
       "blocks": {
         "review_1": {
           "type": "review",
@@ -289,23 +285,22 @@
         "review_3",
         "review_4",
         "review_5"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "Avis vérifiés",
+        "heading": "Ce qu'en disent <em>les familles</em>",
+        "text": "Des parents qui cherchaient une alternative aux boissons sucrées, et des enfants qui redemandent leur infusion.",
+        "summary_stars": "★★★★★",
+        "summary_rating": "4,9/5 sur 128 avis",
+        "summary_stat": "93 % des enfants réclament leur saveur",
+        "duration": 60,
+        "background": "white",
+        "show_scallop": false,
+        "scallop_color": "#fff7ec"
+      }
     },
     "saveurs": {
       "type": "featured-flavors",
-      "settings": {
-        "anchor": "",
-        "heading": "Nos 3 <em>infusions fruitées bio</em>",
-        "text": "Trois univers, trois goûts francs. Sachets de 80 g, soit environ 30 infusions · 14,90 € l'unité.",
-        "button_label": "",
-        "button_link": "shopify://products/kit-demarrage-rituel",
-        "background": "white",
-        "mobile_gradient": false,
-        "compact_mobile": true,
-        "hide_current": "mobile",
-        "show_scallop": true,
-        "scallop_color": "#FFF7EC"
-      },
       "blocks": {
         "product_1": {
           "type": "product",
@@ -315,6 +310,8 @@
             "eyebrow": "Passion Mangue",
             "title": "Tropical Sunshine",
             "text": "Soleil, mangue juteuse et fruit de la passion. La saveur des grandes envies de vacances.",
+            "price_text": "",
+            "link": "",
             "button_label": "Découvrir"
           }
         },
@@ -326,6 +323,8 @@
             "eyebrow": "Pomme Fraise",
             "title": "Happy Adventure",
             "text": "Pomme croquante, fraise et une pointe de vanille. Le goût que tout le monde accepte du premier coup.",
+            "price_text": "",
+            "link": "",
             "button_label": "Découvrir"
           }
         },
@@ -337,6 +336,8 @@
             "eyebrow": "Fruits des Bois",
             "title": "Dream Forest",
             "text": "Framboise, fraise et bleuet. Une forêt douce, parfaite pour le moment calme du soir.",
+            "price_text": "",
+            "link": "",
             "button_label": "Découvrir"
           }
         }
@@ -345,18 +346,23 @@
         "product_1",
         "product_2",
         "product_3"
-      ]
+      ],
+      "settings": {
+        "anchor": "",
+        "heading": "Nos 3 <em>infusions fruitées bio</em>",
+        "text": "Trois univers, trois goûts francs. Sachets de 80 g, soit environ 30 infusions · 14,90 € l'unité.",
+        "button_label": "",
+        "button_link": "shopify://products/kit-demarrage-rituel",
+        "background": "white",
+        "mobile_gradient": false,
+        "compact_mobile": true,
+        "hide_current": "mobile",
+        "show_scallop": true,
+        "scallop_color": "#fff7ec"
+      }
     },
     "faq": {
       "type": "faq-split",
-      "settings": {
-        "heading": "Les questions que se posent <em>les parents</em>",
-        "text": "Tout ce qu'il faut savoir avant de remplacer un jus ou un sirop par une infusion fruitée bio.",
-        "button_label": "Voir toute la FAQ",
-        "button_link": "shopify://pages/faq-contact",
-        "background": "cream",
-        "structured_data": false
-      },
       "blocks": {
         "question_1": {
           "type": "question",
@@ -432,7 +438,15 @@
         "question_6",
         "question_7",
         "question_8"
-      ]
+      ],
+      "settings": {
+        "heading": "Les questions que se posent <em>les parents</em>",
+        "text": "Tout ce qu'il faut savoir avant de remplacer un jus ou un sirop par une infusion fruitée bio.",
+        "button_label": "Voir toute la FAQ",
+        "button_link": "shopify://pages/faq-contact",
+        "background": "cream",
+        "structured_data": false
+      }
     }
   },
   "order": [
