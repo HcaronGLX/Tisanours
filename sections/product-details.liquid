@@ -10,7 +10,7 @@
   endif
   assign aside_image = ss.image | default: product.featured_image
 -%}
-<div class="pdetails u-{{ u }}{% if ss.aside == 'gallery' %} pdetails--stretch{% endif %}" style="--section-bg: {{ section_bg }};">
+<div class="pdetails u-{{ u }}{% if ss.aside == 'gallery' %} pdetails--stretch{% elsif ss.aside == 'none' %} pdetails--no-aside{% endif %}" style="--section-bg: {{ section_bg }};">
   <div class="pdetails__inner">
     {%- if ss.heading != blank -%}<h2 class="pdetails__title">{{ ss.heading }}</h2>{%- endif -%}
     <div class="pdetails__card">

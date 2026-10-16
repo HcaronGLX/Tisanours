@@ -1156,6 +1156,7 @@ button.gallery__thumb { background: none; cursor: pointer; }
   align-items: start;
 }
 .pdetails--stretch .pdetails__inner { align-items: stretch; }
+.pdetails--no-aside .pdetails__inner { grid-template-columns: minmax(0, 1fr); max-width: 980px; }
 .pdetails__title { display: none; }
 .pdetails__card { background: var(--c-white); border-radius: clamp(24px, 3vw, 40px); padding: clamp(24px, 3vw, 40px); display: grid; gap: 4px; align-content: start; }
 .panel { padding: 18px 0; border-top: 1px solid var(--c-border); }

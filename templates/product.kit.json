@@ -147,7 +147,7 @@
         "heading": "Ce que contient <em>le coffret</em>",
         "univers": "kit",
         "background": "cream",
-        "aside": "gallery",
+        "aside": "none",
         "gallery_product_1": "tropical-sunshine",
         "gallery_product_2": "happy-adventure",
         "gallery_product_3": "dream-forest"
