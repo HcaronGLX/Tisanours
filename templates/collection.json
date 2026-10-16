@@ -3,10 +3,23 @@
  */
 {
   "sections": {
+    "banner": {
+      "type": "collection-banner",
+      "settings": {
+        "overlay_opacity": 30,
+        "text_color": "light",
+        "height": "medium",
+        "badge": "",
+        "heading": "",
+        "text": "",
+        "use_description": true
+      }
+    },
     "main": {
       "type": "main-collection",
       "settings": {
-        "show_description": true,
+        "show_title": false,
+        "show_description": false,
         "show_sort": false,
         "products_per_page": 24,
         "button_label": "Découvrir"
@@ -29,6 +42,7 @@
     }
   },
   "order": [
+    "banner",
     "main",
     "cta_kit"
   ]

@@ -1,0 +1,56 @@
+{%- liquid
+  assign ss = section.settings
+  assign banner_image = ss.image | default: collection.image
+  assign mobile_image = ss.image_mobile | default: banner_image
+  assign heading = ss.heading
+  if heading == blank
+    assign heading = collection.title | default: page_title | escape
+  endif
+  assign text = ss.text
+  if text == blank and ss.use_description
+    assign text = collection.description
+  endif
+  assign overlay = ss.overlay_opacity | divided_by: 100.0
+-%}
+<div class="collection-banner collection-banner--{{ ss.height }} collection-banner--{{ ss.text_color }}{% if banner_image != blank %} collection-banner--has-image{% endif %}" style="--banner-overlay: {{ overlay }};">
+  {%- if banner_image != blank -%}
+    <div class="collection-banner__media{% if mobile_image != banner_image %} desktop-only{% endif %}">
+      {{- banner_image | image_url: width: 2400 | image_tag: widths: '750, 1100, 1500, 1800, 2400', sizes: '100vw', loading: 'eager', fetchpriority: 'high', alt: '' -}}
+    </div>
+    {%- if mobile_image != banner_image -%}
+      <div class="collection-banner__media mobile-only">
+        {{- mobile_image | image_url: width: 1100 | image_tag: widths: '450, 750, 1100', sizes: '100vw', loading: 'eager', alt: '' -}}
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+  <div class="collection-banner__inner">
+    {%- if ss.badge != blank -%}<span class="collection-banner__badge">{{ ss.badge }}</span>{%- endif -%}
+    <h1 class="collection-banner__title">{{ heading }}</h1>
+    {%- if text != blank -%}<div class="collection-banner__text rte">{{ text }}</div>{%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Bannière de collection",
+  "tag": "section",
+  "class": "section-collection-banner",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image de fond", "info": "Par défaut : image de la collection. Sans image, un fond coloré est affiché." },
+    { "type": "image_picker", "id": "image_mobile", "label": "Image de fond mobile" },
+    { "type": "range", "id": "overlay_opacity", "label": "Voile sombre sur l'image", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 30 },
+    { "type": "select", "id": "text_color", "label": "Couleur du texte sur image", "options": [
+      { "value": "light", "label": "Clair" }, { "value": "dark", "label": "Foncé" }
+    ], "default": "light" },
+    { "type": "select", "id": "height", "label": "Hauteur", "options": [
+      { "value": "small", "label": "Petite" }, { "value": "medium", "label": "Moyenne" }, { "value": "large", "label": "Grande" }
+    ], "default": "medium" },
+    { "type": "text", "id": "badge", "label": "Badge" },
+    { "type": "inline_richtext", "id": "heading", "label": "Titre (H1)", "info": "Laisser vide pour utiliser le titre de la collection." },
+    { "type": "richtext", "id": "text", "label": "Texte" },
+    { "type": "checkbox", "id": "use_description", "label": "Si le texte est vide, afficher la description de la collection", "default": true }
+  ],
+  "presets": [ { "name": "Bannière de collection" } ],
+  "enabled_on": { "templates": ["collection"] }
+}
+{% endschema %}

@@ -1,7 +1,9 @@
 {%- assign ss = section.settings -%}
-<div class="page-section">
+<div class="page-section{% unless ss.show_title or ss.show_description %} page-section--no-head{% endunless %}">
   <div class="page-section__inner" style="max-width: 1360px;">
-    <h1 class="page-title">{{ collection.title | escape }}</h1>
+    {%- if ss.show_title -%}
+      <h1 class="page-title">{{ collection.title | escape }}</h1>
+    {%- endif -%}
     {%- if collection.description != blank and ss.show_description -%}
       <div class="page-lead rte">{{ collection.description }}</div>
     {%- endif -%}
@@ -48,6 +50,7 @@
   "tag": "section",
   "class": "section-main-collection",
   "settings": [
+    { "type": "checkbox", "id": "show_title", "label": "Afficher le titre", "info": "À décocher si la page commence par une bannière de collection.", "default": true },
     { "type": "checkbox", "id": "show_description", "label": "Afficher la description", "default": true },
     { "type": "checkbox", "id": "show_sort", "label": "Afficher le tri", "default": false },
     { "type": "range", "id": "products_per_page", "label": "Produits par page", "min": 6, "max": 48, "step": 3, "default": 24 },
