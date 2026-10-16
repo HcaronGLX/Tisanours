@@ -11,7 +11,7 @@
   assign mobile_image = ss.image_mobile | default: ss.image_1
 -%}
 <div
-  class="benefits{% if ss.background == 'gradient' %} benefits--gradient{% endif %}{% if ss.media_style == 'sticky_gallery' %} benefits--sticky{% endif %}{% if ss.compact_heading %} benefits--compact{% endif %} benefits--media-{{ ss.media_position }}"
+  class="benefits{% if ss.background == 'gradient' %} benefits--gradient{% endif %}{% if ss.media_style == 'sticky_gallery' %} benefits--sticky{% endif %}{% if ss.compact_heading %} benefits--compact{% endif %}{% unless ss.media_shadow %} benefits--no-shadow{% endunless %} benefits--media-{{ ss.media_position }}"
   style="--section-bg: {{ section_bg }}; --card-bg: {{ card_bg }};"
 >
   <div class="benefits__inner">
@@ -101,6 +101,7 @@
       { "value": "single", "label": "Une image inclinée" },
       { "value": "sticky_gallery", "label": "Galerie collante (1 grande + 2 petites)" }
     ], "default": "stacked" },
+    { "type": "checkbox", "id": "media_shadow", "label": "Ombre sous les images", "default": true },
     { "type": "select", "id": "media_position", "label": "Position des images (desktop)", "options": [
       { "value": "left", "label": "À gauche" }, { "value": "right", "label": "À droite" }
     ], "default": "left" },

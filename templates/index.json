@@ -75,6 +75,7 @@
         "button_link": "shopify://products/kit-demarrage-rituel",
         "button_style": "yellow",
         "media_style": "single",
+        "media_shadow": false,
         "media_position": "left",
         "ph_1": "beige",
         "ph_2": "adventure-soft",
