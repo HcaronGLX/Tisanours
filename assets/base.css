@@ -1359,6 +1359,7 @@ button.gallery__thumb { background: none; cursor: pointer; }
 .bubble__chips { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 9px; }
 .bubble__chip { background: var(--c-white); border-radius: 999px; padding: 9px 15px; font-size: var(--fs-body); font-weight: 700; }
 .duo__media-mobile { display: none; }
+.duo--no-shadow .tilted-media, .duo--no-shadow .stack__item { box-shadow: none; }
 @media (max-width: 899px) {
   .duo__inner { display: grid; gap: 16px; padding: 38px 16px 42px; }
   .duo__media { display: none; }

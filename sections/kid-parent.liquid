@@ -2,13 +2,17 @@
   assign ss = section.settings
   assign mobile_image = ss.image_mobile | default: ss.image_1
 -%}
-<div class="duo">
+<div class="duo{% unless ss.media_shadow %} duo--no-shadow{% endunless %}">
   <div class="duo__inner">
     <div class="duo__media">
-      <div class="stack">
-        {%- render 'media', image: ss.image_1, ph: ss.ph_1, class: 'stack__item stack__item--1', sizes: '(min-width: 900px) 40vw, 100vw' -%}
-        {%- render 'media', image: ss.image_2, ph: ss.ph_2, class: 'stack__item stack__item--2', sizes: '(min-width: 900px) 36vw, 100vw' -%}
-      </div>
+      {%- if ss.media_style == 'single' -%}
+        {%- render 'media', image: ss.image_1, ph: ss.ph_1, class: 'tilted-media tilted-media--left', sizes: '(min-width: 900px) 50vw, 100vw' -%}
+      {%- else -%}
+        <div class="stack">
+          {%- render 'media', image: ss.image_1, ph: ss.ph_1, class: 'stack__item stack__item--1', sizes: '(min-width: 900px) 40vw, 100vw' -%}
+          {%- render 'media', image: ss.image_2, ph: ss.ph_2, class: 'stack__item stack__item--2', sizes: '(min-width: 900px) 36vw, 100vw' -%}
+        </div>
+      {%- endif -%}
     </div>
     <div class="duo__content">
       {%- if ss.heading != blank -%}<h2 class="duo__title">{{ ss.heading }}</h2>{%- endif -%}
@@ -41,11 +45,16 @@
   "class": "section-duo",
   "settings": [
     { "type": "inline_richtext", "id": "heading", "label": "Titre", "default": "Une boisson que l’enfant réclame, que <em>le parent approuve</em>" },
+    { "type": "header", "content": "Images" },
+    { "type": "select", "id": "media_style", "label": "Disposition des images", "options": [
+      { "value": "single", "label": "Une seule image" }, { "value": "stacked", "label": "Deux images superposées" }
+    ], "default": "single" },
+    { "type": "checkbox", "id": "media_shadow", "label": "Ombre sous les images", "default": false },
     { "type": "image_picker", "id": "image_1", "label": "Image 1" },
     { "type": "select", "id": "ph_1", "label": "Couleur si vide (image 1)", "options": [
       { "value": "beige", "label": "Beige" }, { "value": "adventure-soft", "label": "Rouge doux" }, { "value": "forest-soft", "label": "Violet doux" }, { "value": "sunshine-soft", "label": "Jaune doux" }, { "value": "bottle", "label": "Vert" }
     ], "default": "adventure-soft" },
-    { "type": "image_picker", "id": "image_2", "label": "Image 2" },
+    { "type": "image_picker", "id": "image_2", "label": "Image 2", "info": "Utilisée avec la disposition « Deux images superposées »." },
     { "type": "select", "id": "ph_2", "label": "Couleur si vide (image 2)", "options": [
       { "value": "beige", "label": "Beige" }, { "value": "adventure-soft", "label": "Rouge doux" }, { "value": "forest-soft", "label": "Violet doux" }, { "value": "sunshine-soft", "label": "Jaune doux" }, { "value": "bottle", "label": "Vert" }
     ], "default": "bottle" },

@@ -406,6 +406,8 @@
       "type": "kid-parent",
       "settings": {
         "heading": "Une boisson que l’enfant réclame, que <em>le parent approuve</em>",
+        "media_style": "single",
+        "media_shadow": false,
         "ph_1": "adventure-soft",
         "ph_2": "bottle"
       },
