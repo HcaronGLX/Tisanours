@@ -95,7 +95,7 @@
     "settings": [
       { "type": "checkbox", "id": "cart_drawer_enabled", "label": "Ouvrir le panier latéral à l'ajout", "default": true },
       { "type": "number", "id": "free_shipping_threshold", "label": "Seuil de livraison offerte (€)", "default": 45 },
-      { "type": "text", "id": "cart_icon", "label": "Icône du panier (emoji)", "default": "🧺" }
+      { "type": "text", "id": "cart_icon", "label": "Icône du panier (emoji)", "info": "Laisser vide pour afficher l'icône sac de la marque." }
     ]
   },
   {

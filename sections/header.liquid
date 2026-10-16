@@ -33,7 +33,11 @@
 
     <div class="header-actions">
       <a class="header-cart" href="{{ routes.cart_url }}" data-cart-open aria-label="{{ 'sections.header.cart' | t }}">
-        <span aria-hidden="true">{{ settings.cart_icon | default: '🧺' }}</span>
+        {%- if settings.cart_icon != blank -%}
+          <span aria-hidden="true">{{ settings.cart_icon }}</span>
+        {%- else -%}
+          {%- render 'icon-bag' -%}
+        {%- endif -%}
         <span class="cart-bubble" data-cart-bubble>{{ cart.item_count }}</span>
       </a>
     </div>

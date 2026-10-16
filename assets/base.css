@@ -434,29 +434,32 @@ h1 strong, h2 strong, h3 strong, .heading strong { color: var(--c-red); font-wei
 .header-actions { display: flex; gap: 10px; align-items: center; }
 .header-cart {
   position: relative;
-  width: 44px; height: 44px;
+  width: 46px; height: 46px;
   border-radius: 999px;
   background: var(--c-white);
-  border: 2px solid var(--c-border);
+  border: 3px solid #EADFCB;
+  color: var(--c-green);
   display: flex; align-items: center; justify-content: center;
   font-size: 18px;
   padding: 0;
   text-decoration: none;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, transform 0.2s ease;
 }
-.header-cart:hover { border-color: var(--c-green); }
+.header-cart:hover { border-color: var(--c-green); color: var(--c-green); }
+.header-cart .icon-bag { width: 25px; height: 25px; display: block; margin-top: -2px; }
 .cart-bubble {
   position: absolute;
-  top: -4px; right: -4px;
-  min-width: 20px; height: 20px;
+  top: -8px; right: -9px;
+  min-width: 24px; height: 24px;
   border-radius: 999px;
   background: var(--c-green);
   color: var(--c-cream);
-  font-size: 11px;
-  font-weight: 800;
+  font-family: var(--font-heading);
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1;
   display: flex; align-items: center; justify-content: center;
-  padding: 0 5px;
-  font-family: var(--font-body);
+  padding: 0 6px;
 }
 .burger {
   width: 42px; height: 42px;
@@ -502,8 +505,9 @@ h1 strong, h2 strong, h3 strong, .heading strong { color: var(--c-red); font-wei
   .site-logo { flex: 1; align-items: center; }
   .site-logo__name { font-size: 21px; }
   .site-logo__tagline { font-size: 8.5px; margin-top: 2px; }
-  .header-cart { width: 42px; height: 42px; border-radius: 13px; font-size: 17px; }
-  .cart-bubble { top: -5px; right: -5px; min-width: 19px; height: 19px; font-size: 10.5px; }
+  .header-cart { width: 42px; height: 42px; font-size: 17px; }
+  .header-cart .icon-bag { width: 22px; height: 22px; }
+  .cart-bubble { top: -7px; right: -8px; min-width: 22px; height: 22px; font-size: 12.5px; }
   .menu-open .mobile-menu { display: grid; }
 }
 
