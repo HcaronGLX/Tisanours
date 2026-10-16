@@ -1,0 +1,98 @@
+{%- comment -%}
+  Barre de paliers du panier (livraison offerte, cadeau…).
+  - blocks: blocs de la section (type « tier » : amount, label, short_label, icon)
+  - settings_block: réglages de la section (messages)
+  Sans bloc, le seuil « free_shipping_threshold » des paramètres du thème sert de palier unique.
+{%- endcomment -%}
+{%- liquid
+  assign ss = settings_block
+  assign total = cart.total_price
+  assign sep = '§§'
+  assign list = ''
+  for block in blocks
+    if block.type == 'tier' and block.settings.amount > 0
+      assign cents = block.settings.amount | times: 100 | round
+      assign entry = cents | append: '|' | append: block.settings.label | append: '|' | append: block.settings.short_label | append: '|' | append: block.settings.icon
+      assign list = list | append: entry | append: sep
+    endif
+  endfor
+  if list == blank
+    assign fallback = settings.free_shipping_threshold | default: 0 | times: 100 | round
+    if fallback > 0
+      assign list = fallback | append: '|' | append: ss.tiers_fallback_label | append: '||🚚' | append: sep
+    endif
+  endif
+  assign tiers = list | split: sep
+
+  assign max = 0
+  assign next_cents = 0
+  assign next_label = ''
+  assign reached_cents = 0
+  assign reached_label = ''
+  for tier in tiers
+    assign parts = tier | split: '|'
+    assign c = parts[0] | plus: 0
+    if c > max
+      assign max = c
+    endif
+    if c > total
+      if next_cents == 0 or c < next_cents
+        assign next_cents = c
+        assign next_label = parts[1]
+      endif
+    elsif c >= reached_cents
+      assign reached_cents = c
+      assign reached_label = parts[2] | default: parts[1]
+    endif
+  endfor
+
+  assign progress = 100
+  if max > 0 and total < max
+    assign progress = total | times: 100 | divided_by: max
+  endif
+-%}
+{%- if tiers.size > 0 and max > 0 -%}
+  {%- liquid
+    if next_cents > 0
+      assign remaining = next_cents | minus: total | money
+      if reached_cents > 0
+        assign message = ss.tiers_progress | replace: '[atteint]', reached_label
+      else
+        assign message = ss.tiers_remaining
+      endif
+      assign message = message | replace: '[montant]', remaining | replace: '[palier]', next_label
+    else
+      assign message = ss.tiers_done
+    endif
+  -%}
+  <div class="ship-bar{% if tiers.size > 1 %} ship-bar--tiers{% endif %}">
+    <span class="ship-bar__msg">{{ message }}</span>
+    <span class="ship-bar__track">
+      <span class="ship-bar__fill" style="width: {{ progress }}%;"></span>
+      {%- if tiers.size > 1 -%}
+        {%- for tier in tiers -%}
+          {%- liquid
+            assign parts = tier | split: '|'
+            assign c = parts[0] | plus: 0
+            assign pos = c | times: 100 | divided_by: max
+          -%}
+          <span class="ship-bar__mark{% if total >= c %} is-reached{% endif %}" style="--pos: {{ pos }}%;" aria-hidden="true">{{ parts[3] | default: '•' }}</span>
+        {%- endfor -%}
+      {%- endif -%}
+    </span>
+    {%- if tiers.size > 1 and ss.tiers_show_steps -%}
+      <ul class="ship-bar__steps">
+        {%- for tier in tiers -%}
+          {%- liquid
+            assign parts = tier | split: '|'
+            assign c = parts[0] | plus: 0
+          -%}
+          <li class="ship-bar__step{% if total >= c %} is-reached{% endif %}">
+            <span class="ship-bar__step-name">{% if total >= c %}✓ {% endif %}{{ parts[2] | default: parts[1] }}</span>
+            <span class="ship-bar__step-amount">{{ c | money_without_trailing_zeros }}</span>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+{%- endif -%}
