@@ -7,7 +7,7 @@
       "type": "main-collection",
       "settings": {
         "show_description": true,
-        "show_sort": true,
+        "show_sort": false,
         "products_per_page": 24,
         "button_label": "Découvrir"
       }
