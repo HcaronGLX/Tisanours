@@ -453,16 +453,154 @@
         "default": true
       },
       {
-        "type": "number",
-        "id": "free_shipping_threshold",
-        "label": "Seuil de livraison offerte (€)",
-        "default": 45
-      },
-      {
         "type": "text",
         "id": "cart_icon",
         "label": "Icône du panier (emoji)",
         "info": "Laisser vide pour afficher l'icône sac de la marque."
+      },
+      {
+        "type": "header",
+        "content": "Paliers à débloquer"
+      },
+      {
+        "type": "paragraph",
+        "content": "Jusqu'à 4 paliers affichés dans le panier latéral et la page panier. Un palier sans montant est masqué. La barre ne fait qu'afficher : l'avantage lui-même se configure dans Shopify (Expédition pour la livraison offerte, Remises pour un cadeau ou une réduction)."
+      },
+      {
+        "type": "header",
+        "content": "Palier 1"
+      },
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Montant du panier (€)",
+        "default": 45
+      },
+      {
+        "type": "text",
+        "id": "tier_1_label",
+        "label": "Avantage (dans le message)",
+        "info": "Ex. « la livraison offerte », « un cadeau surprise ».",
+        "default": "la livraison offerte"
+      },
+      {
+        "type": "text",
+        "id": "tier_1_short",
+        "label": "Nom court (sous la barre)",
+        "default": "Livraison offerte"
+      },
+      {
+        "type": "text",
+        "id": "tier_1_icon",
+        "label": "Icône (emoji)",
+        "default": "🚚"
+      },
+      {
+        "type": "header",
+        "content": "Palier 2"
+      },
+      {
+        "type": "number",
+        "id": "tier_2_amount",
+        "label": "Montant du panier (€)",
+        "info": "Laisser vide pour masquer ce palier."
+      },
+      {
+        "type": "text",
+        "id": "tier_2_label",
+        "label": "Avantage (dans le message)",
+        "info": "Ex. « la livraison offerte », « un cadeau surprise »."
+      },
+      {
+        "type": "text",
+        "id": "tier_2_short",
+        "label": "Nom court (sous la barre)"
+      },
+      {
+        "type": "text",
+        "id": "tier_2_icon",
+        "label": "Icône (emoji)"
+      },
+      {
+        "type": "header",
+        "content": "Palier 3"
+      },
+      {
+        "type": "number",
+        "id": "tier_3_amount",
+        "label": "Montant du panier (€)"
+      },
+      {
+        "type": "text",
+        "id": "tier_3_label",
+        "label": "Avantage (dans le message)",
+        "info": "Ex. « la livraison offerte », « un cadeau surprise »."
+      },
+      {
+        "type": "text",
+        "id": "tier_3_short",
+        "label": "Nom court (sous la barre)"
+      },
+      {
+        "type": "text",
+        "id": "tier_3_icon",
+        "label": "Icône (emoji)"
+      },
+      {
+        "type": "header",
+        "content": "Palier 4"
+      },
+      {
+        "type": "number",
+        "id": "tier_4_amount",
+        "label": "Montant du panier (€)"
+      },
+      {
+        "type": "text",
+        "id": "tier_4_label",
+        "label": "Avantage (dans le message)",
+        "info": "Ex. « la livraison offerte », « un cadeau surprise »."
+      },
+      {
+        "type": "text",
+        "id": "tier_4_short",
+        "label": "Nom court (sous la barre)"
+      },
+      {
+        "type": "text",
+        "id": "tier_4_icon",
+        "label": "Icône (emoji)"
+      },
+      {
+        "type": "header",
+        "content": "Messages des paliers"
+      },
+      {
+        "type": "text",
+        "id": "tiers_remaining",
+        "label": "Avant le premier palier",
+        "info": "[montant] : somme restante, [palier] : avantage suivant.",
+        "default": "Plus que [montant] pour [palier]"
+      },
+      {
+        "type": "text",
+        "id": "tiers_progress",
+        "label": "Entre deux paliers",
+        "info": "[atteint] : dernier avantage débloqué (nom court).",
+        "default": "✓ [atteint] · Plus que [montant] pour [palier]"
+      },
+      {
+        "type": "text",
+        "id": "tiers_done",
+        "label": "Tous les paliers atteints",
+        "default": "Livraison offerte, c'est acquis !"
+      },
+      {
+        "type": "checkbox",
+        "id": "tiers_show_steps",
+        "label": "Afficher la liste des paliers sous la barre",
+        "info": "À partir de 2 paliers.",
+        "default": true
       }
     ]
   },

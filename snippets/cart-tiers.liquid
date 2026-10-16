@@ -1,27 +1,27 @@
 {%- comment -%}
-  Barre de paliers du panier (livraison offerte, cadeau…).
-  - blocks: blocs de la section (type « tier » : amount, label, short_label, icon)
-  - settings_block: réglages de la section (messages)
-  Sans bloc, le seuil « free_shipping_threshold » des paramètres du thème sert de palier unique.
+  Barre des paliers à débloquer (livraison offerte, cadeau…), réglée dans Paramètres du thème > Panier.
+  Utilisée par le panier latéral et la page panier.
 {%- endcomment -%}
 {%- liquid
-  assign ss = settings_block
   assign total = cart.total_price
   assign sep = '§§'
   assign list = ''
-  for block in blocks
-    if block.type == 'tier' and block.settings.amount > 0
-      assign cents = block.settings.amount | times: 100 | round
-      assign entry = cents | append: '|' | append: block.settings.label | append: '|' | append: block.settings.short_label | append: '|' | append: block.settings.icon
+  for i in (1..4)
+    if i == 1
+      assign amount = settings.free_shipping_threshold
+    else
+      assign key = 'tier_' | append: i | append: '_amount'
+      assign amount = settings[key]
+    endif
+    if amount > 0
+      assign k_label = 'tier_' | append: i | append: '_label'
+      assign k_short = 'tier_' | append: i | append: '_short'
+      assign k_icon = 'tier_' | append: i | append: '_icon'
+      assign cents = amount | times: 100 | round
+      assign entry = cents | append: '|' | append: settings[k_label] | append: '|' | append: settings[k_short] | append: '|' | append: settings[k_icon]
       assign list = list | append: entry | append: sep
     endif
   endfor
-  if list == blank
-    assign fallback = settings.free_shipping_threshold | default: 0 | times: 100 | round
-    if fallback > 0
-      assign list = fallback | append: '|' | append: ss.tiers_fallback_label | append: '||🚚' | append: sep
-    endif
-  endif
   assign tiers = list | split: sep
 
   assign max = 0
@@ -38,7 +38,7 @@
     if c > total
       if next_cents == 0 or c < next_cents
         assign next_cents = c
-        assign next_label = parts[1]
+        assign next_label = parts[1] | default: parts[2]
       endif
     elsif c >= reached_cents
       assign reached_cents = c
@@ -51,18 +51,18 @@
     assign progress = total | times: 100 | divided_by: max
   endif
 -%}
-{%- if tiers.size > 0 and max > 0 -%}
+{%- if max > 0 -%}
   {%- liquid
     if next_cents > 0
       assign remaining = next_cents | minus: total | money
       if reached_cents > 0
-        assign message = ss.tiers_progress | replace: '[atteint]', reached_label
+        assign message = settings.tiers_progress | replace: '[atteint]', reached_label
       else
-        assign message = ss.tiers_remaining
+        assign message = settings.tiers_remaining
       endif
       assign message = message | replace: '[montant]', remaining | replace: '[palier]', next_label
     else
-      assign message = ss.tiers_done
+      assign message = settings.tiers_done
     endif
   -%}
   <div class="ship-bar{% if tiers.size > 1 %} ship-bar--tiers{% endif %}">
@@ -80,7 +80,7 @@
         {%- endfor -%}
       {%- endif -%}
     </span>
-    {%- if tiers.size > 1 and ss.tiers_show_steps -%}
+    {%- if tiers.size > 1 and settings.tiers_show_steps -%}
       <ul class="ship-bar__steps">
         {%- for tier in tiers -%}
           {%- liquid

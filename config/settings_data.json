@@ -20,33 +20,21 @@
           "upsell_name": "Gourde infuseur",
           "upsell_button": "Ajouter",
           "checkout_label": "Passer commande",
-          "note": "Paiement sécurisé · Satisfait ou remboursé 30 jours",
-          "tiers_remaining": "Plus que [montant] pour [palier]",
-          "tiers_progress": "✓ [atteint] · Plus que [montant] pour [palier]",
-          "tiers_done": "Livraison offerte, c'est acquis !",
-          "tiers_fallback_label": "la livraison offerte",
-          "tiers_show_steps": true
-        },
-        "blocks": {
-          "tier_shipping": {
-            "type": "tier",
-            "settings": {
-              "amount": 45,
-              "label": "la livraison offerte",
-              "short_label": "Livraison offerte",
-              "icon": "🚚"
-            }
-          }
-        },
-        "block_order": [
-          "tier_shipping"
-        ]
+          "note": "Paiement sécurisé · Satisfait ou remboursé 30 jours"
+        }
       }
     },
     "type_heading_font": "fredoka_n6",
     "type_body_font": "nunito_n4",
     "body_font_size": 14,
-    "heading_scale": 100
+    "heading_scale": 100,
+    "tier_1_label": "la livraison offerte",
+    "tier_1_short": "Livraison offerte",
+    "tier_1_icon": "🚚",
+    "tiers_remaining": "Plus que [montant] pour [palier]",
+    "tiers_progress": "✓ [atteint] · Plus que [montant] pour [palier]",
+    "tiers_done": "Livraison offerte, c'est acquis !",
+    "tiers_show_steps": true
   },
   "presets": {
     "Default": {

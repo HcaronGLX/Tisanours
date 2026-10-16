@@ -56,7 +56,7 @@
     </div>
 
     <div class="cart-drawer__foot">
-      {%- render 'cart-tiers', blocks: section.blocks, settings_block: ss -%}
+      {%- render 'cart-tiers' -%}
       <div class="cart-total">
         <span class="cart-total__label">{{ 'cart.total' | t }}</span>
         <span class="cart-total__value">{{ cart.total_price | money }}</span>
@@ -89,28 +89,10 @@
     { "type": "text", "id": "upsell_name", "label": "Nom affiché", "default": "Gourde infuseur" },
     { "type": "text", "id": "upsell_button", "label": "Texte du bouton", "default": "Ajouter" },
     { "type": "header", "content": "Paliers à débloquer" },
-    { "type": "paragraph", "content": "Ajoutez un bloc « Palier » par avantage (livraison offerte, cadeau…). Sans bloc, le seuil de livraison offerte des Paramètres du thème > Panier est utilisé. La barre affiche les paliers : l'avantage lui-même se configure dans Shopify (Expédition, Remises)." },
-    { "type": "text", "id": "tiers_remaining", "label": "Message avant un palier", "info": "[montant] : somme restante, [palier] : avantage suivant.", "default": "Plus que [montant] pour [palier]" },
-    { "type": "text", "id": "tiers_progress", "label": "Message entre deux paliers", "info": "[atteint] : dernier avantage débloqué, [montant] et [palier] : avantage suivant.", "default": "✓ [atteint] · Plus que [montant] pour [palier]" },
-    { "type": "text", "id": "tiers_done", "label": "Message tous paliers atteints", "default": "Livraison offerte, c'est acquis !" },
-    { "type": "text", "id": "tiers_fallback_label", "label": "Avantage du seuil par défaut", "info": "Utilisé s'il n'y a aucun bloc Palier.", "default": "la livraison offerte" },
-    { "type": "checkbox", "id": "tiers_show_steps", "label": "Afficher la liste des paliers sous la barre", "info": "Visible à partir de 2 paliers.", "default": true },
+    { "type": "paragraph", "content": "Les paliers et leurs messages se règlent dans Paramètres du thème > Panier." },
     { "type": "header", "content": "Validation" },
     { "type": "text", "id": "checkout_label", "label": "Texte du bouton", "default": "Passer commande" },
     { "type": "text", "id": "note", "label": "Mentions de réassurance", "default": "Paiement sécurisé · Satisfait ou remboursé 30 jours" }
-  ],
-  "blocks": [
-    {
-      "type": "tier",
-      "name": "Palier",
-      "limit": 5,
-      "settings": [
-        { "type": "number", "id": "amount", "label": "Montant du panier (€)", "default": 45 },
-        { "type": "text", "id": "label", "label": "Avantage (dans le message)", "info": "Ex. « la livraison offerte », « un cadeau surprise ».", "default": "la livraison offerte" },
-        { "type": "text", "id": "short_label", "label": "Nom court (sous la barre)", "default": "Livraison offerte" },
-        { "type": "text", "id": "icon", "label": "Icône (emoji)", "default": "🚚" }
-      ]
-    }
   ]
 }
 {% endschema %}
