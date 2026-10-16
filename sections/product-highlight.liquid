@@ -596,6 +596,29 @@
         {
           "type": "paragraph",
           "content": "Affiche les options du produit (ex. coloris). Masqué si le bloc Offres est utilisé."
+        },
+        {
+          "type": "select",
+          "id": "display",
+          "label": "Affichage",
+          "options": [
+            {
+              "value": "pills",
+              "label": "Boutons texte"
+            },
+            {
+              "value": "images",
+              "label": "Images"
+            }
+          ],
+          "default": "pills",
+          "info": "Images : image de l'échantillon de l'option, sinon image de la variante (Produits > variante > image)."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_label",
+          "label": "Afficher le nom sous l'image",
+          "default": true
         }
       ]
     },

@@ -259,6 +259,11 @@
     var picker = qs('[data-variant-picker]', section);
     if (picker && idInput) {
       picker.addEventListener('change', function () {
+        qsa('fieldset[data-option-index]', picker).forEach(function (fs) {
+          var current = qs('[data-option-current]', fs);
+          var checked = qs('input:checked', fs);
+          if (current && checked) current.textContent = checked.value;
+        });
         var selected = qsa('fieldset[data-option-index]', picker).map(function (fs) {
           var checked = qs('input:checked', fs);
           return checked ? checked.value : null;

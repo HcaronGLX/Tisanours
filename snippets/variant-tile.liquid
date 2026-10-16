@@ -1,0 +1,25 @@
+{%- comment -%}
+  Option de variante affichée en image.
+  - value: valeur d'option (product_option_value)
+  - selected: valeur sélectionnée de l'option
+  - input_name: nom du bouton radio
+  - show_label: affiche le nom sous l'image
+  Image : échantillon de l'option, sinon image de la variante, sinon couleur de l'échantillon ou motif.
+{%- endcomment -%}
+{%- liquid
+  assign tile_image = value.swatch.image | default: value.variant.featured_image
+  assign tile_color = value.swatch.color
+-%}
+<label class="variant-tile" title="{{ value | escape }}">
+  <input type="radio" name="{{ input_name }}" value="{{ value | escape }}"{% if selected == value %} checked{% endif %}>
+  <span class="variant-tile__box">
+    {%- if tile_image != blank -%}
+      <span class="variant-tile__media">{{ tile_image | image_url: width: 300 | image_tag: loading: 'lazy', sizes: '120px', widths: '120, 240, 300', alt: value }}</span>
+    {%- elsif tile_color -%}
+      <span class="variant-tile__media" style="background: {{ tile_color }};"></span>
+    {%- else -%}
+      <span class="variant-tile__media ph"></span>
+    {%- endif -%}
+    {%- if show_label -%}<span class="variant-tile__label">{{ value }}</span>{%- endif -%}
+  </span>
+</label>

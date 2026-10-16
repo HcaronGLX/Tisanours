@@ -1,0 +1,29 @@
+{%- comment -%}
+  Sélecteur d'options du produit, en boutons texte ou en images.
+  - product: produit
+  - block: bloc « Sélecteur de variantes » (réglages display, show_label)
+  - section_id: identifiant de la section
+{%- endcomment -%}
+<div class="variant-picker" data-variant-picker {{ block.shopify_attributes }}>
+  {%- for option in product.options_with_values -%}
+    <fieldset class="variant-picker__option" data-option-index="{{ forloop.index0 }}">
+      <legend class="variant-picker__legend">{{ option.name }}{% if block.settings.display == 'images' %} : <span class="variant-picker__current" data-option-current>{{ option.selected_value }}</span>{% endif %}</legend>
+      <div class="variant-picker__values{% if block.settings.display == 'images' %} variant-picker__values--images{% endif %}">
+        {%- for value in option.values -%}
+          {%- if block.settings.display == 'images' -%}
+            {%- assign input_name = section_id | append: '-option-' | append: option.position -%}
+            {%- render 'variant-tile', value: value, selected: option.selected_value, input_name: input_name, show_label: block.settings.show_label -%}
+          {%- else -%}
+            <label class="variant-pill">
+              <input type="radio" name="{{ section_id }}-option-{{ option.position }}" value="{{ value | escape }}"{% if option.selected_value == value %} checked{% endif %}>
+              <span>
+                {%- if value.swatch.color -%}<i class="variant-pill__swatch" style="background: {{ value.swatch.color }};"></i>{%- endif -%}
+                {{ value }}
+              </span>
+            </label>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </fieldset>
+  {%- endfor -%}
+</div>

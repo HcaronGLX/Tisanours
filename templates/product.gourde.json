@@ -51,7 +51,10 @@
         },
         "variant_picker_6": {
           "type": "variant_picker",
-          "settings": {}
+          "settings": {
+            "display": "images",
+            "show_label": true
+          }
         },
         "price_7": {
           "type": "price",

@@ -261,24 +261,7 @@
 
           {%- when 'variant_picker' -%}
             {%- unless product.has_only_default_variant or has_offers -%}
-              <div class="variant-picker" data-variant-picker {{ block.shopify_attributes }}>
-                {%- for option in product.options_with_values -%}
-                  <fieldset class="variant-picker__option" data-option-index="{{ forloop.index0 }}">
-                    <legend class="variant-picker__legend">{{ option.name }}</legend>
-                    <div class="variant-picker__values">
-                      {%- for value in option.values -%}
-                        <label class="variant-pill">
-                          <input type="radio" name="{{ section.id }}-option-{{ option.position }}" value="{{ value | escape }}"{% if option.selected_value == value %} checked{% endif %}>
-                          <span>
-                            {%- if value.swatch.color -%}<i class="variant-pill__swatch" style="background: {{ value.swatch.color }};"></i>{%- endif -%}
-                            {{ value }}
-                          </span>
-                        </label>
-                      {%- endfor -%}
-                    </div>
-                  </fieldset>
-                {%- endfor -%}
-              </div>
+              {%- render 'variant-picker', product: product, block: block, section_id: section.id -%}
             {%- endunless -%}
 
           {%- when 'price' -%}
