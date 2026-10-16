@@ -453,20 +453,30 @@ h1 strong, h2 strong, h3 strong, .heading strong { color: var(--c-red); font-wei
 }
 .header-cart:hover { border-color: var(--c-green); color: var(--c-green); }
 .cart-bubble[hidden] { display: none; }
-.header-cart .icon-bag { width: 25px; height: 25px; display: block; margin-top: -2px; }
+.header-cart .icon-bag { width: 25px; height: 25px; flex: 0 0 auto; display: block; margin-top: -2px; }
 .cart-bubble {
   position: absolute;
+  z-index: 2;
   top: -8px; right: -9px;
+  box-sizing: border-box;
   min-width: 24px; height: 24px;
   border-radius: 999px;
+  background: #22352A;
   background: var(--c-green);
+  color: #FFF7EC;
   color: var(--c-cream);
-  font-family: var(--font-heading);
+  -webkit-text-fill-color: currentColor;
+  font-family: var(--font-heading), sans-serif;
+  font-size: 13.5px;
   font-size: calc(13.5px * var(--heading-scale, 1));
+  font-weight: 700;
   font-weight: var(--font-heading-weight, 700);
   line-height: 1;
+  white-space: nowrap;
+  text-indent: 0;
   display: flex; align-items: center; justify-content: center;
   padding: 0 6px;
+  pointer-events: none;
 }
 .burger {
   width: 42px; height: 42px;

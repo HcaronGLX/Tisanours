@@ -81,21 +81,31 @@
     },
     render: function (sections) {
       var id = this.sectionId();
-      if (!sections || !id || !sections[id]) return;
+      if (!sections || !id || !sections[id]) { this.refreshCount(); return; }
       var doc = new DOMParser().parseFromString(sections[id], 'text/html');
       var fresh = qs('.cart-drawer__panel', doc);
       var panel = qs('.cart-drawer__panel', this.drawer());
       if (fresh && panel) panel.innerHTML = fresh.innerHTML;
       var count = fresh ? fresh.getAttribute('data-cart-count') : null;
-      if (count !== null) this.setCount(count);
+      if (count !== null && count !== '') this.setCount(count);
+      else this.refreshCount();
     },
     setCount: function (count) {
+      var n = parseInt(count, 10);
+      if (isNaN(n)) { this.refreshCount(); return; }
       var panel = qs('.cart-drawer__panel', this.drawer());
-      if (panel) panel.setAttribute('data-cart-count', count);
+      if (panel) panel.setAttribute('data-cart-count', n);
       qsa('[data-cart-bubble]').forEach(function (el) {
-        el.textContent = count;
-        el.hidden = parseInt(count, 10) === 0;
+        el.textContent = String(n);
+        el.hidden = n === 0;
       });
+    },
+    refreshCount: function () {
+      var self = this;
+      return fetch(routes.cart + '.js', { headers: { 'Accept': 'application/json' } })
+        .then(function (res) { return res.json(); })
+        .then(function (data) { if (data && typeof data.item_count === 'number') self.setCount(data.item_count); })
+        .catch(function () { /* compteur inchangé */ });
     },
     loading: function (state) {
       var d = this.drawer();
@@ -536,6 +546,8 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', measure);
     window.addEventListener('load', measure);
+    // Retour arrière (cache du navigateur) : resynchroniser le compteur du panier
+    window.addEventListener('pageshow', function (e) { if (e.persisted) Cart.refreshCount(); });
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
