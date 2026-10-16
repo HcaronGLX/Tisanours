@@ -431,6 +431,12 @@ h1 strong, h2 strong, h3 strong, .heading strong { color: var(--c-red); font-wei
   transform: rotate(-1.5deg);
 }
 .site-nav__link--highlight:hover, .site-nav__link--highlight[aria-current="page"] { background: #FFC13D; color: #fff; }
+@media (min-width: 900px) and (max-width: 1179px) {
+  .site-header__inner { gap: 14px; }
+  .site-nav { gap: 14px; }
+  .site-nav__link { font-size: calc(14.5px * var(--heading-scale, 1)); white-space: nowrap; }
+  .site-nav__link--highlight { padding: 8px 12px; }
+}
 .header-actions { display: flex; gap: 10px; align-items: center; }
 .header-cart {
   position: relative;
