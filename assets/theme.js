@@ -307,6 +307,224 @@
     qsa('[data-product]').forEach(initProduct);
   }
 
+  /* ---------- Composer mon pack ---------- */
+  function initPack(root) {
+    if (!root || root.hasAttribute('data-pack-ready')) return;
+    root.setAttribute('data-pack-ready', '');
+    var config = {};
+    try { config = JSON.parse(qs('[data-pack-config]', root).textContent); } catch (err) { config = {}; }
+    var tiers = (config.tiers || []).slice().sort(function (a, b) { return a.quantity - b.quantity; });
+    var max = parseInt(root.getAttribute('data-max'), 10) || 10;
+    var minSlots = parseInt(root.getAttribute('data-min-slots'), 10) || 6;
+    var storeKey = 'tisanours-pack-' + root.getAttribute('data-section-id');
+    var catalog = {};
+    var cards = qsa('[data-pack-card]', root);
+
+    cards.forEach(function (card) {
+      var data = {};
+      try { data = JSON.parse(qs('[data-pack-item]', card).textContent); } catch (err) { return; }
+      catalog[data.key] = data;
+    });
+
+    var pack = [];
+    try {
+      var saved = JSON.parse(window.sessionStorage.getItem(storeKey) || '[]');
+      pack = saved.filter(function (it) { return it && catalog[it.key]; }).slice(0, max);
+    } catch (err) { pack = []; }
+
+    function money(cents) { return formatMoney(Math.round(cents), config.moneyFormat); }
+    function plural(n) { return n > 1 ? config.units : config.unit; }
+    function save() { try { window.sessionStorage.setItem(storeKey, JSON.stringify(pack)); } catch (err) { /* stockage indisponible */ } }
+
+    function remaining(n) { return n === 1 ? 'qu’1 ' + config.unit : 'que ' + n + ' ' + plural(n); }
+
+    function currentTier(n) {
+      var found = null;
+      tiers.forEach(function (t) { if (n >= t.quantity) found = t; });
+      return found;
+    }
+
+    function message(n) {
+      var tier = currentTier(n);
+      var next = tiers.filter(function (t) { return t.quantity > n; })[0];
+      if (!tiers.length) return '';
+      if (!tier) {
+        var missing = next.quantity - n;
+        if (n === 0) return 'Ajoutez ' + next.quantity + ' ' + plural(next.quantity) + ' pour débloquer -' + next.percent + ' %';
+        return 'Plus ' + remaining(missing) + ' pour débloquer -' + next.percent + ' %';
+      }
+      if (!next) return '-' + tier.percent + ' % débloqué, la meilleure réduction';
+      var left = next.quantity - n;
+      return '-' + tier.percent + ' % débloqué · plus ' + remaining(left) + ' pour -' + next.percent + ' %';
+    }
+
+    function slotThumb(item) {
+      var data = catalog[item.key];
+      var el = document.createElement('div');
+      el.className = 'pack-slot__thumb u-' + data.univers + ((item.image || data.image) ? '' : ' ph ph--sm');
+      var src = item.image || data.image;
+      if (src) {
+        var img = document.createElement('img');
+        img.src = src;
+        img.alt = data.title + (item.label ? ' · ' + item.label : '');
+        img.loading = 'lazy';
+        el.appendChild(img);
+      }
+      return el;
+    }
+
+    function render() {
+      var nEligible = pack.filter(function (it) { return catalog[it.key].eligible; }).length;
+      var tier = currentTier(nEligible);
+      var pct = tier ? tier.percent : 0;
+      var old = 0;
+      var now = 0;
+      pack.forEach(function (it) {
+        var price = it.price;
+        old += price;
+        now += catalog[it.key].eligible ? price * (1 - pct / 100) : price;
+      });
+
+      qsa('[data-pack-tier]', root).forEach(function (el) {
+        var q = parseInt(el.getAttribute('data-pack-tier'), 10);
+        el.classList.toggle('is-active', !!tier && tier.quantity === q);
+        el.classList.toggle('is-reached', nEligible >= q && !(tier && tier.quantity === q));
+      });
+
+      cards.forEach(function (card) {
+        var key = card.getAttribute('data-key');
+        var count = pack.filter(function (it) { return it.key === key; }).length;
+        var badge = qs('[data-pack-count]', card);
+        if (badge) {
+          badge.hidden = count === 0;
+          badge.textContent = (config.inPack || '×[count]').replace('[count]', count);
+        }
+        var add = qs('[data-pack-add]', card);
+        if (add) add.disabled = pack.length >= max;
+      });
+
+      var slots = qs('[data-pack-slots]', root);
+      if (slots) {
+        slots.innerHTML = '';
+        var total = Math.max(minSlots, pack.length + (pack.length < max ? 1 : 0));
+        for (var i = 0; i < total; i++) {
+          var slot = document.createElement('div');
+          slot.className = 'pack-slot';
+          var item = pack[i];
+          if (item) {
+            slot.classList.add('is-filled', 'u-' + catalog[item.key].univers);
+            slot.appendChild(slotThumb(item));
+            var rm = document.createElement('button');
+            rm.type = 'button';
+            rm.className = 'pack-slot__remove';
+            rm.setAttribute('data-pack-remove', i);
+            rm.setAttribute('aria-label', (config.removeLabel || 'Retirer') + ' : ' + catalog[item.key].title);
+            rm.textContent = '✕';
+            slot.appendChild(rm);
+          } else {
+            slot.classList.add('is-empty');
+            slot.textContent = '+';
+          }
+          slots.appendChild(slot);
+        }
+      }
+
+      var msg = qs('[data-pack-msg]', root);
+      if (msg) msg.textContent = pack.length >= max ? config.fullLabel : message(nEligible);
+      var nowEl = qs('[data-pack-now]', root);
+      if (nowEl) nowEl.textContent = money(now);
+      var oldEl = qs('[data-pack-old]', root);
+      if (oldEl) oldEl.textContent = pct ? money(old) : '';
+      var saveEl = qs('[data-pack-save]', root);
+      if (saveEl) saveEl.textContent = pct ? (config.saveLabel || '-[percent] %').replace('[percent]', pct) : config.noDiscountLabel;
+      var submit = qs('[data-pack-submit]', root);
+      if (submit) submit.disabled = pack.length === 0;
+      save();
+    }
+
+    cards.forEach(function (card) {
+      var key = card.getAttribute('data-key');
+      var select = qs('[data-pack-variant]', card);
+      if (select) {
+        select.addEventListener('change', function () {
+          var opt = select.options[select.selectedIndex];
+          var priceEl = qs('[data-pack-card-price]', card);
+          if (priceEl) priceEl.textContent = money(parseInt(opt.getAttribute('data-price'), 10));
+        });
+      }
+      var add = qs('[data-pack-add]', card);
+      if (!add) return;
+      add.addEventListener('click', function () {
+        if (pack.length >= max) return;
+        var data = catalog[key];
+        var item = { key: key, variant: data.variant, price: data.price };
+        if (select) {
+          var opt = select.options[select.selectedIndex];
+          item.variant = parseInt(opt.value, 10);
+          item.price = parseInt(opt.getAttribute('data-price'), 10);
+          item.label = opt.textContent.trim();
+          if (opt.getAttribute('data-image')) item.image = opt.getAttribute('data-image');
+        }
+        pack.push(item);
+        render();
+      });
+    });
+
+    root.addEventListener('click', function (e) {
+      var rm = e.target.closest('[data-pack-remove]');
+      if (rm) {
+        pack.splice(parseInt(rm.getAttribute('data-pack-remove'), 10), 1);
+        render();
+        return;
+      }
+      var tab = e.target.closest('[data-pack-tab]');
+      if (tab) {
+        var group = tab.getAttribute('data-pack-tab');
+        qsa('[data-pack-tab]', root).forEach(function (t) {
+          var on = t === tab;
+          t.classList.toggle('is-active', on);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        cards.forEach(function (card) {
+          card.hidden = group !== 'all' && card.getAttribute('data-group') !== group;
+        });
+      }
+    });
+
+    var submit = qs('[data-pack-submit]', root);
+    if (submit) {
+      submit.addEventListener('click', function () {
+        if (!pack.length) return;
+        var byVariant = {};
+        var order = [];
+        pack.forEach(function (it) {
+          if (!byVariant[it.variant]) { byVariant[it.variant] = 0; order.push(it.variant); }
+          byVariant[it.variant] += 1;
+        });
+        var items = order.map(function (id) { return { id: parseInt(id, 10), quantity: byVariant[id] }; });
+        var error = qs('[data-pack-error]', root);
+        if (error) error.hidden = true;
+        submit.disabled = true;
+        Cart.add(items).then(function () {
+          pack = [];
+          render();
+        }).catch(function (err) {
+          submit.disabled = false;
+          if (error) {
+            error.textContent = (err && (err.description || err.message)) || strings.error || 'Erreur';
+            error.hidden = false;
+          }
+        });
+      });
+    }
+
+    render();
+  }
+
+  function initPacks(ctx) {
+    qsa('[data-pack]', ctx).forEach(initPack);
+  }
+
   /* ---------- Init ---------- */
   function init() {
     measure();
@@ -314,6 +532,7 @@
     initMenu();
     initCart();
     initProducts();
+    initPacks();
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', measure);
     window.addEventListener('load', measure);
@@ -326,6 +545,7 @@
   document.addEventListener('shopify:section:load', function (e) {
     measure();
     qsa('[data-product]', e.target).forEach(initProduct);
+    initPacks(e.target);
     if (e.target.querySelector('.site-header')) initMenu();
   });
   document.addEventListener('shopify:section:select', function (e) {

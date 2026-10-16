@@ -12,6 +12,7 @@ Thème Online Store 2.0 recréé à partir de la maquette desktop et mobile. Tou
 | `product.gourde` | Gourde infuseur |
 | `product` | Produit par défaut |
 | `page.a-propos`, `page.faq-contact`, `page.contact`, `page` | Pages |
+| `page.pack` | Je compose mon pack (section « Composer mon pack ») |
 | `collection`, `list-collections`, `search`, `cart`, `404`, `blog`, `article`, `password`, `gift_card`, `customers/*` | Modèles système |
 
 ## Données produit
@@ -27,3 +28,9 @@ Thème Online Store 2.0 recréé à partir de la maquette desktop et mobile. Tou
 - **Panier** : seuil de livraison offerte (45 € par défaut), ouverture du panier latéral à l'ajout.
 
 Dans les titres, le texte en *italique* est affiché « surligné » (bloc vert incliné) et le texte en **gras** en rouge.
+
+## Je compose mon pack
+
+- Page « Je compose mon pack » (modèle `page.pack`). Les paliers affichés (2 sachets -5 %, 3 sachets -15 %, 5 sachets -20 %) correspondent à trois réductions automatiques Shopify (*Remises* : « Pack Tisa'nours · … »), appliquées aux variantes « 1 sachet » des trois infusions. Si un palier change, modifier à la fois la réduction et le bloc « Palier de réduction » de la section.
+- Chaque produit du pack est un bloc « Produit » : « Compte pour la réduction » le range dans l'onglet des infusions, « Choix de la variante » affiche une liste (coloris de la gourde).
+

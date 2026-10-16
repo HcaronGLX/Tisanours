@@ -1,0 +1,120 @@
+/*
+ * Modèle Tisa'nours — éditable depuis l'éditeur de thème Shopify.
+ */
+{
+  "sections": {
+    "pack": {
+      "type": "pack-builder",
+      "settings": {
+        "show_intro": true,
+        "badge": "Pack sur-mesure",
+        "heading": "Je compose <em>mon pack</em>",
+        "text": "<p>Choisissez les infusions préférées de vos enfants, ajoutez la gourde si besoin, et composez un pack qui leur ressemble. Chacun peut y mettre sa saveur : c'est le début du rituel.</p><p>Plus il y a de sachets dans le pack, plus la réduction grimpe. Elle s'applique automatiquement sur les infusions bio ; la gourde infuseur peut rejoindre le pack, à son prix habituel.</p>",
+        "note": "Réduction appliquée sur les infusions uniquement. La gourde reste à 24,90 €.",
+        "products_heading": "Choisissez vos <em>produits</em>",
+        "show_tabs": true,
+        "tab_all": "Tout voir",
+        "tab_eligible": "Les infusions",
+        "tab_other": "La gourde",
+        "add_label": "Ajouter",
+        "max_items": 10,
+        "min_slots": 6,
+        "unit_singular": "sachet",
+        "unit_plural": "sachets",
+        "in_pack_label": "×[count] dans le pack",
+        "save_label": "Vous économisez [percent] %",
+        "no_discount_label": "Sans réduction",
+        "full_label": "Votre pack est complet",
+        "remove_label": "Retirer du pack",
+        "submit_label": "Ajouter au panier"
+      },
+      "blocks": {
+        "tier_1": {
+          "type": "tier",
+          "settings": {
+            "quantity": 2,
+            "percent": 5
+          }
+        },
+        "tier_2": {
+          "type": "tier",
+          "settings": {
+            "quantity": 3,
+            "percent": 15
+          }
+        },
+        "tier_3": {
+          "type": "tier",
+          "settings": {
+            "quantity": 5,
+            "percent": 20
+          }
+        },
+        "product_1": {
+          "type": "product",
+          "settings": {
+            "product": "tropical-sunshine",
+            "eligible": true,
+            "show_variants": false,
+            "univers": "sunshine",
+            "eyebrow": "Passion Mangue",
+            "title": "Tropical Sunshine",
+            "text": "Mangue juteuse et fruit de la passion : la saveur des envies de vacances.",
+            "price_suffix": "le sachet"
+          }
+        },
+        "product_2": {
+          "type": "product",
+          "settings": {
+            "product": "happy-adventure",
+            "eligible": true,
+            "show_variants": false,
+            "univers": "adventure",
+            "eyebrow": "Pomme Fraise",
+            "title": "Happy Adventure",
+            "text": "Pomme croquante, fraise et une pointe de vanille : adoptée au premier verre.",
+            "price_suffix": "le sachet"
+          }
+        },
+        "product_3": {
+          "type": "product",
+          "settings": {
+            "product": "dream-forest",
+            "eligible": true,
+            "show_variants": false,
+            "univers": "forest",
+            "eyebrow": "Fruits des Bois",
+            "title": "Dream Forest",
+            "text": "Framboise, fraise et bleuet : une forêt douce pour le moment calme du soir.",
+            "price_suffix": "le sachet"
+          }
+        },
+        "product_4": {
+          "type": "product",
+          "settings": {
+            "product": "gourde-infuseur",
+            "eligible": false,
+            "show_variants": true,
+            "univers": "bottle",
+            "eyebrow": "Hors réduction",
+            "title": "Gourde infuseur",
+            "text": "Filtre infuseur amovible, chaud ou glacé. Elle rejoint le pack à son prix habituel.",
+            "price_suffix": "· hors réduction"
+          }
+        }
+      },
+      "block_order": [
+        "tier_1",
+        "tier_2",
+        "tier_3",
+        "product_1",
+        "product_2",
+        "product_3",
+        "product_4"
+      ]
+    }
+  },
+  "order": [
+    "pack"
+  ]
+}
