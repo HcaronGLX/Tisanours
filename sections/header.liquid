@@ -38,7 +38,7 @@
         {%- else -%}
           {%- render 'icon-bag' -%}
         {%- endif -%}
-        <span class="cart-bubble" data-cart-bubble{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
+        <span class="cart-bubble" data-cart-bubble style="position: absolute; color: #FFF7EC; -webkit-text-fill-color: #FFF7EC;"{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
       </a>
     </div>
   </div>

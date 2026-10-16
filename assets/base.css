@@ -445,12 +445,13 @@ h1 strong, h2 strong, h3 strong, .heading strong { color: var(--c-red); font-wei
   background: var(--c-white);
   border: 3px solid #EADFCB;
   color: var(--c-green);
-  display: flex; align-items: center; justify-content: center;
+  display: grid; place-items: center;
   font-size: 18px;
   padding: 0;
   text-decoration: none;
   transition: border-color 0.2s ease, transform 0.2s ease;
 }
+.header-cart > :not(.cart-bubble) { grid-area: 1 / 1; }
 .header-cart:hover { border-color: var(--c-green); color: var(--c-green); }
 .cart-bubble[hidden] { display: none; }
 .header-cart .icon-bag { width: 25px; height: 25px; flex: 0 0 auto; display: block; margin-top: -2px; }
@@ -464,8 +465,7 @@ h1 strong, h2 strong, h3 strong, .heading strong { color: var(--c-red); font-wei
   background: #22352A;
   background: var(--c-green);
   color: #FFF7EC;
-  color: var(--c-cream);
-  -webkit-text-fill-color: currentColor;
+  -webkit-text-fill-color: #FFF7EC;
   font-family: var(--font-heading), sans-serif;
   font-size: 13.5px;
   font-size: calc(13.5px * var(--heading-scale, 1));
