@@ -446,6 +446,7 @@ h1 strong, h2 strong, h3 strong, .heading strong { color: var(--c-red); font-wei
   transition: border-color 0.2s ease, transform 0.2s ease;
 }
 .header-cart:hover { border-color: var(--c-green); color: var(--c-green); }
+.cart-bubble[hidden] { display: none; }
 .header-cart .icon-bag { width: 25px; height: 25px; display: block; margin-top: -2px; }
 .cart-bubble {
   position: absolute;

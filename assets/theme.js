@@ -92,7 +92,10 @@
     setCount: function (count) {
       var panel = qs('.cart-drawer__panel', this.drawer());
       if (panel) panel.setAttribute('data-cart-count', count);
-      qsa('[data-cart-bubble]').forEach(function (el) { el.textContent = count; });
+      qsa('[data-cart-bubble]').forEach(function (el) {
+        el.textContent = count;
+        el.hidden = parseInt(count, 10) === 0;
+      });
     },
     loading: function (state) {
       var d = this.drawer();
