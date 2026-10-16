@@ -82,17 +82,27 @@
           {%- endif -%}
         </div>
 
-        {%- if thumbs > 0 -%}
+        {%- liquid
+          assign real_thumbs = 0
+          if media_count > 1
+            assign real_thumbs = media_count
+            if real_thumbs > thumbs
+              assign real_thumbs = thumbs
+            endif
+          endif
+          assign missing = 0
+          if ss.show_empty_thumbs
+            assign missing = thumbs | minus: real_thumbs
+          endif
+        -%}
+        {%- if thumbs > 0 and real_thumbs > 0 or missing > 0 -%}
           <div class="gallery__thumbs gallery__thumbs--{{ thumbs }}">
-            {%- if media_count > 1 -%}
-              {%- for media in product.media limit: thumbs -%}
+            {%- if real_thumbs > 0 -%}
+              {%- for media in product.media limit: real_thumbs -%}
                 <button type="button" class="gallery__thumb{% if forloop.first %} is-active{% endif %}" data-gallery-thumb data-media-id="{{ media.id }}" aria-label="{{ 'products.product.media_label' | t: index: forloop.index }}">
                   {{- media.preview_image | image_url: width: 300 | image_tag: loading: 'lazy', alt: '' -}}
                 </button>
               {%- endfor -%}
-              {%- assign missing = thumbs | minus: media_count -%}
-            {%- else -%}
-              {%- assign missing = thumbs -%}
             {%- endif -%}
             {%- if missing > 0 -%}
               {%- for i in (1..missing) -%}

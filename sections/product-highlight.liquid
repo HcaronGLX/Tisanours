@@ -114,11 +114,18 @@
     {
       "type": "range",
       "id": "gallery_thumbs",
-      "label": "Nombre de vignettes",
+      "label": "Nombre maximum de vignettes",
       "min": 0,
       "max": 6,
       "step": 1,
-      "default": 4
+      "default": 4,
+      "info": "Seules les images ajoutées au produit sont affichées."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_empty_thumbs",
+      "label": "Compléter avec des vignettes vides",
+      "default": false
     },
     {
       "type": "range",
