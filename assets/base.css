@@ -1690,11 +1690,11 @@ textarea.field__input { resize: vertical; }
   .collection-banner__title { font-size: calc(30px * var(--heading-scale, 1)); }
   .collection-banner__text { font-size: var(--fs-body); }
 }
-.collection-grid { margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 22px; }
-.collection-grid .flavor-card { width: auto; }
+.collection-grid { margin-top: 32px; display: flex; flex-wrap: wrap; justify-content: center; gap: 22px; }
+.collection-grid .flavor-card { width: auto; flex: 0 1 340px; min-width: 280px; }
 @media (max-width: 899px) {
-  .collection-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 20px; }
-  .collection-grid .flavor-card { width: 100%; }
+  .collection-grid { gap: 16px; margin-top: 20px; }
+  .collection-grid .flavor-card { width: 100%; flex: 1 1 100%; min-width: 0; }
 }
 .collection-toolbar { margin-top: 18px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between; font-weight: 700; }
 .collection-toolbar select { border: 2px solid var(--c-border-2); border-radius: 14px; padding: 10px 14px; background: var(--c-white); font-weight: 700; }
