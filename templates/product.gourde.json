@@ -1,21 +1,16 @@
 /*
- * Modèle Tisa'nours — éditable depuis l'éditeur de thème Shopify.
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
  */
 {
   "sections": {
     "main": {
       "type": "main-product",
-      "settings": {
-        "univers": "bottle",
-        "background": "cream",
-        "bordered": false,
-        "button_style": "red",
-        "gallery_thumbs": 4,
-        "gallery_radius": 36,
-        "dashed_placeholders": false,
-        "show_sticky_atc": true,
-        "sticky_label": "Ajouter au panier"
-      },
       "blocks": {
         "badge_1": {
           "type": "badge",
@@ -117,27 +112,22 @@
         "testimonial_10",
         "accordion_11",
         "accordion_12"
-      ]
+      ],
+      "settings": {
+        "univers": "bottle",
+        "background": "cream",
+        "bordered": false,
+        "button_style": "red",
+        "gallery_thumbs": 4,
+        "show_empty_thumbs": false,
+        "gallery_radius": 36,
+        "dashed_placeholders": false,
+        "show_sticky_atc": true,
+        "sticky_label": "Ajouter au panier"
+      }
     },
     "pensee": {
       "type": "benefits",
-      "settings": {
-        "background": "white",
-        "card_bg": "cream",
-        "rating_text": "",
-        "heading": "Une gourde pensée pour <em>les enfants</em>",
-        "compact_heading": true,
-        "note": "Matériaux et contenance définitifs à confirmer avec le fournisseur retenu.",
-        "button_label": "",
-        "button_style": "yellow",
-        "media_style": "sticky_gallery",
-        "media_position": "right",
-        "ph_1": "bottle",
-        "ph_2": "sunshine",
-        "ph_3": "adventure",
-        "show_mobile_image": false,
-        "ph_mobile": "bottle"
-      },
       "blocks": {
         "benefit_1": {
           "type": "benefit",
@@ -177,7 +167,27 @@
         "benefit_2",
         "benefit_3",
         "benefit_4"
-      ]
+      ],
+      "settings": {
+        "background": "white",
+        "card_bg": "cream",
+        "rating_stars": "★★★★★",
+        "rating_text": "",
+        "heading": "Une gourde pensée pour <em>les enfants</em>",
+        "compact_heading": true,
+        "note": "Matériaux et contenance définitifs à confirmer avec le fournisseur retenu.",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "yellow",
+        "media_style": "sticky_gallery",
+        "media_shadow": true,
+        "media_position": "right",
+        "ph_1": "bottle",
+        "ph_2": "sunshine",
+        "ph_3": "adventure",
+        "show_mobile_image": false,
+        "ph_mobile": "bottle"
+      }
     },
     "cta_kit": {
       "type": "cta-banner",
@@ -191,23 +201,12 @@
         "button_1_style": "red",
         "button_1_tilt": true,
         "button_2_label": "",
+        "button_2_link": "",
         "button_2_style": "outline-transparent"
       }
     },
     "avis": {
       "type": "reviews",
-      "settings": {
-        "eyebrow": "Avis vérifiés",
-        "heading": "Ce qu'en disent <em>les familles</em>",
-        "text": "Des parents qui cherchaient une alternative aux boissons sucrées, et des enfants qui redemandent leur infusion.",
-        "summary_stars": "★★★★★",
-        "summary_rating": "4,9/5 sur 128 avis",
-        "summary_stat": "93 % des enfants réclament leur saveur",
-        "duration": 60,
-        "background": "white",
-        "show_scallop": false,
-        "scallop_color": "#FFF7EC"
-      },
       "blocks": {
         "review_1": {
           "type": "review",
@@ -266,74 +265,22 @@
         "review_3",
         "review_4",
         "review_5"
-      ]
-    },
-    "saveurs": {
-      "type": "featured-flavors",
+      ],
       "settings": {
-        "anchor": "",
-        "heading": "Nos 3 <em>infusions fruitées bio</em>",
-        "text": "Trois univers, trois goûts francs. Sachets de 80 g, soit environ 30 infusions · 14,90 € l'unité.",
-        "button_label": "",
-        "button_link": "shopify://products/kit-demarrage-rituel",
+        "eyebrow": "Avis vérifiés",
+        "heading": "Ce qu'en disent <em>les familles</em>",
+        "text": "Des parents qui cherchaient une alternative aux boissons sucrées, et des enfants qui redemandent leur infusion.",
+        "summary_stars": "★★★★★",
+        "summary_rating": "4,9/5 sur 128 avis",
+        "summary_stat": "93 % des enfants réclament leur saveur",
+        "duration": 60,
         "background": "white",
-        "mobile_gradient": false,
-        "compact_mobile": true,
-        "hide_current": "mobile",
-        "show_scallop": true,
-        "scallop_color": "#FFF7EC"
-      },
-      "blocks": {
-        "product_1": {
-          "type": "product",
-          "settings": {
-            "product": "tropical-sunshine",
-            "univers": "sunshine",
-            "eyebrow": "Passion Mangue",
-            "title": "Tropical Sunshine",
-            "text": "Soleil, mangue juteuse et fruit de la passion. La saveur des grandes envies de vacances.",
-            "button_label": "Découvrir"
-          }
-        },
-        "product_2": {
-          "type": "product",
-          "settings": {
-            "product": "happy-adventure",
-            "univers": "adventure",
-            "eyebrow": "Pomme Fraise",
-            "title": "Happy Adventure",
-            "text": "Pomme croquante, fraise et une pointe de vanille. Le goût que tout le monde accepte du premier coup.",
-            "button_label": "Découvrir"
-          }
-        },
-        "product_3": {
-          "type": "product",
-          "settings": {
-            "product": "dream-forest",
-            "univers": "forest",
-            "eyebrow": "Fruits des Bois",
-            "title": "Dream Forest",
-            "text": "Framboise, fraise et bleuet. Une forêt douce, parfaite pour le moment calme du soir.",
-            "button_label": "Découvrir"
-          }
-        }
-      },
-      "block_order": [
-        "product_1",
-        "product_2",
-        "product_3"
-      ]
+        "show_scallop": false,
+        "scallop_color": "#fff7ec"
+      }
     },
     "faq": {
       "type": "faq-split",
-      "settings": {
-        "heading": "Les questions que se posent <em>les parents</em>",
-        "text": "Tout ce qu'il faut savoir avant de remplacer un jus ou un sirop par une infusion fruitée bio.",
-        "button_label": "Voir toute la FAQ",
-        "button_link": "shopify://pages/faq-contact",
-        "background": "cream",
-        "structured_data": false
-      },
       "blocks": {
         "question_1": {
           "type": "question",
@@ -409,7 +356,77 @@
         "question_6",
         "question_7",
         "question_8"
-      ]
+      ],
+      "settings": {
+        "heading": "Les questions que se posent <em>les parents</em>",
+        "text": "Tout ce qu'il faut savoir avant de remplacer un jus ou un sirop par une infusion fruitée bio.",
+        "button_label": "Voir toute la FAQ",
+        "button_link": "shopify://pages/faq-contact",
+        "background": "cream",
+        "structured_data": false
+      }
+    },
+    "saveurs": {
+      "type": "featured-flavors",
+      "blocks": {
+        "product_1": {
+          "type": "product",
+          "settings": {
+            "product": "tropical-sunshine",
+            "univers": "sunshine",
+            "eyebrow": "Passion Mangue",
+            "title": "Tropical Sunshine",
+            "text": "Soleil, mangue juteuse et fruit de la passion. La saveur des grandes envies de vacances.",
+            "price_text": "",
+            "link": "",
+            "button_label": "Découvrir"
+          }
+        },
+        "product_2": {
+          "type": "product",
+          "settings": {
+            "product": "happy-adventure",
+            "univers": "adventure",
+            "eyebrow": "Pomme Fraise",
+            "title": "Happy Adventure",
+            "text": "Pomme croquante, fraise et une pointe de vanille. Le goût que tout le monde accepte du premier coup.",
+            "price_text": "",
+            "link": "",
+            "button_label": "Découvrir"
+          }
+        },
+        "product_3": {
+          "type": "product",
+          "settings": {
+            "product": "dream-forest",
+            "univers": "forest",
+            "eyebrow": "Fruits des Bois",
+            "title": "Dream Forest",
+            "text": "Framboise, fraise et bleuet. Une forêt douce, parfaite pour le moment calme du soir.",
+            "price_text": "",
+            "link": "",
+            "button_label": "Découvrir"
+          }
+        }
+      },
+      "block_order": [
+        "product_1",
+        "product_2",
+        "product_3"
+      ],
+      "settings": {
+        "anchor": "",
+        "heading": "Nos 3 <em>infusions fruitées bio</em>",
+        "text": "Trois univers, trois goûts francs. Sachets de 80 g, soit environ 30 infusions · 14,90 € l'unité.",
+        "button_label": "",
+        "button_link": "shopify://products/kit-demarrage-rituel",
+        "background": "white",
+        "mobile_gradient": false,
+        "compact_mobile": true,
+        "hide_current": "mobile",
+        "show_scallop": true,
+        "scallop_color": "#fff7ec"
+      }
     }
   },
   "order": [
@@ -417,7 +434,7 @@
     "pensee",
     "cta_kit",
     "avis",
-    "saveurs",
-    "faq"
+    "faq",
+    "saveurs"
   ]
 }
