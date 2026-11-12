@@ -1,21 +1,16 @@
 /*
- * Modèle Tisa'nours — éditable depuis l'éditeur de thème Shopify.
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
  */
 {
   "sections": {
     "main": {
       "type": "main-product",
-      "settings": {
-        "univers": "adventure",
-        "background": "gradient",
-        "bordered": false,
-        "button_style": "univers",
-        "gallery_thumbs": 3,
-        "gallery_radius": 30,
-        "dashed_placeholders": true,
-        "show_sticky_atc": true,
-        "sticky_label": "Ajouter au panier"
-      },
       "blocks": {
         "badge_1": {
           "type": "badge",
@@ -24,15 +19,21 @@
             "style": "univers"
           }
         },
-        "title_2": {
-          "type": "title",
-          "settings": {}
-        },
         "rating_3": {
           "type": "rating",
           "settings": {
             "stars": "★★★★★",
             "text": "4,9/5 · 63 avis · ≈ 30 infusions par sachet"
+          }
+        },
+        "title_2": {
+          "type": "title",
+          "settings": {}
+        },
+        "price_fhwpxd": {
+          "type": "price",
+          "settings": {
+            "note": "Livraison offerte · satisfait ou remboursé 30 jours"
           }
         },
         "seo_4": {
@@ -45,7 +46,7 @@
           "type": "description",
           "settings": {
             "source": "custom",
-            "text": "<p>Pomme croquante, fraise mûre et une pointe de vanille. C'est la saveur d'entrée : celle que les enfants acceptent au premier verre, même ceux qui disaient ne pas aimer les infusions. Le remplacement le plus direct du sirop à l'eau.</p>",
+            "text": "{{ product.description }}",
             "size": "large"
           }
         },
@@ -71,6 +72,7 @@
         },
         "offers_7": {
           "type": "offers",
+          "disabled": true,
           "settings": {
             "default_offer": "2",
             "show_thumbs": true,
@@ -95,6 +97,19 @@
             "style": "section"
           }
         },
+        "image_link_jLwDNi": {
+          "type": "image_link",
+          "settings": {
+            "image": "shopify://shop_images/Banniere_gourmande_aux_textes_vert_fonce.png",
+            "alt": "",
+            "link": "shopify://pages/compose-ton-pack",
+            "new_tab": false,
+            "hover_zoom": true,
+            "radius": 20,
+            "margin_top": 16,
+            "margin_bottom": 16
+          }
+        },
         "marquee_9": {
           "type": "marquee",
           "settings": {
@@ -110,7 +125,8 @@
             "author": "Thomas, papa d'un garçon de 6 ans · Achat vérifié",
             "author_color": "univers",
             "show_avatar": true,
-            "avatar_mobile": false
+            "avatar_mobile": false,
+            "avatar": "shopify://shop_images/pok.png"
           }
         },
         "upsell_11": {
@@ -121,7 +137,9 @@
             "name": "Gourde infuseur Tisa’nours",
             "price_text": "24,90 €",
             "text": "Chaud et glacé, filtre amovible, 400 ml. C’est elle qui rend le rituel possible partout.",
-            "button_label": "Ajouter"
+            "button_label": "Ajouter",
+            "show_variant_picker": true,
+            "variant_label": ""
           }
         },
         "accordion_12": {
@@ -143,28 +161,36 @@
       },
       "block_order": [
         "badge_1",
-        "title_2",
         "rating_3",
+        "title_2",
+        "price_fhwpxd",
         "seo_4",
         "description_5",
         "flavors_6",
         "offers_7",
         "buy_buttons_8",
+        "image_link_jLwDNi",
         "marquee_9",
         "testimonial_10",
         "upsell_11",
         "accordion_12",
         "accordion_13"
-      ]
+      ],
+      "settings": {
+        "univers": "adventure",
+        "background": "gradient",
+        "bordered": false,
+        "button_style": "univers",
+        "gallery_thumbs": 4,
+        "show_empty_thumbs": false,
+        "gallery_radius": 30,
+        "dashed_placeholders": true,
+        "show_sticky_atc": true,
+        "sticky_label": "Ajouter au panier"
+      }
     },
     "details": {
       "type": "product-details",
-      "settings": {
-        "heading": "Ingrédients &amp; <em>nutrition</em>",
-        "univers": "adventure",
-        "background": "cream",
-        "aside": "product_image"
-      },
       "blocks": {
         "text_1": {
           "type": "text",
@@ -182,9 +208,9 @@
             "title": "Apports nutritionnels",
             "open": true,
             "col_0": "Pour",
-            "col_1": "1 tasse (200 ml)",
+            "col_1": "",
             "col_2": "100 ml",
-            "rows": "Énergie (kJ) | | \nÉnergie (kcal) | | \nMatières grasses | | \ndont acides gras saturés | | \nGlucides | | \ndont sucres | | \nProtéines | | \nSel | | ",
+            "rows": "Énergie (kJ) | 9 kJ\nÉnergie (kcal) | 2 kcal\nMatières grasses | < 0,1 g\ndont acides gras saturés |\nGlucides | < 0,1 g\ndont sucres |\nProtéines | < 0,1 g\nSel | < 0,1 g",
             "note": "Valeurs nutritionnelles à compléter après analyse. Infusion sans sucre ajouté : les sucres présents sont ceux, naturels, des fruits."
           }
         }
@@ -192,7 +218,17 @@
       "block_order": [
         "text_1",
         "nutrition_2"
-      ]
+      ],
+      "settings": {
+        "heading": "Ingrédients & <em>nutrition</em>",
+        "univers": "adventure",
+        "background": "cream",
+        "aside": "product_image",
+        "image": "shopify://shop_images/Gradient_Shadow.png",
+        "gallery_product_1": "",
+        "gallery_product_2": "",
+        "gallery_product_3": ""
+      }
     },
     "comparatif": {
       "type": "comparison",
@@ -203,6 +239,7 @@
         "heading": "La différence est dans <em>le détail</em>",
         "highlight_mobile_only": true,
         "show_image": true,
+        "image": "shopify://shop_images/Group_11.png",
         "col_label": "Ce qui fait la différence",
         "col_brand": "Tisa’nours",
         "col_other": "Boisson\nsucrée",
@@ -215,6 +252,8 @@
       "type": "cta-banner",
       "settings": {
         "background": "hatched",
+        "image": "shopify://shop_images/Section_ac7bfb76-bf49-4102-b43c-5283a930027f.png",
+        "image_mobile": "shopify://shop_images/Section_22d186ca-37ca-4464-aa76-4b8df0140d59.png",
         "size": "compact",
         "heading": "Goûtez les 3 saveurs avec le <em>Kit Démarrage Rituel</em>",
         "text": "Les 3 infusions bio, la bouteille infuseur et le Petit Guide du Rituel. Satisfait ou remboursé 30 jours.",
@@ -223,23 +262,12 @@
         "button_1_style": "red",
         "button_1_tilt": true,
         "button_2_label": "",
+        "button_2_link": "",
         "button_2_style": "outline-transparent"
       }
     },
     "avis": {
       "type": "reviews",
-      "settings": {
-        "eyebrow": "Avis vérifiés",
-        "heading": "Ce qu'en disent <em>les familles</em>",
-        "text": "Des parents qui cherchaient une alternative aux boissons sucrées, et des enfants qui redemandent leur infusion.",
-        "summary_stars": "★★★★★",
-        "summary_rating": "4,9/5 sur 128 avis",
-        "summary_stat": "93 % des enfants réclament leur saveur",
-        "duration": 60,
-        "background": "white",
-        "show_scallop": false,
-        "scallop_color": "#FFF7EC"
-      },
       "blocks": {
         "review_1": {
           "type": "review",
@@ -248,6 +276,7 @@
             "text": "« Ma fille de 5 ans réclame sa \"boisson de fruits\" au goûter. Le sirop est resté au placard depuis. »",
             "author": "Camille, maman de 2 enfants",
             "verified": "✓ Achat vérifié",
+            "avatar": "shopify://shop_images/Gradient_e23d22e6-a576-421d-810b-72d5dc7a043c.png",
             "univers": "sunshine"
           }
         },
@@ -255,9 +284,10 @@
           "type": "review",
           "settings": {
             "stars": "★★★★★",
-            "text": "« Le kit était le bon départ : ils ont goûté les trois, chacun a élu sa saveur. La bouteille part tous les jours à l'école. »",
+            "text": "« Le kit a été un vrai coup de cœur ! Ils ont goûté les trois saveurs et chacun a trouvé sa préférée. Maintenant, préparer leur infusion est devenu un petit rituel à la maison qu'ils adorent partager. »",
             "author": "Sofiane, papa de jumeaux",
             "verified": "✓ Achat vérifié",
+            "avatar": "shopify://shop_images/Gradient.png",
             "univers": "forest"
           }
         },
@@ -268,6 +298,7 @@
             "text": "« Glacée en été, chaude en hiver : c'est devenu notre moment de fin de journée, sans discussion sur le sucre. »",
             "author": "Élodie, maman d'un garçon de 8 ans",
             "verified": "✓ Achat vérifié",
+            "avatar": "shopify://shop_images/Gradient_ef6e9047-1a8f-4a75-b76a-109be9f02b36.png",
             "univers": "sunshine"
           }
         },
@@ -278,11 +309,13 @@
             "text": "« Je cherchais une alternative au jus de fruits du matin. Il choisit son sachet lui-même, c'est devenu un jeu. »",
             "author": "Marion, maman de 3 enfants",
             "verified": "✓ Achat vérifié",
+            "avatar": "shopify://shop_images/Gradient_38411da8-1106-435e-86ee-1543117670ae.png",
             "univers": "adventure"
           }
         },
         "review_5": {
           "type": "review",
+          "disabled": true,
           "settings": {
             "stars": "★★★★★",
             "text": "« Aucun goût de tisane, c'est ce qui a tout changé chez nous. Mon fils de 6 ans en boit tous les jours. »",
@@ -298,23 +331,22 @@
         "review_3",
         "review_4",
         "review_5"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "Avis vérifiés",
+        "heading": "Ce qu'en disent <em>les familles</em>",
+        "text": "Des parents qui cherchaient une alternative aux boissons sucrées, et des enfants qui redemandent leur infusion.",
+        "summary_stars": "★★★★★",
+        "summary_rating": "4,9/5 sur 128 avis",
+        "summary_stat": "93 % des enfants réclament leur saveur",
+        "duration": 60,
+        "background": "white",
+        "show_scallop": false,
+        "scallop_color": "#fff7ec"
+      }
     },
     "saveurs": {
       "type": "featured-flavors",
-      "settings": {
-        "anchor": "",
-        "heading": "Nos 3 <em>infusions fruitées bio</em>",
-        "text": "Trois univers, trois goûts francs. Sachets de 80 g, soit environ 30 infusions · 14,90 € l'unité.",
-        "button_label": "",
-        "button_link": "shopify://products/kit-demarrage-rituel",
-        "background": "white",
-        "mobile_gradient": false,
-        "compact_mobile": true,
-        "hide_current": "mobile",
-        "show_scallop": true,
-        "scallop_color": "#FFF7EC"
-      },
       "blocks": {
         "product_1": {
           "type": "product",
@@ -324,6 +356,8 @@
             "eyebrow": "Passion Mangue",
             "title": "Tropical Sunshine",
             "text": "Soleil, mangue juteuse et fruit de la passion. La saveur des grandes envies de vacances.",
+            "price_text": "",
+            "link": "",
             "button_label": "Découvrir"
           }
         },
@@ -335,6 +369,8 @@
             "eyebrow": "Pomme Fraise",
             "title": "Happy Adventure",
             "text": "Pomme croquante, fraise et une pointe de vanille. Le goût que tout le monde accepte du premier coup.",
+            "price_text": "",
+            "link": "",
             "button_label": "Découvrir"
           }
         },
@@ -346,6 +382,8 @@
             "eyebrow": "Fruits des Bois",
             "title": "Dream Forest",
             "text": "Framboise, fraise et bleuet. Une forêt douce, parfaite pour le moment calme du soir.",
+            "price_text": "",
+            "link": "",
             "button_label": "Découvrir"
           }
         }
@@ -354,18 +392,23 @@
         "product_1",
         "product_2",
         "product_3"
-      ]
+      ],
+      "settings": {
+        "anchor": "",
+        "heading": "Nos 3 <em>infusions fruitées bio</em>",
+        "text": "Trois univers, trois goûts francs. Sachets de 80 g, soit environ 30 infusions · 14,90 € l'unité.",
+        "button_label": "",
+        "button_link": "shopify://products/kit-demarrage-rituel",
+        "background": "white",
+        "mobile_gradient": false,
+        "compact_mobile": true,
+        "hide_current": "mobile",
+        "show_scallop": true,
+        "scallop_color": "#fff7ec"
+      }
     },
     "faq": {
       "type": "faq-split",
-      "settings": {
-        "heading": "Les questions que se posent <em>les parents</em>",
-        "text": "Tout ce qu'il faut savoir avant de remplacer un jus ou un sirop par une infusion fruitée bio.",
-        "button_label": "Voir toute la FAQ",
-        "button_link": "shopify://pages/faq-contact",
-        "background": "cream",
-        "structured_data": false
-      },
       "blocks": {
         "question_1": {
           "type": "question",
@@ -441,7 +484,15 @@
         "question_6",
         "question_7",
         "question_8"
-      ]
+      ],
+      "settings": {
+        "heading": "Les questions que se posent <em>les parents</em>",
+        "text": "Tout ce qu'il faut savoir avant de remplacer un jus ou un sirop par une infusion fruitée bio.",
+        "button_label": "Voir toute la FAQ",
+        "button_link": "shopify://pages/faq",
+        "background": "cream",
+        "structured_data": false
+      }
     }
   },
   "order": [

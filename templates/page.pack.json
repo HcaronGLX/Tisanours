@@ -1,33 +1,16 @@
 /*
- * Modèle Tisa'nours — éditable depuis l'éditeur de thème Shopify.
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
  */
 {
   "sections": {
     "pack": {
       "type": "pack-builder",
-      "settings": {
-        "show_intro": true,
-        "badge": "Pack sur-mesure",
-        "heading": "Je compose <em>mon pack</em>",
-        "text": "<p>Choisissez les infusions préférées de vos enfants, ajoutez la gourde si besoin, et composez un pack qui leur ressemble. Chacun peut y mettre sa saveur : c'est le début du rituel.</p><p>Plus il y a de sachets dans le pack, plus la réduction grimpe. Elle s'applique automatiquement sur les infusions bio ; la gourde infuseur peut rejoindre le pack, à son prix habituel.</p>",
-        "note": "Réduction appliquée sur les infusions uniquement. La gourde reste à 24,90 €.",
-        "products_heading": "Choisissez vos <em>produits</em>",
-        "show_tabs": true,
-        "tab_all": "Tout voir",
-        "tab_eligible": "Les infusions",
-        "tab_other": "La gourde",
-        "add_label": "Ajouter",
-        "max_items": 10,
-        "min_slots": 6,
-        "unit_singular": "sachet",
-        "unit_plural": "sachets",
-        "in_pack_label": "×[count] dans le pack",
-        "save_label": "Vous économisez [percent] %",
-        "no_discount_label": "Sans réduction",
-        "full_label": "Votre pack est complet",
-        "remove_label": "Retirer du pack",
-        "submit_label": "Ajouter au panier"
-      },
       "blocks": {
         "tier_1": {
           "type": "tier",
@@ -40,14 +23,14 @@
           "type": "tier",
           "settings": {
             "quantity": 3,
-            "percent": 15
+            "percent": 10
           }
         },
         "tier_3": {
           "type": "tier",
           "settings": {
             "quantity": 5,
-            "percent": 20
+            "percent": 15
           }
         },
         "product_1": {
@@ -111,7 +94,30 @@
         "product_2",
         "product_3",
         "product_4"
-      ]
+      ],
+      "settings": {
+        "show_intro": true,
+        "badge": "Pack sur-mesure",
+        "heading": "Je compose <em>mon pack</em>",
+        "text": "<p>Choisissez les infusions préférées de vos enfants, ajoutez la gourde si besoin, et composez un pack qui leur ressemble. Chacun peut y mettre sa saveur : c'est le début du rituel.</p><p>Plus il y a de sachets dans le pack, plus la réduction grimpe. Elle s'applique automatiquement sur les infusions bio ; la gourde infuseur peut rejoindre le pack, à son prix habituel.</p>",
+        "note": "Réduction appliquée sur les infusions uniquement. La gourde reste à 24,90 €.",
+        "products_heading": "Choisissez vos <em>produits</em>",
+        "show_tabs": true,
+        "tab_all": "Tout voir",
+        "tab_eligible": "Les infusions",
+        "tab_other": "La gourde",
+        "add_label": "Ajouter",
+        "max_items": 10,
+        "min_slots": 6,
+        "unit_singular": "sachet",
+        "unit_plural": "sachets",
+        "in_pack_label": "×[count] dans le pack",
+        "save_label": "Vous économisez [percent] %",
+        "no_discount_label": "Sans réduction",
+        "full_label": "Votre pack est complet",
+        "remove_label": "Retirer du pack",
+        "submit_label": "Ajouter au panier"
+      }
     }
   },
   "order": [

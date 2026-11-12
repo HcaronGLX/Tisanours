@@ -6,7 +6,27 @@
     assign section_bg = 'var(--c-white)'
   endif
 -%}
-<div class="imgtext imgtext--media-{{ ss.media_position }}" style="--section-bg: {{ section_bg }};">
+{%- unless ss.media_shadow -%}
+<style>
+  /* Image sans ombre */
+  #shopify-section-{{ section.id }} .imgtext__media,
+  #shopify-section-{{ section.id }} .tilted-media,
+  #shopify-section-{{ section.id }} .imgtext__media-mobile,
+  #shopify-section-{{ section.id }} .tilted-media :is(picture, img),
+  #shopify-section-{{ section.id }} .imgtext__media-mobile :is(picture, img) {
+    box-shadow: none !important;
+    filter: none !important;
+  }
+  #shopify-section-{{ section.id }} .tilted-media::before,
+  #shopify-section-{{ section.id }} .tilted-media::after,
+  #shopify-section-{{ section.id }} .imgtext__media-mobile::before,
+  #shopify-section-{{ section.id }} .imgtext__media-mobile::after {
+    content: none !important;
+    display: none !important;
+  }
+</style>
+{%- endunless -%}
+<div class="imgtext imgtext--media-{{ ss.media_position }}{% unless ss.media_shadow %} imgtext--no-shadow{% endunless %}" style="--section-bg: {{ section_bg }};">
   <div class="imgtext__inner">
     <div class="imgtext__content">
       {%- if ss.heading != blank -%}<h2 class="imgtext__title">{{ ss.heading }}</h2>{%- endif -%}
@@ -41,6 +61,7 @@
     ], "default": "red" },
     { "type": "image_picker", "id": "image", "label": "Image" },
     { "type": "image_picker", "id": "image_mobile", "label": "Image mobile" },
+    { "type": "checkbox", "id": "media_shadow", "label": "Ombre derrière l'image", "default": true },
     { "type": "select", "id": "ph", "label": "Couleur si vide", "options": [
       { "value": "beige", "label": "Beige" }, { "value": "sunshine-soft", "label": "Jaune doux" }, { "value": "adventure-soft", "label": "Rouge doux" }, { "value": "forest-soft", "label": "Violet doux" }, { "value": "bottle", "label": "Vert" }
     ], "default": "beige" },

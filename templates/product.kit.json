@@ -44,6 +44,13 @@
             "items": "3 infusions bio de 80 g\n1 bouteille infuseur\n1 Petit Guide du Rituel\nSans sucre ajouté*, dès 3 ans"
           }
         },
+        "variant_picker_LfREN8": {
+          "type": "variant_picker",
+          "settings": {
+            "display": "pills",
+            "show_label": true
+          }
+        },
         "flavors_6": {
           "type": "flavors",
           "settings": {
@@ -88,11 +95,12 @@
           "type": "testimonial",
           "settings": {
             "stars": "★★★★★",
-            "quote": "« Le kit était le bon départ : ils ont goûté les trois, chacun a élu sa saveur. La bouteille part tous les jours à l'école. »",
+            "quote": "« Le kit a été un vrai coup de cœur ! Ils ont goûté les trois saveurs et chacun a trouvé sa préférée. Maintenant, préparer leur infusion est devenu un petit rituel à la maison qu'ils adorent partager. »",
             "author": "Sofiane, papa de jumeaux · Achat vérifié",
             "author_color": "grey",
             "show_avatar": true,
-            "avatar_mobile": true
+            "avatar_mobile": true,
+            "avatar": "shopify://shop_images/Gradient.png"
           }
         },
         "accordion_11": {
@@ -126,6 +134,7 @@
         "rating_3",
         "description_4",
         "bullets_5",
+        "variant_picker_LfREN8",
         "flavors_6",
         "price_7",
         "buy_buttons_8",
@@ -202,7 +211,7 @@
         "univers": "kit",
         "background": "cream",
         "aside": "image",
-        "image": "shopify://shop_images/KitDemarrageRituel-2.png",
+        "image": "shopify://shop_images/Group_7.png",
         "gallery_product_1": "tropical-sunshine",
         "gallery_product_2": "happy-adventure",
         "gallery_product_3": "dream-forest"
@@ -217,6 +226,7 @@
         "heading": "La différence est dans <em>le détail</em>",
         "highlight_mobile_only": true,
         "show_image": true,
+        "image": "shopify://shop_images/zq.png",
         "col_label": "Ce qui fait la différence",
         "col_brand": "Tisa’nours",
         "col_other": "Boisson\nsucrée",
@@ -235,6 +245,7 @@
             "text": "« Ma fille de 5 ans réclame sa \"boisson de fruits\" au goûter. Le sirop est resté au placard depuis. »",
             "author": "Camille, maman de 2 enfants",
             "verified": "✓ Achat vérifié",
+            "avatar": "shopify://shop_images/Gradient_e23d22e6-a576-421d-810b-72d5dc7a043c.png",
             "univers": "sunshine"
           }
         },
@@ -242,9 +253,10 @@
           "type": "review",
           "settings": {
             "stars": "★★★★★",
-            "text": "« Le kit était le bon départ : ils ont goûté les trois, chacun a élu sa saveur. La bouteille part tous les jours à l'école. »",
+            "text": "« Le kit a été un vrai coup de cœur ! Ils ont goûté les trois saveurs et chacun a trouvé sa préférée. Maintenant, préparer leur infusion est devenu un petit rituel à la maison qu'ils adorent partager. »",
             "author": "Sofiane, papa de jumeaux",
             "verified": "✓ Achat vérifié",
+            "avatar": "shopify://shop_images/Gradient.png",
             "univers": "forest"
           }
         },
@@ -255,6 +267,7 @@
             "text": "« Glacée en été, chaude en hiver : c'est devenu notre moment de fin de journée, sans discussion sur le sucre. »",
             "author": "Élodie, maman d'un garçon de 8 ans",
             "verified": "✓ Achat vérifié",
+            "avatar": "shopify://shop_images/Gradient_ef6e9047-1a8f-4a75-b76a-109be9f02b36.png",
             "univers": "sunshine"
           }
         },
@@ -265,11 +278,13 @@
             "text": "« Je cherchais une alternative au jus de fruits du matin. Il choisit son sachet lui-même, c'est devenu un jeu. »",
             "author": "Marion, maman de 3 enfants",
             "verified": "✓ Achat vérifié",
+            "avatar": "shopify://shop_images/Gradient_38411da8-1106-435e-86ee-1543117670ae.png",
             "univers": "adventure"
           }
         },
         "review_5": {
           "type": "review",
+          "disabled": true,
           "settings": {
             "stars": "★★★★★",
             "text": "« Aucun goût de tisane, c'est ce qui a tout changé chez nous. Mon fils de 6 ans en boit tous les jours. »",
@@ -350,7 +365,7 @@
       "settings": {
         "anchor": "",
         "heading": "Nos 3 <em>infusions fruitées bio</em>",
-        "text": "Trois univers, trois goûts francs. Sachets de 80 g, soit environ 30 infusions · 14,90 € l'unité.",
+        "text": "Trois univers, trois aventures fruitées. Sachets de 80 g, soit environ 30 infusions · 14,90 € l'unité.",
         "button_label": "",
         "button_link": "shopify://products/kit-demarrage-rituel",
         "background": "white",
@@ -443,7 +458,7 @@
         "heading": "Les questions que se posent <em>les parents</em>",
         "text": "Tout ce qu'il faut savoir avant de remplacer un jus ou un sirop par une infusion fruitée bio.",
         "button_label": "Voir toute la FAQ",
-        "button_link": "shopify://pages/faq-contact",
+        "button_link": "shopify://pages/faq",
         "background": "cream",
         "structured_data": false
       }

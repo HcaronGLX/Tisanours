@@ -4,12 +4,44 @@
   if ss.background == 'cream'
     assign section_bg = 'var(--c-cream)'
   endif
-  assign img_alt = ss.image.alt | escape
+
+  assign img_desktop = ss.image
+  assign img_mobile = ss.image_mobile
+  assign mobile_only = false
+  if img_desktop == blank and img_mobile != blank
+    assign img_desktop = img_mobile
+    assign mobile_only = true
+  endif
+  if img_mobile == blank
+    assign img_mobile = img_desktop
+  endif
+  assign img_alt = img_desktop.alt | escape
 -%}
+<style>
+  #shopify-section-{{ section.id }} .cta-banner__bg picture { display: contents; }
+  @media (min-width: 900px) {
+    #shopify-section-{{ section.id }} .cta-banner__bg--mobile-only { display: none; }
+  }
+</style>
 <div class="cta-banner cta-banner--{{ ss.size }}{% if ss.background == 'hatched' %} cta-banner--hatched{% endif %}" style="--section-bg: {{ section_bg }};">
-  {%- if ss.image != blank -%}
-    <div class="cta-banner__bg">
-      {{ ss.image | image_url: width: 2400 | image_tag: widths: '750, 1100, 1500, 1800, 2400', sizes: '100vw', loading: 'lazy', alt: img_alt }}
+  {%- if img_desktop != blank -%}
+    <div class="cta-banner__bg{% if mobile_only %} cta-banner__bg--mobile-only{% endif %}">
+      <picture>
+        {%- if ss.image_mobile != blank and ss.image != blank -%}
+          <source
+            media="(max-width: 899px)"
+            srcset="
+              {{- img_mobile | image_url: width: 750 }} 750w,
+              {{ img_mobile | image_url: width: 1100 }} 1100w,
+              {{ img_mobile | image_url: width: 1500 }} 1500w
+            "
+            sizes="100vw"
+            width="{{ img_mobile.width }}"
+            height="{{ img_mobile.height }}"
+          >
+        {%- endif -%}
+        {{ img_desktop | image_url: width: 2400 | image_tag: widths: '750, 1100, 1500, 1800, 2400', sizes: '100vw', loading: 'lazy', alt: img_alt }}
+      </picture>
     </div>
   {%- endif -%}
   <div class="cta-banner__inner">
@@ -33,7 +65,8 @@
     { "type": "select", "id": "background", "label": "Fond", "options": [
       { "value": "white", "label": "Blanc" }, { "value": "cream", "label": "Crème" }, { "value": "hatched", "label": "Beige hachuré (en attendant une image)" }
     ], "default": "white" },
-    { "type": "image_picker", "id": "image", "label": "Image de fond" },
+    { "type": "image_picker", "id": "image", "label": "Image de fond (desktop)" },
+    { "type": "image_picker", "id": "image_mobile", "label": "Image de fond (mobile)", "info": "Affichée sous 900 px. Si vide, l'image desktop est utilisée. Format portrait conseillé." },
     { "type": "select", "id": "size", "label": "Format", "options": [
       { "value": "default", "label": "Standard" }, { "value": "compact", "label": "Compact (titre plus petit)" }, { "value": "narrow", "label": "Texte long, centré" }, { "value": "tall", "label": "Haut" }
     ], "default": "default" },

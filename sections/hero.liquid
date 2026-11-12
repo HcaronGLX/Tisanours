@@ -7,9 +7,49 @@
   assign overlay = ss.overlay_opacity | divided_by: 100.0
   assign img_alt = ss.image.alt | escape
   assign img_m_alt = ss.image_mobile.alt | escape
+
+  assign m_pos = ss.mobile_content_position | default: 'bottom'
+  case m_pos
+    when 'top'
+      assign m_justify = 'flex-start'
+    when 'center'
+      assign m_justify = 'center'
+    else
+      assign m_justify = 'flex-end'
+  endcase
 -%}
+
+{%- unless m_pos == 'bottom' -%}
+  {%- style -%}
+    @media screen and (max-width: 749px) {
+      #shopify-section-{{ section.id }} .hero__inner {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: {{ m_justify }} !important;
+        align-items: stretch !important;
+        align-self: stretch !important;
+        flex: 1 1 auto;
+        min-height: var(--hero-mobile-h);
+        margin-top: 0 !important;
+        {%- if m_pos == 'top' %}
+        padding-top: {{ ss.mobile_padding_top }}px !important;
+        {%- endif %}
+      }
+      #shopify-section-{{ section.id }} .hero__content {
+        {%- if m_pos == 'top' %}
+        margin-top: 0 !important;
+        margin-bottom: auto !important;
+        {%- else %}
+        margin-top: auto !important;
+        margin-bottom: auto !important;
+        {%- endif %}
+      }
+    }
+  {%- endstyle -%}
+{%- endunless -%}
+
 <div
-  class="hero hero--{{ ss.style }}{% if ss.overlap_header %} hero--overlap{% endif %}{% if ss.show_scallop %} has-scallop{% endif %}"
+  class="hero hero--{{ ss.style }} hero--m-{{ m_pos }}{% if ss.overlap_header %} hero--overlap{% endif %}{% if ss.show_scallop %} has-scallop{% endif %}"
   style="--hero-width: {{ ss.content_width }}%; --hero-mobile-h: {{ ss.mobile_height }}px;{% if overlay > 0 %} --hero-overlay: rgba(255, 247, 236, {{ overlay }});{% endif %}"
 >
   {%- if ss.image != blank -%}
@@ -81,7 +121,15 @@
     { "type": "range", "id": "overlay_opacity", "label": "Voile crème sur l'image", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 0 },
     { "type": "checkbox", "id": "overlap_header", "label": "Passer sous le header (header transparent)", "default": true },
     { "type": "range", "id": "content_width", "label": "Largeur du contenu (desktop)", "min": 40, "max": 80, "step": 2, "unit": "%", "default": 50 },
+    { "type": "header", "content": "Mobile" },
     { "type": "range", "id": "mobile_height", "label": "Hauteur minimale mobile", "min": 400, "max": 800, "step": 20, "unit": "px", "default": 680 },
+    { "type": "select", "id": "mobile_content_position", "label": "Position du contenu (mobile)", "options": [
+      { "value": "top", "label": "Haut" },
+      { "value": "center", "label": "Centre" },
+      { "value": "bottom", "label": "Bas" }
+    ], "default": "bottom" },
+    { "type": "range", "id": "mobile_padding_top", "label": "Marge haute du contenu (mobile)", "info": "S'applique quand le contenu est en haut. Augmentez si le header passe par-dessus le texte.", "min": 0, "max": 200, "step": 10, "unit": "px", "default": 100 },
+    { "type": "header", "content": "Festons" },
     { "type": "checkbox", "id": "show_scallop", "label": "Festons en bas de section", "default": true },
     { "type": "color", "id": "scallop_color", "label": "Couleur des festons (section suivante)", "default": "#FFF7EC" }
   ],

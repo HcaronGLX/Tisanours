@@ -1,17 +1,24 @@
 /*
- * Modèle Tisa'nours — éditable depuis l'éditeur de thème Shopify.
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
  */
 {
   "sections": {
     "banner": {
       "type": "collection-banner",
       "settings": {
+        "image": "shopify://shop_images/Section_ac7bfb76-bf49-4102-b43c-5283a930027f.png",
         "overlay_opacity": 30,
         "text_color": "light",
         "height": "medium",
         "badge": "",
-        "heading": "",
-        "text": "",
+        "heading": "Nos infusions&nbsp;",
+        "text": "<p>🌿 <strong>Nos infusions bio, sans sucre, sans caféine</strong></p><p>Des saveurs gourmandes conçues pour toute la famille, des tout-petits dès 3 ans aux adultes.&nbsp;<br/>Chaque infusion Tisa'nours est certifiée bio, sans sucre ajouté, sans caféine.</p><p>Le rituel doux du quotidien, en sachet ou en vrac.</p>",
         "use_description": true
       }
     },
@@ -28,7 +35,7 @@
     "cta_kit": {
       "type": "cta-banner",
       "settings": {
-        "background": "hatched",
+        "background": "cream",
         "size": "compact",
         "heading": "Goûtez les 3 saveurs avec le <em>Kit Démarrage Rituel</em>",
         "text": "Les 3 infusions bio, la bouteille infuseur et le Petit Guide du Rituel. Satisfait ou remboursé 30 jours.",
@@ -37,6 +44,7 @@
         "button_1_style": "red",
         "button_1_tilt": true,
         "button_2_label": "",
+        "button_2_link": "",
         "button_2_style": "outline-transparent"
       }
     }

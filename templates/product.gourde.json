@@ -34,20 +34,20 @@
           "type": "description",
           "settings": {
             "source": "custom",
-            "text": "<p>La gourde que l’enfant remplit lui-même : filtre infuseur intégré, étanche, pensée pour l’infusion chaude comme glacée. C’est elle qui transforme la boisson en rituel, à la maison, à l’école ou en sortie.</p>",
+            "text": "<p>La gourde que l’enfant remplit lui-même : filtre infuseur intégré, étanche, pensée pour l’infusion chaude comme glacée. C’est elle qui transforme la boisson en rituel, à la maison ou en sortie.</p>",
             "size": "normal"
           }
         },
         "bullets_5": {
           "type": "bullets",
           "settings": {
-            "items": "400 ml, format cartable\nFiltre infuseur amovible\nChaud et glacé\nSans BPA, lave-vaisselle"
+            "items": "280 ml, format cartable\nFiltre infuseur amovible\nChaud et glacé\nSans BPA, lave-vaisselle"
           }
         },
         "variant_picker_6": {
           "type": "variant_picker",
           "settings": {
-            "display": "images",
+            "display": "pills",
             "show_label": true
           }
         },
@@ -62,6 +62,19 @@
           "settings": {
             "label": "Ajouter au panier",
             "style": "section"
+          }
+        },
+        "image_link_L3refi": {
+          "type": "image_link",
+          "settings": {
+            "image": "shopify://shop_images/Banniere_gourmande_aux_textes_vert_fonce.png",
+            "alt": "",
+            "link": "shopify://pages/compose-ton-pack",
+            "new_tab": false,
+            "hover_zoom": true,
+            "radius": 20,
+            "margin_top": 16,
+            "margin_bottom": 16
           }
         },
         "marquee_9": {
@@ -79,7 +92,8 @@
             "author": "Sofiane, papa de jumeaux · Achat vérifié",
             "author_color": "grey",
             "show_avatar": true,
-            "avatar_mobile": false
+            "avatar_mobile": false,
+            "avatar": "shopify://shop_images/Gradient.png"
           }
         },
         "accordion_11": {
@@ -108,6 +122,7 @@
         "variant_picker_6",
         "price_7",
         "buy_buttons_8",
+        "image_link_L3refi",
         "marquee_9",
         "testimonial_10",
         "accordion_11",
@@ -118,7 +133,7 @@
         "background": "cream",
         "bordered": false,
         "button_style": "red",
-        "gallery_thumbs": 4,
+        "gallery_thumbs": 3,
         "show_empty_thumbs": false,
         "gallery_radius": 36,
         "dashed_placeholders": false,
@@ -133,8 +148,8 @@
           "type": "benefit",
           "settings": {
             "icon": "🎒",
-            "title": "400 ml, format cartable",
-            "text": "Assez pour l’école, assez léger pour un sac d’enfant. Bouchon à vis étanche."
+            "title": "280 ml, format cartable",
+            "text": "La bonne contenance pour les repas et le goûter, se glisse dans la porte du frigo. Bouchon à vis étanche."
           }
         },
         "benefit_2": {
@@ -175,15 +190,18 @@
         "rating_text": "",
         "heading": "Une gourde pensée pour <em>les enfants</em>",
         "compact_heading": true,
-        "note": "Matériaux et contenance définitifs à confirmer avec le fournisseur retenu.",
+        "note": "",
         "button_label": "",
         "button_link": "",
         "button_style": "yellow",
         "media_style": "sticky_gallery",
         "media_shadow": true,
         "media_position": "right",
+        "image_1": "shopify://shop_images/Gradient_Shadow_5f1db5ac-ef75-4023-97c5-0e96fb69924b.png",
         "ph_1": "bottle",
+        "image_2": "shopify://shop_images/Gradient_53238a04-5e95-4600-b427-46efbc2a5b42.png",
         "ph_2": "sunshine",
+        "image_3": "shopify://shop_images/Gradient-1.png",
         "ph_3": "adventure",
         "show_mobile_image": false,
         "ph_mobile": "bottle"
@@ -193,6 +211,8 @@
       "type": "cta-banner",
       "settings": {
         "background": "hatched",
+        "image": "shopify://shop_images/Section_ac7bfb76-bf49-4102-b43c-5283a930027f.png",
+        "image_mobile": "shopify://shop_images/Section_22d186ca-37ca-4464-aa76-4b8df0140d59.png",
         "size": "compact",
         "heading": "Goûtez les 3 saveurs avec le <em>Kit Démarrage Rituel</em>",
         "text": "Les 3 infusions bio, la bouteille infuseur et le Petit Guide du Rituel. Satisfait ou remboursé 30 jours.",
@@ -215,6 +235,7 @@
             "text": "« Ma fille de 5 ans réclame sa \"boisson de fruits\" au goûter. Le sirop est resté au placard depuis. »",
             "author": "Camille, maman de 2 enfants",
             "verified": "✓ Achat vérifié",
+            "avatar": "shopify://shop_images/Gradient_e23d22e6-a576-421d-810b-72d5dc7a043c.png",
             "univers": "sunshine"
           }
         },
@@ -222,9 +243,10 @@
           "type": "review",
           "settings": {
             "stars": "★★★★★",
-            "text": "« Le kit était le bon départ : ils ont goûté les trois, chacun a élu sa saveur. La bouteille part tous les jours à l'école. »",
+            "text": "« Le kit a été un vrai coup de cœur ! Ils ont goûté les trois saveurs et chacun a trouvé sa préférée. Maintenant, préparer leur infusion est devenu un petit rituel à la maison qu'ils adorent partager. »",
             "author": "Sofiane, papa de jumeaux",
             "verified": "✓ Achat vérifié",
+            "avatar": "shopify://shop_images/Gradient.png",
             "univers": "forest"
           }
         },
@@ -235,6 +257,7 @@
             "text": "« Glacée en été, chaude en hiver : c'est devenu notre moment de fin de journée, sans discussion sur le sucre. »",
             "author": "Élodie, maman d'un garçon de 8 ans",
             "verified": "✓ Achat vérifié",
+            "avatar": "shopify://shop_images/Gradient_ef6e9047-1a8f-4a75-b76a-109be9f02b36.png",
             "univers": "sunshine"
           }
         },
@@ -245,11 +268,13 @@
             "text": "« Je cherchais une alternative au jus de fruits du matin. Il choisit son sachet lui-même, c'est devenu un jeu. »",
             "author": "Marion, maman de 3 enfants",
             "verified": "✓ Achat vérifié",
+            "avatar": "shopify://shop_images/Gradient_38411da8-1106-435e-86ee-1543117670ae.png",
             "univers": "adventure"
           }
         },
         "review_5": {
           "type": "review",
+          "disabled": true,
           "settings": {
             "stars": "★★★★★",
             "text": "« Aucun goût de tisane, c'est ce qui a tout changé chez nous. Mon fils de 6 ans en boit tous les jours. »",
@@ -361,7 +386,7 @@
         "heading": "Les questions que se posent <em>les parents</em>",
         "text": "Tout ce qu'il faut savoir avant de remplacer un jus ou un sirop par une infusion fruitée bio.",
         "button_label": "Voir toute la FAQ",
-        "button_link": "shopify://pages/faq-contact",
+        "button_link": "shopify://pages/faq",
         "background": "cream",
         "structured_data": false
       }
@@ -424,7 +449,7 @@
         "mobile_gradient": false,
         "compact_mobile": true,
         "hide_current": "mobile",
-        "show_scallop": true,
+        "show_scallop": false,
         "scallop_color": "#fff7ec"
       }
     }

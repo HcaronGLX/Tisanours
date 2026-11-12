@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "header",
   "name": "Header",
@@ -5,27 +14,91 @@
     "announcement": {
       "type": "announcement-bar",
       "blocks": {
-        "m1": { "type": "message", "settings": { "text": "🌿 100 % fruits bio" } },
-        "m2": { "type": "message", "settings": { "text": "🍯 Sans sucre ajouté*" } },
-        "m3": { "type": "message", "settings": { "text": "🚚 Livraison offerte dès 45 €" } },
-        "m4": { "type": "message", "settings": { "text": "🇫🇷 Conditionné en France" } },
-        "m5": { "type": "message", "settings": { "text": "😴 Sans caféine ni théine" } },
-        "m6": { "type": "message", "settings": { "text": "🧒 Dès 3 ans" } },
-        "m7": { "type": "message", "settings": { "text": "🧊 Chaud ou glacé" } },
-        "m8": { "type": "message", "settings": { "text": "🧡 Satisfait ou remboursé 30 jours" } }
+        "m1": {
+          "type": "message",
+          "settings": {
+            "text": "🌿 100 % fruits bio",
+            "link": ""
+          }
+        },
+        "m2": {
+          "type": "message",
+          "settings": {
+            "text": "🍯 Sans sucre ajouté*",
+            "link": ""
+          }
+        },
+        "m3": {
+          "type": "message",
+          "settings": {
+            "text": "🚚 Livraison offerte dès 45 €",
+            "link": ""
+          }
+        },
+        "m4": {
+          "type": "message",
+          "settings": {
+            "text": "🇫🇷 Conditionné en France",
+            "link": ""
+          }
+        },
+        "m5": {
+          "type": "message",
+          "settings": {
+            "text": "😴 Sans caféine ni théine",
+            "link": ""
+          }
+        },
+        "m6": {
+          "type": "message",
+          "settings": {
+            "text": "🧒 Dès 3 ans",
+            "link": ""
+          }
+        },
+        "m7": {
+          "type": "message",
+          "settings": {
+            "text": "🧊 Chaud ou glacé",
+            "link": ""
+          }
+        },
+        "m8": {
+          "type": "message",
+          "settings": {
+            "text": "🧡 Satisfait ou remboursé 30 jours",
+            "link": ""
+          }
+        }
       },
-      "block_order": ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8"],
-      "settings": { "duration": 32 }
+      "block_order": [
+        "m1",
+        "m2",
+        "m3",
+        "m4",
+        "m5",
+        "m6",
+        "m7",
+        "m8"
+      ],
+      "settings": {
+        "duration": 32
+      }
     },
     "header": {
       "type": "header",
       "settings": {
+        "logo": "shopify://shop_images/Logo_3.png",
+        "logo_width": 140,
         "logo_text": "Tisa'nours",
         "tagline": "infuse ton monde",
-        "menu": "tisanours-menu-principal",
+        "menu": "main-menu",
         "highlight_title": "Le Kit Rituel"
       }
     }
   },
-  "order": ["announcement", "header"]
+  "order": [
+    "announcement",
+    "header"
+  ]
 }

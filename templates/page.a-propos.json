@@ -1,20 +1,16 @@
 /*
- * Modèle Tisa'nours — éditable depuis l'éditeur de thème Shopify.
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
  */
 {
   "sections": {
     "hero": {
       "type": "hero",
-      "settings": {
-        "style": "about",
-        "heading_level": "h1",
-        "overlay_opacity": 0,
-        "overlap_header": true,
-        "content_width": 56,
-        "mobile_height": 520,
-        "show_scallop": true,
-        "scallop_color": "#FFF7EC"
-      },
       "blocks": {
         "badge_1": {
           "type": "badge",
@@ -31,7 +27,7 @@
         "text_3": {
           "type": "text",
           "settings": {
-            "text": "<p>Tisa’nours est une alternative fruitée bio aux boissons sucrées, pensée pour les enfants de 3 à 12 ans : le plaisir les fait adhérer, et le choix, la bouteille et le rituel leur permettent de se l’approprier.</p>"
+            "text": "<p>Tisa’nours est une alternative fruitée bio aux boissons sucrées, pensée pour les enfants à partir de 3 ans : le plaisir les fait adhérer, et le choix, la bouteille et le rituel leur permettent de se l’approprier.</p>"
           }
         }
       },
@@ -39,14 +35,34 @@
         "badge_1",
         "heading_2",
         "text_3"
-      ]
+      ],
+      "settings": {
+        "style": "about",
+        "heading_level": "h1",
+        "image": "shopify://shop_images/Section_2c2f93ea-2ff2-42bb-9c74-6add1b7cf517.png",
+        "image_mobile": "shopify://shop_images/dc.png",
+        "overlay_opacity": 0,
+        "overlap_header": true,
+        "content_width": 56,
+        "mobile_height": 520,
+        "mobile_content_position": "bottom",
+        "mobile_padding_top": 100,
+        "show_scallop": true,
+        "scallop_color": "#fff7ec"
+      }
     },
     "habitude": {
       "type": "image-with-text",
       "settings": {
         "heading": "Le moment devient une habitude. <em>La saveur reste libre.</em>",
-        "text": "<p>Nous ne voulons pas attribuer une saveur à une heure ou à une fonction. Matin, sortie d’école, repas, goûter, soir : le rituel s’installe sur le moment, et l’enfant choisit selon son envie du jour.</p><p>L’autonomie est progressive et adaptée à l’âge. L’idée est la participation et l’appropriation · l’eau chaude reste l’affaire des adultes pour les plus jeunes.</p>",
+        "text": "<p>Nous ne voulons pas attribuer une saveur à une heure ou à une fonction. Matin, sortie, repas, goûter, soir : le rituel s’installe sur le moment, et l’enfant choisit selon son envie du jour.</p><p>L’autonomie est progressive et adaptée à l’âge. L’idée est la participation et l’appropriation · l’eau chaude reste l’affaire des adultes pour les plus jeunes.</p>",
         "quote": "« Sa saveur. Sa bouteille. Son rituel. »",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "red",
+        "image": "shopify://shop_images/Gradient_Shadow_da76aa91-57f9-4041-a489-507105cc3dcf.png",
+        "image_mobile": "shopify://shop_images/Gradient_Shadow_da76aa91-57f9-4041-a489-507105cc3dcf.png",
+        "media_shadow": false,
         "ph": "beige",
         "media_position": "right",
         "background": "cream"
@@ -54,11 +70,6 @@
     },
     "piliers": {
       "type": "pillars",
-      "settings": {
-        "eyebrow": "Notre socle",
-        "heading": "Nos quatre <em>piliers</em>",
-        "note": "En soutien : plaisir · gourmandise · famille · partage · découverte · simplicité · liberté de choix."
-      },
       "blocks": {
         "pillar_1": {
           "type": "pillar",
@@ -81,7 +92,7 @@
           "settings": {
             "icon": "🏡",
             "title": "Lifestyle",
-            "text": "Maison, école, sorties, famille : le rituel suit le quotidien."
+            "text": "Maison, sorties, famille : le rituel suit le quotidien."
           }
         },
         "pillar_4": {
@@ -98,31 +109,20 @@
         "pillar_2",
         "pillar_3",
         "pillar_4"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "Notre socle",
+        "heading": "Nos quatre <em>piliers</em>",
+        "note": "En soutien : plaisir · gourmandise · famille · partage · découverte · simplicité · liberté de choix."
+      }
     },
     "ingredients": {
       "type": "benefits",
-      "settings": {
-        "background": "cream",
-        "card_bg": "white",
-        "rating_text": "",
-        "heading": "Ce que nous mettons (et ne mettons pas) <em>dans nos infusions</em>",
-        "compact_heading": true,
-        "button_label": "",
-        "button_style": "yellow",
-        "media_style": "single",
-        "media_position": "left",
-        "ph_1": "sunshine-soft",
-        "ph_2": "beige",
-        "ph_3": "beige",
-        "show_mobile_image": true,
-        "ph_mobile": "beige"
-      },
       "blocks": {
         "benefit_1": {
           "type": "benefit",
           "settings": {
-            "icon": "",
+            "icon": "🌱",
             "title": "100 % bio",
             "text": "Fruits et plantes issus de l’agriculture biologique, certifiés AB."
           }
@@ -130,7 +130,7 @@
         "benefit_2": {
           "type": "benefit",
           "settings": {
-            "icon": "🧂",
+            "icon": "🍬",
             "title": "Sans sucre ajouté*",
             "text": "Le goût vient du fruit. Les sucres présents sont ceux, naturels, des fruits."
           }
@@ -146,7 +146,7 @@
         "benefit_4": {
           "type": "benefit",
           "settings": {
-            "icon": "",
+            "icon": "🇫🇷",
             "title": "Conditionné en France",
             "text": "Sachets de 80 g conditionnés en France, environ 30 infusions chacun."
           }
@@ -157,7 +157,28 @@
         "benefit_2",
         "benefit_3",
         "benefit_4"
-      ]
+      ],
+      "settings": {
+        "background": "cream",
+        "card_bg": "white",
+        "rating_stars": "★★★★★",
+        "rating_text": "",
+        "heading": "Ce que nous mettons (et ne mettons pas) <em>dans nos infusions</em>",
+        "compact_heading": true,
+        "note": "",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "yellow",
+        "media_style": "single",
+        "media_shadow": false,
+        "media_position": "left",
+        "image_1": "shopify://shop_images/Gradient_Shadow_a9919a34-a751-4648-b0a4-783cec089cd3.png",
+        "ph_1": "sunshine-soft",
+        "ph_2": "beige",
+        "ph_3": "beige",
+        "show_mobile_image": true,
+        "ph_mobile": "beige"
+      }
     },
     "cta": {
       "type": "cta-banner",

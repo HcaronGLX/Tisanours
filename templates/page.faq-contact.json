@@ -1,5 +1,11 @@
 /*
- * Modèle Tisa'nours — éditable depuis l'éditeur de thème Shopify.
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
  */
 {
   "sections": {
@@ -13,11 +19,6 @@
     },
     "faq_1": {
       "type": "faq-group",
-      "settings": {
-        "heading": "Produit & composition",
-        "padding_top": 44,
-        "structured_data": true
-      },
       "blocks": {
         "question_1": {
           "type": "question",
@@ -31,7 +32,7 @@
           "type": "question",
           "settings": {
             "question": "À partir de quel âge peut-on en donner ?",
-            "answer": "<p>Dès 3 ans, et jusqu'à 12 ans et bien au-delà · les parents en boivent aussi. Nos infusions sont sans caféine ni théine, elles peuvent donc être servies le soir.</p>",
+            "answer": "<p>À partir de 3 ans et bien au-delà · les parents en boivent aussi. Nos infusions sont sans caféine ni théine, elles peuvent donc être servies le soir.</p>",
             "open": false
           }
         },
@@ -66,15 +67,15 @@
         "question_3",
         "question_4",
         "question_5"
-      ]
+      ],
+      "settings": {
+        "heading": "Produit & composition",
+        "padding_top": 44,
+        "structured_data": true
+      }
     },
     "faq_2": {
       "type": "faq-group",
-      "settings": {
-        "heading": "Préparation & rituel",
-        "padding_top": 24,
-        "structured_data": false
-      },
       "blocks": {
         "question_1": {
           "type": "question",
@@ -114,15 +115,15 @@
         "question_2",
         "question_3",
         "question_4"
-      ]
+      ],
+      "settings": {
+        "heading": "Préparation & rituel",
+        "padding_top": 24,
+        "structured_data": false
+      }
     },
     "faq_3": {
       "type": "faq-group",
-      "settings": {
-        "heading": "Commande, abonnement & livraison",
-        "padding_top": 24,
-        "structured_data": false
-      },
       "blocks": {
         "question_1": {
           "type": "question",
@@ -144,7 +145,7 @@
           "type": "question",
           "settings": {
             "question": "Et si mon enfant n'aime pas ?",
-            "answer": "<p>Le premier kit est satisfait ou remboursé pendant 30 jours, même entamé. Écrivez-nous, nous nous occupons du reste.</p>",
+            "answer": "<p>Le premier kit est satisfait ou remboursé pendant 30 jours. Écrivez-nous, nous nous occupons du reste.</p>",
             "open": false
           }
         },
@@ -162,7 +163,12 @@
         "question_2",
         "question_3",
         "question_4"
-      ]
+      ],
+      "settings": {
+        "heading": "Commande, abonnement & livraison",
+        "padding_top": 24,
+        "structured_data": false
+      }
     },
     "contact": {
       "type": "contact-form",
@@ -171,8 +177,19 @@
         "heading": "Nous <em>écrire</em>",
         "text": "Une question sur la composition, une commande à modifier, une envie de nous faire un retour ? Nous lisons tout et répondons en moins de 24 h ouvrées.",
         "contact_lines": "✉️ bonjour@tisanours.fr\n💬 Du lundi au vendredi, 9 h – 18 h\n📦 Suivi de commande depuis votre compte client\n📷 @tisanours sur Instagram",
-        "pro_title": "Vous êtes une boutique, une école ou un professionnel ?",
-        "pro_text": "<p>Écrivez-nous à pro@tisanours.fr pour recevoir nos conditions revendeur.</p>"
+        "pro_title": "Vous êtes une boutique ou un professionnel ?",
+        "pro_text": "<p>Écrivez-nous à pro@tisanours.fr pour recevoir nos conditions revendeur.</p>",
+        "label_name": "Prénom et nom",
+        "placeholder_name": "Camille Durand",
+        "label_email": "Email",
+        "placeholder_email": "camille@email.fr",
+        "label_subject": "Sujet",
+        "subjects": "Question produit ou composition\nMa commande\nMon abonnement\nRetour ou remboursement\nPartenariat / revendeur\nAutre",
+        "label_message": "Message",
+        "placeholder_message": "Dites-nous tout…",
+        "button_label": "Envoyer le message",
+        "legal": "En envoyant ce formulaire, vous acceptez que nous utilisions vos données uniquement pour vous répondre.",
+        "success_message": "Merci ! Votre message est bien parti, nous répondons en moins de 24 h ouvrées."
       }
     }
   },
