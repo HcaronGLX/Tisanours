@@ -191,7 +191,9 @@
       { "type": "text", "id": "name", "label": "Nom (remplace le titre du produit)", "default": "Gourde infuseur Tisa’nours" },
       { "type": "text", "id": "price_text", "label": "Prix (si aucun produit)", "default": "24,90 €" },
       { "type": "textarea", "id": "text", "label": "Texte", "default": "Chaud et glacé, filtre amovible, 400 ml. C’est elle qui rend le rituel possible partout." },
-      { "type": "text", "id": "button_label", "label": "Texte du bouton", "default": "Ajouter" }
+      { "type": "text", "id": "button_label", "label": "Texte du bouton", "default": "Ajouter" },
+      { "type": "checkbox", "id": "show_variant_picker", "label": "Afficher le choix de la variante (coloris)", "info": "Visible si le produit a plusieurs variantes. Le bouton ajoute la variante choisie.", "default": true },
+      { "type": "text", "id": "variant_label", "label": "Libellé du choix", "info": "Par défaut : le nom de l'option du produit (ex. Coloris)." }
     ] },
     { "type": "accordion", "name": "Question / accordéon", "settings": [
       { "type": "text", "id": "question", "label": "Question", "default": "Que contient exactement le kit ?" },

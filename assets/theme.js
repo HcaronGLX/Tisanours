@@ -183,6 +183,32 @@
       if (e.key === 'Escape') Cart.close();
     });
 
+    // Produit complémentaire : la variante choisie (coloris) devient celle du bouton « Ajouter »
+    document.addEventListener('change', function (e) {
+      var select = e.target.closest('[data-upsell-variant]');
+      if (!select) return;
+      var box = select.closest('[data-upsell]');
+      var opt = select.options[select.selectedIndex];
+      if (!box || !opt) return;
+      qsa('[data-quick-add]', box).forEach(function (btn) { btn.setAttribute('data-quick-add', opt.value); });
+      var price = opt.getAttribute('data-price');
+      if (price) qsa('[data-upsell-price]', box).forEach(function (el) { el.textContent = price; });
+      var src = opt.getAttribute('data-image');
+      var thumb = qs('.upsell__thumb', box);
+      if (src && thumb) {
+        var img = qs('img', thumb);
+        if (!img) {
+          img = document.createElement('img');
+          img.alt = '';
+          thumb.classList.remove('ph');
+          thumb.appendChild(img);
+        }
+        img.removeAttribute('srcset');
+        img.removeAttribute('sizes');
+        img.src = src;
+      }
+    });
+
     document.addEventListener('submit', function (e) {
       var form = e.target.closest('[data-product-form]');
       if (!form || !Cart.drawer()) return;

@@ -1087,6 +1087,18 @@ button.gallery__thumb { background: none; cursor: pointer; }
 .upsell__name { font-family: var(--font-heading); font-weight: var(--font-heading-weight, 700); font-size: calc(20px * var(--heading-scale, 1)); color: var(--c-green); }
 .upsell__name-price { display: none; }
 .upsell__text { font-size: var(--fs-body); line-height: 1.45; color: var(--c-text); }
+.upsell__variant { display: flex; align-items: center; gap: 10px; margin-top: 6px; }
+.upsell__variant-label { font-size: calc(var(--fs-body) * 0.8214); font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-text-2); }
+.upsell__variant-select {
+  min-width: 0; max-width: 100%;
+  appearance: none; -webkit-appearance: none;
+  border: 2px solid var(--c-border); border-radius: 12px;
+  background: var(--c-cream) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2322352A' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center;
+  padding: 8px 34px 8px 12px;
+  font-family: var(--font-body); font-size: var(--fs-body); font-weight: 700; color: var(--c-green);
+  cursor: pointer;
+}
+.upsell__variant-select:hover, .upsell__variant-select:focus { border-color: var(--c-green); outline: none; }
 .upsell__side { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
 .upsell__price { font-family: var(--font-heading); font-weight: var(--font-heading-weight, 700); font-size: calc(22px * var(--heading-scale, 1)); }
 .upsell .btn { font-size: calc(16px * var(--heading-scale, 1)); padding: 13px 20px; border-radius: 16px; box-shadow: 0 4px 0 var(--btn-shadow); }
@@ -1154,6 +1166,9 @@ button.gallery__thumb { background: none; cursor: pointer; }
   .upsell__name { font-size: calc(16px * var(--heading-scale, 1)); }
   .upsell__name-price { display: inline; }
   .upsell__text { font-size: calc(var(--fs-body) * 0.9286); line-height: 1.4; }
+  .upsell__variant { margin-top: 4px; gap: 8px; }
+  .upsell__variant-label { font-size: calc(var(--fs-body) * 0.75); }
+  .upsell__variant-select { padding: 7px 30px 7px 10px; font-size: calc(var(--fs-body) * 0.9286); background-position: right 10px center; }
   .upsell__price { display: none; }
   .upsell .btn { font-size: calc(14px * var(--heading-scale, 1)); padding: 11px 14px; border-radius: 13px; box-shadow: 0 3px 0 var(--btn-shadow); }
   .pi-accordion, .pi-accordion--first { margin-top: 0; }

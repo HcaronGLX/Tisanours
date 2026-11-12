@@ -327,16 +327,26 @@
                 assign up_price = up.price | money
               endif
             -%}
+            {%- liquid
+              assign up_picker = false
+              if bs.show_variant_picker != false and up != blank and up.has_only_default_variant == false
+                assign up_picker = true
+              endif
+              assign up_image = up_variant.featured_image | default: up.featured_image
+            -%}
             {%- unless up != blank and up.id == product.id -%}
-              <div class="upsell" {{ block.shopify_attributes }}>
-                {%- render 'media', image: up.featured_image, class: 'upsell__thumb ph--beige', sizes: '88px', widths: '88, 176' -%}
+              <div class="upsell" {{ block.shopify_attributes }}{% if up_picker %} data-upsell{% endif %}>
+                {%- render 'media', image: up_image, class: 'upsell__thumb ph--beige', sizes: '88px', widths: '88, 176' -%}
                 <div class="upsell__body">
                   {%- if bs.label != blank -%}<span class="upsell__label">{{ bs.label }}</span>{%- endif -%}
-                  <span class="upsell__name">{{ up_name }}<span class="upsell__name-price"> · {{ up_price }}</span></span>
+                  <span class="upsell__name">{{ up_name }}<span class="upsell__name-price"> · <span data-upsell-price>{{ up_price }}</span></span></span>
                   {%- if bs.text != blank -%}<span class="upsell__text">{{ bs.text }}</span>{%- endif -%}
+                  {%- if up_picker -%}
+                    {%- render 'upsell-variant-select', product: up, selected: up_variant, label: bs.variant_label, block_id: block.id -%}
+                  {%- endif -%}
                 </div>
                 <div class="upsell__side">
-                  <span class="upsell__price">{{ up_price }}</span>
+                  <span class="upsell__price" data-upsell-price>{{ up_price }}</span>
                   {%- if up_variant.available -%}
                     <button type="button" class="btn btn--dark" data-quick-add="{{ up_variant.id }}">{{ bs.button_label | default: 'Ajouter' }}</button>
                   {%- elsif up != blank -%}
