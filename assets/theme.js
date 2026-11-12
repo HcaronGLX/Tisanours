@@ -179,6 +179,17 @@
       }
     });
 
+    // Slider des produits complémentaires du panier latéral
+    document.addEventListener('click', function (e) {
+      var arrow = e.target.closest('[data-slider-prev], [data-slider-next]');
+      if (!arrow) return;
+      var track = qs('[data-slider-track]', arrow.closest('[data-cart-slider]'));
+      if (!track) return;
+      var card = track.firstElementChild;
+      var step = card ? card.getBoundingClientRect().width + 10 : track.clientWidth;
+      track.scrollBy({ left: arrow.hasAttribute('data-slider-prev') ? -step : step, behavior: 'smooth' });
+    });
+
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') Cart.close();
     });

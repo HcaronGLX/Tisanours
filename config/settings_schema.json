@@ -501,6 +501,13 @@
         "default": "Ajouter"
       },
       {
+        "type": "text",
+        "id": "cart_upsell_variant_options",
+        "label": "Options avec choix de variante",
+        "info": "Le choix n'apparaît que si le nom de l'option du produit contient l'un de ces mots (séparés par des virgules). Sinon, la première variante disponible est ajoutée (ex. 1 sachet).",
+        "default": "Coloris, Couleur, Color"
+      },
+      {
         "type": "header",
         "content": "Paliers à débloquer"
       },

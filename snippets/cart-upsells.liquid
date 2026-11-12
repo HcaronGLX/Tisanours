@@ -51,9 +51,17 @@
     {%- endunless -%}
   {%- endcapture -%}
   {%- if shown > 0 -%}
-    <div class="cart-upsells">
-      {%- if settings.cart_upsell_title != blank -%}<span class="cart-upsells__title">{{ settings.cart_upsell_title }}</span>{%- endif -%}
-      <div class="cart-upsells__list">{{ cards }}</div>
+    <div class="cart-upsells" data-cart-slider>
+      <div class="cart-upsells__head">
+        {%- if settings.cart_upsell_title != blank -%}<span class="cart-upsells__title">{{ settings.cart_upsell_title }}</span>{%- endif -%}
+        {%- if shown > 1 -%}
+          <span class="cart-upsells__nav">
+            <button type="button" class="cart-upsells__arrow" data-slider-prev aria-label="{{ 'general.slider.previous' | t }}">‹</button>
+            <button type="button" class="cart-upsells__arrow" data-slider-next aria-label="{{ 'general.slider.next' | t }}">›</button>
+          </span>
+        {%- endif -%}
+      </div>
+      <div class="cart-upsells__list" data-slider-track tabindex="0" role="region" aria-label="{{ settings.cart_upsell_title | escape }}">{{ cards }}</div>
     </div>
   {%- endif -%}
 {%- endif -%}

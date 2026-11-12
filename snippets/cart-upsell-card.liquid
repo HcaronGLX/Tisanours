@@ -2,7 +2,8 @@
   Carte d'un produit complémentaire dans le panier latéral.
   - card_product: produit proposé
   - button_label: texte du bouton
-  Avec plusieurs variantes, une liste permet de choisir celle qui sera ajoutée (theme.js, data-upsell).
+  Une liste permet de choisir la variante seulement si le nom de l'option contient l'un des mots
+  du réglage « Options avec choix de variante » (ex. Coloris) ; sinon la première variante disponible est ajoutée.
 {%- endcomment -%}
 {%- liquid
   assign cv = card_product.selected_or_first_available_variant
@@ -12,15 +13,26 @@
   endcapture
   assign cu = cu | strip
   assign select_id = 'cart-' | append: card_product.id
+  assign show_select = false
+  unless card_product.has_only_default_variant
+    assign option_name = card_product.options.first | downcase
+    assign words = settings.cart_upsell_variant_options | downcase | split: ','
+    for word in words
+      assign w = word | strip
+      if w != blank and option_name contains w
+        assign show_select = true
+      endif
+    endfor
+  endunless
 -%}
 <div class="cart-upsell u-{{ cu }}" data-upsell>
-  {%- render 'media', image: card_image, class: 'cart-upsell__thumb', tag: 'span', sizes: '56px', widths: '56, 112', alt: card_product.title -%}
+  {%- render 'media', image: card_image, class: 'cart-upsell__thumb', tag: 'span', sizes: '180px', widths: '180, 360', alt: card_product.title -%}
   <span class="cart-upsell__info">
     <a class="cart-upsell__name" href="{{ card_product.url }}">{{ card_product.title | escape }}</a>
     <span class="cart-upsell__price" data-upsell-price>{{ cv.price | money }}</span>
-    {%- unless card_product.has_only_default_variant -%}
+    {%- if show_select -%}
       {%- render 'upsell-variant-select', product: card_product, selected: cv, block_id: select_id -%}
-    {%- endunless -%}
+    {%- endif -%}
   </span>
   <button type="button" class="btn btn--dark" data-quick-add="{{ cv.id }}">{{ button_label | default: 'Ajouter' }}</button>
 </div>

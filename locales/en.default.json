@@ -24,6 +24,10 @@
         "other": "{{ count }} results for “{{ terms }}”"
       },
       "no_results": "No results. Try another word."
+    },
+    "slider": {
+      "previous": "Previous product",
+      "next": "Next product"
     }
   },
   "sections": {

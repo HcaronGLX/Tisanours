@@ -24,6 +24,10 @@
         "other": "{{ count }} résultats pour « {{ terms }} »"
       },
       "no_results": "Aucun résultat. Essayez un autre mot, par exemple « kit » ou « gourde »."
+    },
+    "slider": {
+      "previous": "Produit précédent",
+      "next": "Produit suivant"
     }
   },
   "sections": {
