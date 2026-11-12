@@ -26,7 +26,7 @@
   endunless
 -%}
 <div class="cart-upsell u-{{ cu }}" data-upsell>
-  {%- render 'media', image: card_image, class: 'cart-upsell__thumb', tag: 'span', sizes: '180px', widths: '180, 360', alt: card_product.title -%}
+  {%- render 'media', image: card_image, class: 'cart-upsell__thumb', tag: 'span', sizes: '64px', widths: '64, 128, 192', alt: card_product.title -%}
   <span class="cart-upsell__info">
     <a class="cart-upsell__name" href="{{ card_product.url }}">{{ card_product.title | escape }}</a>
     <span class="cart-upsell__price" data-upsell-price>{{ cv.price | money }}</span>
