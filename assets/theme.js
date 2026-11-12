@@ -194,7 +194,7 @@
       var price = opt.getAttribute('data-price');
       if (price) qsa('[data-upsell-price]', box).forEach(function (el) { el.textContent = price; });
       var src = opt.getAttribute('data-image');
-      var thumb = qs('.upsell__thumb', box);
+      var thumb = qs('.upsell__thumb, .cart-upsell__thumb', box);
       if (src && thumb) {
         var img = qs('img', thumb);
         if (!img) {

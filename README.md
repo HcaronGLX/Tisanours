@@ -20,6 +20,7 @@ Thème Online Store 2.0 recréé à partir de la maquette desktop et mobile. Tou
 - Les offres « 1 / 2 / 3 sachets » correspondent aux variantes du produit (option « Format »). Prix et prix barrés viennent des variantes.
 - Gourde : le bloc « Sélecteur de variantes » est réglé sur « Images ». Chaque coloris affiche l'image associée à la variante dans la fiche produit (ou l'image d'échantillon de l'option si elle est définie).
 - Métachamps produit (espace `custom`) : `univers` (`kit`, `sunshine`, `adventure`, `forest`, `bottle`), `saveur`, `sous_titre`, `accroche`. Ils alimentent les couleurs et les textes des cartes et du panier.
+- Métachamp produit `custom.produits_complementaires` (« Produits complémentaires (panier) », liste de produits) : produits proposés dans le panier latéral quand ce produit est au panier. Sans valeur, le thème utilise les produits complémentaires de Search & Discovery, puis les suggestions par défaut (Paramètres du thème > Panier).
 
 ## Réglages du thème
 

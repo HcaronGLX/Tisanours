@@ -1,7 +1,28 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
-    "free_shipping_threshold": 45,
+    "type_heading_font": "fredoka_n6",
+    "type_body_font": "nunito_n4",
+    "body_font_size": 14,
+    "heading_scale": 100,
     "cart_drawer_enabled": true,
+    "free_shipping_threshold": 45,
+    "tier_1_label": "la livraison offerte",
+    "tier_1_short": "Livraison offerte",
+    "tier_1_icon": "🚚",
+    "tiers_remaining": "Plus que [montant] pour [palier]",
+    "tiers_progress": "✓ [atteint] · Plus que [montant] pour [palier]",
+    "tiers_done": "Livraison offerte, c'est acquis !",
+    "tiers_show_steps": true,
+    "favicon": "shopify://shop_images/Favicon1.png",
     "sections": {
       "cart-drawer": {
         "type": "cart-drawer",
@@ -12,29 +33,19 @@
           "empty_text": "Commencez par le Kit Démarrage Rituel : les 3 saveurs, la gourde infuseur et le Petit Guide du Rituel.",
           "empty_button_label": "Découvrir le Kit Rituel",
           "empty_button_link": "shopify://products/kit-demarrage-rituel",
-          "upsell_product": "gourde-infuseur",
-          "upsell_exclude": [
-            "kit-demarrage-rituel"
-          ],
-          "upsell_label": "Complétez le rituel",
-          "upsell_name": "Gourde infuseur",
-          "upsell_button": "Ajouter",
           "checkout_label": "Passer commande",
           "note": "Paiement sécurisé · Satisfait ou remboursé 30 jours"
         }
       }
     },
-    "type_heading_font": "fredoka_n6",
-    "type_body_font": "nunito_n4",
-    "body_font_size": 14,
-    "heading_scale": 100,
-    "tier_1_label": "la livraison offerte",
-    "tier_1_short": "Livraison offerte",
-    "tier_1_icon": "🚚",
-    "tiers_remaining": "Plus que [montant] pour [palier]",
-    "tiers_progress": "✓ [atteint] · Plus que [montant] pour [palier]",
-    "tiers_done": "Livraison offerte, c'est acquis !",
-    "tiers_show_steps": true
+    "content_for_index": [],
+    "cart_upsell_enabled": true,
+    "cart_upsell_title": "Complétez votre rituel",
+    "cart_upsell_limit": 3,
+    "cart_upsell_fallback": [
+      "gourde-infuseur"
+    ],
+    "cart_upsell_button": "Ajouter"
   },
   "presets": {
     "Default": {

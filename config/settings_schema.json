@@ -460,6 +460,48 @@
       },
       {
         "type": "header",
+        "content": "Produits complémentaires"
+      },
+      {
+        "type": "paragraph",
+        "content": "Le panier latéral propose des produits selon ceux qu'il contient : métachamp produit « Produits complémentaires (panier) » (custom.produits_complementaires), sinon les produits complémentaires de l'application Search & Discovery. Un produit déjà au panier n'est jamais proposé."
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_upsell_enabled",
+        "label": "Afficher les produits complémentaires",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "cart_upsell_title",
+        "label": "Titre",
+        "default": "Complétez votre rituel"
+      },
+      {
+        "type": "range",
+        "id": "cart_upsell_limit",
+        "label": "Nombre de suggestions",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "default": 3
+      },
+      {
+        "type": "product_list",
+        "id": "cart_upsell_fallback",
+        "label": "Suggestions par défaut",
+        "info": "Utilisées quand aucun produit du panier n'a de produits complémentaires.",
+        "limit": 6
+      },
+      {
+        "type": "text",
+        "id": "cart_upsell_button",
+        "label": "Texte du bouton",
+        "default": "Ajouter"
+      },
+      {
+        "type": "header",
         "content": "Paliers à débloquer"
       },
       {

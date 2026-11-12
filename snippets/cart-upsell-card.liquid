@@ -1,0 +1,26 @@
+{%- comment -%}
+  Carte d'un produit complémentaire dans le panier latéral.
+  - card_product: produit proposé
+  - button_label: texte du bouton
+  Avec plusieurs variantes, une liste permet de choisir celle qui sera ajoutée (theme.js, data-upsell).
+{%- endcomment -%}
+{%- liquid
+  assign cv = card_product.selected_or_first_available_variant
+  assign card_image = cv.featured_image | default: card_product.featured_image
+  capture cu
+    render 'univers', setting: 'auto', product: card_product
+  endcapture
+  assign cu = cu | strip
+  assign select_id = 'cart-' | append: card_product.id
+-%}
+<div class="cart-upsell u-{{ cu }}" data-upsell>
+  {%- render 'media', image: card_image, class: 'cart-upsell__thumb', tag: 'span', sizes: '56px', widths: '56, 112', alt: card_product.title -%}
+  <span class="cart-upsell__info">
+    <a class="cart-upsell__name" href="{{ card_product.url }}">{{ card_product.title | escape }}</a>
+    <span class="cart-upsell__price" data-upsell-price>{{ cv.price | money }}</span>
+    {%- unless card_product.has_only_default_variant -%}
+      {%- render 'upsell-variant-select', product: card_product, selected: cv, block_id: select_id -%}
+    {%- endunless -%}
+  </span>
+  <button type="button" class="btn btn--dark" data-quick-add="{{ cv.id }}">{{ button_label | default: 'Ajouter' }}</button>
+</div>

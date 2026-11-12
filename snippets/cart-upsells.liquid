@@ -1,0 +1,59 @@
+{%- comment -%}
+  Produits complémentaires du panier latéral, selon les produits du panier :
+  1. métachamp produit custom.produits_complementaires (liste de produits) ;
+  2. sinon, produits complémentaires de Search & Discovery ;
+  3. sinon, suggestions par défaut (Paramètres du thème > Panier).
+  Un produit déjà au panier, indisponible ou déjà proposé n'apparaît pas.
+{%- endcomment -%}
+{%- if settings.cart_upsell_enabled and cart.item_count > 0 -%}
+  {%- liquid
+    assign limit = settings.cart_upsell_limit | default: 3
+    assign seen = ','
+    for item in cart.items
+      assign seen = seen | append: item.product_id | append: ','
+    endfor
+    assign shown = 0
+    assign has_rules = false
+  -%}
+  {%- capture cards -%}
+    {%- for item in cart.items -%}
+      {%- liquid
+        assign recs = item.product.metafields.custom.produits_complementaires.value
+        if recs == blank
+          assign recs = item.product.metafields['shopify--discovery--product_recommendation'].complementary_products.value
+        endif
+        if recs != blank
+          assign has_rules = true
+        endif
+      -%}
+      {%- for rec in recs -%}
+        {%- if shown >= limit -%}{%- break -%}{%- endif -%}
+        {%- assign key = ',' | append: rec.id | append: ',' -%}
+        {%- if rec.available and seen contains key -%}{%- continue -%}{%- endif -%}
+        {%- if rec.available -%}
+          {%- render 'cart-upsell-card', card_product: rec, button_label: settings.cart_upsell_button -%}
+          {%- assign seen = seen | append: rec.id | append: ',' -%}
+          {%- assign shown = shown | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endfor -%}
+    {%- unless has_rules -%}
+      {%- for rec in settings.cart_upsell_fallback -%}
+        {%- if shown >= limit -%}{%- break -%}{%- endif -%}
+        {%- assign key = ',' | append: rec.id | append: ',' -%}
+        {%- if rec.available and seen contains key -%}{%- continue -%}{%- endif -%}
+        {%- if rec.available -%}
+          {%- render 'cart-upsell-card', card_product: rec, button_label: settings.cart_upsell_button -%}
+          {%- assign seen = seen | append: rec.id | append: ',' -%}
+          {%- assign shown = shown | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endunless -%}
+  {%- endcapture -%}
+  {%- if shown > 0 -%}
+    <div class="cart-upsells">
+      {%- if settings.cart_upsell_title != blank -%}<span class="cart-upsells__title">{{ settings.cart_upsell_title }}</span>{%- endif -%}
+      <div class="cart-upsells__list">{{ cards }}</div>
+    </div>
+  {%- endif -%}
+{%- endif -%}

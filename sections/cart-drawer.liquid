@@ -1,20 +1,5 @@
 {%- liquid
   assign ss = section.settings
-
-  assign show_upsell = false
-  if ss.upsell_product != blank and cart.item_count > 0
-    assign show_upsell = true
-    for item in cart.items
-      if item.product_id == ss.upsell_product.id
-        assign show_upsell = false
-      endif
-      for excluded in ss.upsell_exclude
-        if item.product_id == excluded.id
-          assign show_upsell = false
-        endif
-      endfor
-    endfor
-  endif
 -%}
 <div class="cart-drawer" data-cart-drawer data-section-id="{{ section.id }}" aria-hidden="true">
   <div class="cart-drawer__overlay" data-cart-close></div>
@@ -37,20 +22,7 @@
           {%- render 'cart-line', item: item, index: forloop.index, once_label: ss.once_label -%}
         {%- endfor -%}
 
-        {%- if show_upsell -%}
-          {%- assign up = ss.upsell_product -%}
-          {%- assign up_variant = up.selected_or_first_available_variant -%}
-          <div class="cart-upsell">
-            {%- render 'media', image: up.featured_image, class: 'cart-upsell__thumb ph--bottle', tag: 'span', sizes: '56px', widths: '56, 112' -%}
-            <span class="cart-upsell__info">
-              <span class="cart-upsell__label">{{ ss.upsell_label }}</span>
-              <span class="cart-upsell__name">{{ ss.upsell_name | default: up.title }} · {{ up.price | money }}</span>
-            </span>
-            {%- if up_variant.available -%}
-              <button type="button" class="btn btn--dark" data-quick-add="{{ up_variant.id }}">{{ ss.upsell_button }}</button>
-            {%- endif -%}
-          </div>
-        {%- endif -%}
+        {%- render 'cart-upsells' -%}
       {%- endif -%}
       <p class="cart-error" data-cart-error role="alert"></p>
     </div>
@@ -82,12 +54,8 @@
     { "type": "textarea", "id": "empty_text", "label": "Texte", "default": "Commencez par le Kit Démarrage Rituel : les 3 saveurs, la gourde infuseur et le Petit Guide du Rituel." },
     { "type": "text", "id": "empty_button_label", "label": "Texte du bouton", "default": "Découvrir le Kit Rituel" },
     { "type": "url", "id": "empty_button_link", "label": "Lien du bouton" },
-    { "type": "header", "content": "Produit complémentaire" },
-    { "type": "product", "id": "upsell_product", "label": "Produit proposé (gourde)" },
-    { "type": "product_list", "id": "upsell_exclude", "label": "Masquer si l'un de ces produits est au panier", "info": "Ex. le Kit, qui contient déjà la gourde.", "limit": 5 },
-    { "type": "text", "id": "upsell_label", "label": "Sur-titre", "default": "Complétez le rituel" },
-    { "type": "text", "id": "upsell_name", "label": "Nom affiché", "default": "Gourde infuseur" },
-    { "type": "text", "id": "upsell_button", "label": "Texte du bouton", "default": "Ajouter" },
+    { "type": "header", "content": "Produits complémentaires" },
+    { "type": "paragraph", "content": "Les suggestions du panier se règlent dans Paramètres du thème > Panier et, produit par produit, avec le métachamp « Produits complémentaires (panier) »." },
     { "type": "header", "content": "Paliers à débloquer" },
     { "type": "paragraph", "content": "Les paliers et leurs messages se règlent dans Paramètres du thème > Panier." },
     { "type": "header", "content": "Validation" },
