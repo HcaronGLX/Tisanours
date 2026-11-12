@@ -337,6 +337,18 @@
         showSlide(section, thumb.getAttribute('data-media-id'));
       });
     });
+
+    // Flèches de la galerie (au-delà des vignettes visibles) : image précédente / suivante
+    qsa('[data-gallery-prev], [data-gallery-next]', section).forEach(function (arrow) {
+      arrow.addEventListener('click', function () {
+        var slides = qsa('[data-gallery-slide]', section);
+        if (slides.length < 2) return;
+        var current = slides.indexOf(qs('[data-gallery-slide].is-active', section));
+        var step = arrow.hasAttribute('data-gallery-prev') ? -1 : 1;
+        var next = (current + step + slides.length) % slides.length;
+        showSlide(section, slides[next].getAttribute('data-media-id'));
+      });
+    });
   }
 
   function showSlide(section, mediaId) {
@@ -346,8 +358,20 @@
     if (!target) return;
     slides.forEach(function (s) { s.classList.toggle('is-active', s === target); });
     qsa('[data-gallery-thumb]', section).forEach(function (t) {
-      t.classList.toggle('is-active', t.getAttribute('data-media-id') === mediaId);
+      var on = t.getAttribute('data-media-id') === mediaId;
+      t.classList.toggle('is-active', on);
+      if (on) revealThumb(t);
     });
+  }
+
+  // Fait défiler la bande de vignettes pour que la vignette active soit visible
+  function revealThumb(thumb) {
+    var track = thumb.closest('[data-gallery-track]');
+    if (!track || track.scrollWidth <= track.clientWidth) return;
+    var left = thumb.offsetLeft;
+    var right = left + thumb.offsetWidth;
+    if (left < track.scrollLeft) track.scrollTo({ left: left, behavior: 'smooth' });
+    else if (right > track.scrollLeft + track.clientWidth) track.scrollTo({ left: right - track.clientWidth, behavior: 'smooth' });
   }
 
   function initProducts() {

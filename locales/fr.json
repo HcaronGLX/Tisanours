@@ -56,7 +56,9 @@
       "sold_out": "Épuisé",
       "unavailable": "Indisponible",
       "media_label": "Afficher l'image {{ index }}",
-      "from_price": "Dès {{ price }}"
+      "from_price": "Dès {{ price }}",
+      "previous_media": "Image précédente",
+      "next_media": "Image suivante"
     }
   },
   "cart": {

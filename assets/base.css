@@ -934,6 +934,14 @@ button.gallery__thumb { background: none; cursor: pointer; }
 .gallery__thumb img { width: 100%; height: 100%; object-fit: cover; }
 .gallery__thumb.is-active { border-color: var(--u-main, var(--c-green)); }
 .gallery__thumb.ph--dashed { border: 2px dashed color-mix(in srgb, var(--u-ink) 35%, transparent); }
+.gallery__thumbs-wrap { position: relative; --thumb-gap: 10px; }
+.gallery__thumbs--scroll { position: relative; display: flex; gap: var(--thumb-gap); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; overscroll-behavior-x: contain; }
+.gallery__thumbs--scroll::-webkit-scrollbar { display: none; }
+.gallery__thumbs--scroll .gallery__thumb { flex: 0 0 calc((100% - (var(--thumbs, 4) - 1) * var(--thumb-gap)) / var(--thumbs, 4)); scroll-snap-align: start; }
+.gallery__arrow { position: absolute; top: 50%; z-index: 2; width: 36px; height: 36px; margin-top: -18px; border-radius: 999px; border: 2px solid var(--c-border); background: var(--c-white); color: var(--c-green); font-size: 22px; line-height: 1; display: flex; align-items: center; justify-content: center; padding: 0 0 3px; cursor: pointer; box-shadow: 0 4px 12px rgba(34, 53, 42, 0.12); transition: border-color 0.15s ease, opacity 0.15s ease; }
+.gallery__arrow:hover { border-color: var(--c-green); }
+.gallery__arrow--prev { left: -14px; }
+.gallery__arrow--next { right: -14px; }
 
 .product__info { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
 .pi-badge {
@@ -1132,6 +1140,10 @@ button.gallery__thumb { background: none; cursor: pointer; }
   .gallery { position: static; gap: 8px; }
   .gallery__main { border-radius: 24px; }
   .gallery__thumbs { gap: 8px; }
+  .gallery__thumbs-wrap { --thumb-gap: 8px; }
+  .gallery__arrow { width: 30px; height: 30px; margin-top: -15px; font-size: 19px; }
+  .gallery__arrow--prev { left: 4px; }
+  .gallery__arrow--next { right: 4px; }
   .gallery__thumb { border-radius: 12px; }
   .gallery__thumbs--3 .gallery__thumb { border-radius: 14px; }
   .gallery__thumb.ph--dashed { border: 0; }

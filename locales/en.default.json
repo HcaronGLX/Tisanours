@@ -56,7 +56,9 @@
       "sold_out": "Sold out",
       "unavailable": "Unavailable",
       "media_label": "Show image {{ index }}",
-      "from_price": "From {{ price }}"
+      "from_price": "From {{ price }}",
+      "previous_media": "Previous image",
+      "next_media": "Next image"
     }
   },
   "cart": {
