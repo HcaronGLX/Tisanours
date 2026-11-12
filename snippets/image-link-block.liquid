@@ -1,0 +1,73 @@
+{%- comment -%}
+  Bloc « Image cliquable » pour la fiche produit.
+  Usage : {%- render 'image-link-block', block: block -%}
+{%- endcomment -%}
+{%- liquid
+  assign bs = block.settings
+  assign img_desktop = bs.image | default: bs.image_mobile
+  assign img_mobile = bs.image_mobile | default: bs.image
+  assign img_alt = bs.alt | default: img_desktop.alt | escape
+  assign uid = 'imglink-' | append: block.id
+-%}
+{%- if img_desktop != blank -%}
+<style>
+  #{{ uid }} {
+    margin: {{ bs.margin_top }}px 0 {{ bs.margin_bottom }}px;
+  }
+  #{{ uid }} .imglink__link {
+    display: block;
+    border-radius: {{ bs.radius }}px;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #{{ uid }} .imglink__link:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+  }
+  #{{ uid }} img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform .4s ease;
+  }
+  {%- if bs.hover_zoom -%}
+  @media (hover: hover) {
+    #{{ uid }} a.imglink__link:hover img { transform: scale(1.03); }
+  }
+  {%- endif -%}
+</style>
+
+<div id="{{ uid }}" class="imglink-block" {{ block.shopify_attributes }}>
+  {%- if bs.link != blank -%}
+    <a class="imglink__link" href="{{ bs.link }}"{% if bs.new_tab %} target="_blank" rel="noopener"{% endif %}{% if img_alt != blank %} aria-label="{{ img_alt }}"{% endif %}>
+  {%- else -%}
+    <div class="imglink__link">
+  {%- endif -%}
+      <picture>
+        {%- if bs.image_mobile != blank and bs.image != blank -%}
+          <source
+            media="(max-width: 899px)"
+            srcset="
+              {{- img_mobile | image_url: width: 600 }} 600w,
+              {{ img_mobile | image_url: width: 900 }} 900w,
+              {{ img_mobile | image_url: width: 1200 }} 1200w
+            "
+            sizes="100vw"
+            width="{{ img_mobile.width }}"
+            height="{{ img_mobile.height }}"
+          >
+        {%- endif -%}
+        {{ img_desktop | image_url: width: 1400 | image_tag: widths: '500, 700, 900, 1100, 1400', sizes: '(min-width: 900px) 50vw, 100vw', loading: 'lazy', alt: img_alt }}
+      </picture>
+  {%- if bs.link != blank -%}
+    </a>
+  {%- else -%}
+    </div>
+  {%- endif -%}
+</div>
+{%- elsif request.design_mode -%}
+  {%- comment -%} Visible uniquement dans l'éditeur, tant qu'aucune image n'est choisie {%- endcomment -%}
+  <div class="imglink-block" {{ block.shopify_attributes }} style="margin: {{ bs.margin_top }}px 0 {{ bs.margin_bottom }}px; padding: 32px 16px; border: 2px dashed currentColor; border-radius: {{ bs.radius }}px; opacity: .45; text-align: center; font-size: 14px;">
+    Image cliquable : choisissez une image dans les réglages du bloc
+  </div>
+{%- endif -%}

@@ -297,6 +297,9 @@
               <p class="pi-error" data-form-error role="alert"></p>
             </div>
 
+          {%- when 'image_link' -%}
+            {%- render 'image-link-block', block: block -%}
+
           {%- when 'marquee' -%}
             <div class="pi-marquee" {{ block.shopify_attributes }}>
               {%- render 'marquee', items: bs.items, duration: bs.duration -%}
